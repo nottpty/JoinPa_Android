@@ -8,7 +8,8 @@
 * Send the invitation.
 * Waiting for response from friends.
 * Let do the event together.
-====
+
+---
 ## Features
 * Login system.
 * Registration system.
