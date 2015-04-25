@@ -1,3 +1,7 @@
+### Members
+* TAWEERAT CHAIMAN 5710546259
+* PATINYA YONGYAI 5710547204
+---
 # JoinPa Project
 ##### New way to touch your friends. #####
 ----
