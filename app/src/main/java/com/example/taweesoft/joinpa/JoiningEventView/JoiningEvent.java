@@ -1,4 +1,7 @@
-package com.example.taweesoft.joinpa;
+package com.example.taweesoft.joinpa.JoiningEventView;
+
+import com.example.taweesoft.joinpa.Library.Event;
+import com.example.taweesoft.joinpa.Library.Friend;
 
 import java.util.Date;
 import java.util.Map;

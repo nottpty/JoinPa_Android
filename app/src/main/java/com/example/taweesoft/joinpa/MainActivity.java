@@ -1,40 +1,62 @@
 package com.example.taweesoft.joinpa;
 
-import android.app.AlertDialog;
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.taweesoft.joinpa.JoiningEventView.JoiningEvent;
+import com.example.taweesoft.joinpa.JoiningEventView.JoiningListCustomAdapter;
+import com.example.taweesoft.joinpa.Library.Owner;
+import com.example.taweesoft.joinpa.MyEventView.MyEventActivity;
+
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 
 public class MainActivity extends ActionBarActivity {
-    private Owner owner;
+    public static Owner owner;
     private ListView lv_joiningList;
     private List<JoiningEvent> joiningEventList;
+    private Button btn_myEvent,btn_createEvent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         owner = (Owner)getIntent().getSerializableExtra("Owner");
         initComponents();
+        initMyEventList();
+        initMyEventButton();
     }
 
     /**
      * Initial components
      */
     public void initComponents(){
+        btn_myEvent = (Button)findViewById(R.id.btn_myEvent);
+        btn_createEvent = (Button)findViewById(R.id.btn_newEvent);
         lv_joiningList = (ListView)findViewById(R.id.lv_joiningList);
+    }
+
+    /**
+     * Initial list view
+     */
+    public void initMyEventList(){
         joiningEventList = owner.getJoiningEvents();
         JoiningListCustomAdapter adapter = new JoiningListCustomAdapter(this,joiningEventList);
         lv_joiningList.setAdapter(adapter);
     }
 
+    /**
+     *
+     */
+    public void initMyEventButton(){
+        ShowMyEventClick clickEvent = new ShowMyEventClick();
+        btn_myEvent.setOnClickListener(clickEvent);
+    }
 //    public List<JoiningEvent> readJoiningEventList() {
 //        List<JoiningEvent> joiningEvents=null;
 //        AsyncTask<Void,Void,List<JoiningEvent>> task = new AsyncTask<Void, Void, List<JoiningEvent>>() {
@@ -66,6 +88,17 @@ public class MainActivity extends ActionBarActivity {
 //
 //        return joiningEvents;
 //    }
+
+    /**
+     * Show My event action.
+     */
+    class ShowMyEventClick implements View.OnClickListener{
+        public void onClick(View v){
+            Intent intent = new Intent(MainActivity.this,MyEventActivity.class);
+            startActivity(intent);
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

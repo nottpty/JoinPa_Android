@@ -1,24 +1,26 @@
-package com.example.taweesoft.joinpa;
+package com.example.taweesoft.joinpa.CreateEvent.FriendView.FriendListView;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.taweesoft.joinpa.R;
 
-public class JoiningEventView extends ActionBarActivity {
+
+public class FriendListActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_joining_event_view);
+        setContentView(R.layout.activity_friend_list);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_joining_event_view, menu);
+        getMenuInflater().inflate(R.menu.menu_friend_list, menu);
         return true;
     }
 

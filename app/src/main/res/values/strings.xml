@@ -6,4 +6,6 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_joining_event_view">JoiningEventView</string>
     <string name="title_activity_my_event">MyEventActivity</string>
+    <string name="title_activity_friend_list">FriendListActivity</string>
+    <string name="title_activity_my_friend_list_view">MyFriendListView</string>
 </resources>

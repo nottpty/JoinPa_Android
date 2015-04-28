@@ -2,7 +2,6 @@ package com.example.taweesoft.joinpa;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -12,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.taweesoft.joinpa.Library.Database;
+import com.example.taweesoft.joinpa.Library.Owner;
 import com.example.taweesoft.joinpa.LoginState.FailedState;
 import com.example.taweesoft.joinpa.LoginState.LoginState;
 import com.example.taweesoft.joinpa.LoginState.SuccessState;
@@ -68,7 +69,7 @@ public class LoginActivity extends ActionBarActivity {
                 protected Void doInBackground(Void... params) {
                     String username = txt_username.getText().toString();
                     String password = txt_password.getText().toString();
-                    owner = Database.getOwner(username,password);
+                    owner = Database.getOwner(username, password);
                     return null;
                 }
 

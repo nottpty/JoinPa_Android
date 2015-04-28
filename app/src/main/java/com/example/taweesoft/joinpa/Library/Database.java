@@ -1,4 +1,6 @@
-package com.example.taweesoft.joinpa;
+package com.example.taweesoft.joinpa.Library;
+
+import com.example.taweesoft.joinpa.JoiningEventView.JoiningEvent;
 
 import java.io.BufferedReader;
 import java.io.IOException;

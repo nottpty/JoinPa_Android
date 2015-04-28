@@ -23,12 +23,16 @@
             android:label="@string/title_activity_main" >
         </activity>
         <activity
-            android:name=".JoiningEventView"
-            android:label="@string/title_activity_joining_event_view" >
+            android:name=".MyEventView.MyEventActivity"
+            android:label="@string/title_activity_my_event" >
         </activity>
         <activity
-            android:name=".MyEventActivity"
-            android:label="@string/title_activity_my_event" >
+            android:name=".FriendView.FriendListActivity"
+            android:label="@string/title_activity_friend_list" >
+        </activity>
+        <activity
+            android:name=".MyFriendListView"
+            android:label="@string/title_activity_my_friend_list_view" >
         </activity>
     </application>
 

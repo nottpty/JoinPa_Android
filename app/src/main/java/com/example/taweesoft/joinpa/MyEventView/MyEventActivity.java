@@ -1,20 +1,36 @@
-package com.example.taweesoft.joinpa;
+package com.example.taweesoft.joinpa.MyEventView;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+
+import com.example.taweesoft.joinpa.Library.Event;
+import com.example.taweesoft.joinpa.MainActivity;
+import com.example.taweesoft.joinpa.R;
+
+import java.util.List;
 
 
 public class MyEventActivity extends ActionBarActivity {
-
+    private ListView lv_myEventList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_event);
+        initComponents();
     }
 
-
+    /**
+     * Initial components
+     */
+    public void initComponents(){
+        lv_myEventList = (ListView)findViewById(R.id.lv_myEventList);
+        List<Event> myEventList = MainActivity.owner.getEventList();
+        MyEventCustomAdapter adapter = new MyEventCustomAdapter(this,myEventList);
+        lv_myEventList.setAdapter(adapter);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
