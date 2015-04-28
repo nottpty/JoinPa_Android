@@ -8,8 +8,8 @@ import java.util.Map;
  */
 public class JoiningEvent extends Event {
     String ownerName;
-    public JoiningEvent(String ownerName,Map<Friend,Integer> invitedList,int iconID,String topic,String note,Date date){
-        super(invitedList,iconID,topic,note,date);
+    public JoiningEvent(String eventID,String ownerName,Map<Friend,Integer> invitedList,int iconID,String topic,String note,Date date){
+        super(eventID,invitedList,iconID,topic,note,date);
         this.ownerName = ownerName;
     }
 

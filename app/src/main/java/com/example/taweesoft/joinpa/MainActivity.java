@@ -30,42 +30,42 @@ public class MainActivity extends ActionBarActivity {
      */
     public void initComponents(){
         lv_joiningList = (ListView)findViewById(R.id.lv_joiningList);
-        joiningEventList = readJoiningEventList();
+        joiningEventList = owner.getJoiningEvents();
         JoiningListCustomAdapter adapter = new JoiningListCustomAdapter(this,joiningEventList);
         lv_joiningList.setAdapter(adapter);
     }
 
-    public List<JoiningEvent> readJoiningEventList() {
-        List<JoiningEvent> joiningEvents=null;
-        AsyncTask<Void,Void,List<JoiningEvent>> task = new AsyncTask<Void, Void, List<JoiningEvent>>() {
-            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
-            AlertDialog dialog = dialogBuilder.create();
-            protected void onPreExecute(){
-                dialog.setMessage("Loading your new event...");
-                dialog.setCancelable(false);
-                dialog.show();
-            }
-
-            @Override
-            protected List<JoiningEvent> doInBackground(Void... params) {
-                return Database.myJoiningEvents(owner);
-            }
-
-            protected void onPostExecute(List<JoiningEvent> param){
-                dialog.setMessage("Success");
-                dialog.setCancelable(true);
-                dialog.dismiss();
-            }
-        };
-        task.execute();
-        try{
-            joiningEvents = task.get();
-        }catch(InterruptedException e1){
-            e1.printStackTrace();
-        }catch(ExecutionException e2){ e2.printStackTrace();}
-
-        return joiningEvents;
-    }
+//    public List<JoiningEvent> readJoiningEventList() {
+//        List<JoiningEvent> joiningEvents=null;
+//        AsyncTask<Void,Void,List<JoiningEvent>> task = new AsyncTask<Void, Void, List<JoiningEvent>>() {
+//            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
+//            AlertDialog dialog = dialogBuilder.create();
+//            protected void onPreExecute(){
+//                dialog.setMessage("Loading your new event...");
+//                dialog.setCancelable(false);
+//                dialog.show();
+//            }
+//
+//            @Override
+//            protected List<JoiningEvent> doInBackground(Void... params) {
+//                return Database.myJoiningEvents(owner);
+//            }
+//
+//            protected void onPostExecute(List<JoiningEvent> param){
+//                dialog.setMessage("Success");
+//                dialog.setCancelable(true);
+//                dialog.dismiss();
+//            }
+//        };
+//        task.execute();
+//        try{
+//            joiningEvents = task.get();
+//        }catch(InterruptedException e1){
+//            e1.printStackTrace();
+//        }catch(ExecutionException e2){ e2.printStackTrace();}
+//
+//        return joiningEvents;
+//    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

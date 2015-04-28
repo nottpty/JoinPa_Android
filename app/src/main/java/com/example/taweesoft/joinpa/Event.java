@@ -12,9 +12,11 @@ public class Event implements Serializable{
 	private String topic;
 	private String note;
 	private Date date;
+    private String eventID;
 	
-	public Event(Owner owner,Map<Friend,Integer> invitedList,int iconID,String topic,String note,Date date){
-		this.owner = owner;
+	public Event(String eventID,Owner owner,Map<Friend,Integer> invitedList,int iconID,String topic,String note,Date date){
+		this.eventID = eventID;
+        this.owner = owner;
 		this.invitedList = invitedList;
 		this.iconID = iconID;
 		this.topic = topic;
@@ -22,7 +24,8 @@ public class Event implements Serializable{
 		this.date = date;
 	}
 
-    public Event(Map<Friend,Integer> invitedList,int iconID,String topic,String note,Date date){
+    public Event(String eventID,Map<Friend,Integer> invitedList,int iconID,String topic,String note,Date date){
+        this.eventID = eventID;
         this.invitedList = invitedList;
         this.iconID = iconID;
         this.topic = topic;
@@ -78,5 +81,5 @@ public class Event implements Serializable{
 		this.invitedList = invitedList;
 	}
 
-	
+	public String getEventID(){ return eventID; };
 }
