@@ -1,4 +1,4 @@
-package com.example.taweesoft.joinpa.JoiningEventView;
+package com.example.taweesoft.joinpa.Library;
 
 import com.example.taweesoft.joinpa.Library.Event;
 import com.example.taweesoft.joinpa.Library.Friend;

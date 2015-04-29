@@ -1,7 +1,5 @@
 package com.example.taweesoft.joinpa.Library;
 
-import com.example.taweesoft.joinpa.JoiningEventView.JoiningEvent;
-
 import java.util.List;
 
 

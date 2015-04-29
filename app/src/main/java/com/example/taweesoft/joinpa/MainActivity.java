@@ -9,7 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.taweesoft.joinpa.JoiningEventView.JoiningEvent;
+import com.example.taweesoft.joinpa.CreateEvent.FriendView.FriendListView.FriendListActivity;
+import com.example.taweesoft.joinpa.Library.JoiningEvent;
 import com.example.taweesoft.joinpa.JoiningEventView.JoiningListCustomAdapter;
 import com.example.taweesoft.joinpa.Library.Owner;
 import com.example.taweesoft.joinpa.MyEventView.MyEventActivity;
@@ -30,6 +31,7 @@ public class MainActivity extends ActionBarActivity {
         initComponents();
         initMyEventList();
         initMyEventButton();
+        initMyCreateEventButton();
     }
 
     /**
@@ -57,6 +59,15 @@ public class MainActivity extends ActionBarActivity {
         ShowMyEventClick clickEvent = new ShowMyEventClick();
         btn_myEvent.setOnClickListener(clickEvent);
     }
+
+    /**
+     * Initial create event button.
+     */
+    public void initMyCreateEventButton(){
+        CreateEventClick createEventClick = new CreateEventClick();
+        btn_createEvent.setOnClickListener(createEventClick);
+    }
+
 //    public List<JoiningEvent> readJoiningEventList() {
 //        List<JoiningEvent> joiningEvents=null;
 //        AsyncTask<Void,Void,List<JoiningEvent>> task = new AsyncTask<Void, Void, List<JoiningEvent>>() {
@@ -95,6 +106,16 @@ public class MainActivity extends ActionBarActivity {
     class ShowMyEventClick implements View.OnClickListener{
         public void onClick(View v){
             Intent intent = new Intent(MainActivity.this,MyEventActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    /**
+     * Show friend list for invite to event.
+     */
+    class CreateEventClick implements View.OnClickListener{
+        public void onClick(View v){
+            Intent intent = new Intent(MainActivity.this, FriendListActivity.class);
             startActivity(intent);
         }
     }

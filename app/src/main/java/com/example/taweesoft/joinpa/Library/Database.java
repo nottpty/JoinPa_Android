@@ -1,7 +1,5 @@
 package com.example.taweesoft.joinpa.Library;
 
-import com.example.taweesoft.joinpa.JoiningEventView.JoiningEvent;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -285,10 +283,18 @@ public class Database {
 
     public static void removeEvent(Event event){
         String eventID = event.getEventID();
-        HttpURLConnection connect = getConnection(String.format("DELETE * FROM tb_event WHERE EventID=\'%s\'",eventID));
+        HttpURLConnection connect = getConnection(String.format("DELETE FROM tb_event WHERE EventID=\'%s\'",eventID));
         try{
             Scanner scan = new Scanner(connect.getInputStream());
             while(scan.hasNext()){ scan.next(); }
+            scan.close();
+            connect.disconnect();
+        }catch(IOException e){ e.printStackTrace(); }
+
+        connect = getConnection(String.format("DELETE FROM tb_joinList WHERE EventID=\'%s\'", eventID ));
+        try{
+            Scanner scan = new Scanner(connect.getInputStream());
+            while(scan.hasNext()){ scan.nextLine(); }
             scan.close();
             connect.disconnect();
         }catch(IOException e){ e.printStackTrace(); }
