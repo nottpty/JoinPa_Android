@@ -1,5 +1,6 @@
 package com.example.taweesoft.joinpa.CreateEvent.FriendView.FriendListView;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.taweesoft.joinpa.CreateEvent.NewEvent.NewEventActivity;
+import com.example.taweesoft.joinpa.CreateEvent.NewEvent.NewEventController;
+import com.example.taweesoft.joinpa.CreateEvent.NewEvent.NewEventModel;
 import com.example.taweesoft.joinpa.Library.Friend;
 import com.example.taweesoft.joinpa.MainActivity;
 import com.example.taweesoft.joinpa.R;
@@ -30,6 +34,7 @@ public class FriendListActivity extends ActionBarActivity implements Observer {
         setContentView(R.layout.activity_friend_list);
         initComponent();
         setListViewAdapter();
+        initNextButton();
     }
 
     /**
@@ -46,6 +51,14 @@ public class FriendListActivity extends ActionBarActivity implements Observer {
     public void setListViewAdapter(){
         FriendListCustomAdapter adapter = new FriendListCustomAdapter(this, MainActivity.owner.getFriendList());
         lv_friendsList.setAdapter(adapter);
+    }
+
+    /**
+     * Initial next button event.
+     */
+    public void initNextButton(){
+        NextEvent action = new NextEvent();
+        btn_next.setOnClickListener(action);
     }
 
     @Override
@@ -71,14 +84,19 @@ public class FriendListActivity extends ActionBarActivity implements Observer {
     }
 
     public void update(Observable observable,Object obj){
-        if(obj.getClass() != List.class) return;;
+        if(obj.getClass() != ArrayList.class) {
+            return;
+        }
         selectedFriend = (List<Friend>)obj;
-        Log.d("XXXX : ", selectedFriend+"");
     }
 
     class NextEvent implements View.OnClickListener{
         public void onClick(View v){
-
+            NewEventModel model = new NewEventModel();
+            Intent intent = new Intent(FriendListActivity.this, NewEventActivity.class);
+            intent.putExtra("SelectedFriend",(ArrayList<Friend>)selectedFriend);
+            startActivity(intent);
+            NewEventController controller = new NewEventController(model);
         }
     }
 }

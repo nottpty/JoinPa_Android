@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 
 public class Database {
-	private static String urlStr = "http://www.cmvk-tech.com/joinpa/connectDB.php";
+	private static String urlStr = Resources.URL;
 	protected static Map<String,Friend> allUser = getAllUser();
 	private final static String WAITING = "0";
 	
