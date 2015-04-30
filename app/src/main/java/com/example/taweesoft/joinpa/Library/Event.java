@@ -2,6 +2,8 @@ package com.example.taweesoft.joinpa.Library;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -82,4 +84,12 @@ public class Event implements Serializable{
 	}
 
 	public String getEventID(){ return eventID; };
+
+    public static Map<Friend,Integer> createInvitedMap(List<Friend> invitedList){
+        Map<Friend,Integer> invitedListMap = new HashMap<Friend,Integer>();
+        for(Friend friend : invitedList){
+            invitedListMap.put(friend, 0);
+        }
+        return invitedListMap;
+    }
 }

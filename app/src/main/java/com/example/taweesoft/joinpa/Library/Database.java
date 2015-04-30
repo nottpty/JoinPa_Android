@@ -201,27 +201,30 @@ public class Database {
     	return invitedList;
     }
     
-    public static Event addEvent(Owner owner,List<Friend> invitedList,int iconID,String topic,String note,Date date){
-    	Date now = new Date();
-    	Map<Friend,Integer> invitedListMap = new HashMap<Friend,Integer>();
-    	Event event = null;
-    	String eventID = String.format("%02d%02d%04d%02d%02d%02d", now.getDay(),now.getMonth(),now.getYear(),now.getHours(),now.getMinutes(),now.getSeconds());
+    public static Event addEvent(Event event){
+        Owner owner = event.getOwner();
+        Date date = event.getDate();
+        int iconID = event.getIconID();
+        String eventName = event.getTopic();
+        String note = event.getNote();
+    	String eventID = event.getEventID();
+    	Map<Friend,Integer> invitedListMap = event.getInvitedList();
     	String ownerName = owner.getUsername();
     	String invitedListStr="";
-    	for(Friend friend : invitedList){
+    	for(Map.Entry<Friend,Integer> each : invitedListMap.entrySet()){
+            Friend friend = each.getKey();
     		addJoiningList(eventID,friend.getUsername());
     		invitedListStr += ","+friend.getUsername();
-    		invitedListMap.put(friend, 0);
     	}
     	String dateStr = String.format("%02d/%02d/%02d", date.getDay(),date.getMonth(),1900+date.getYear());
     	String time = String.format("%02d:%02d:%02d", date.getHours(),date.getMinutes(),date.getSeconds());
-    	HttpURLConnection connect = getConnection(String.format("INSERT INTO tb_event VALUES (\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\')", eventID,ownerName,invitedListStr,iconID,topic,note,dateStr,time));
+    	HttpURLConnection connect = getConnection(String.format("INSERT INTO tb_event VALUES (\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\')", eventID,ownerName,invitedListStr,iconID,eventName,note,dateStr,time));
     	try{
     		BufferedReader in = new BufferedReader(new InputStreamReader(connect.getInputStream()));
     		while(in.readLine() != null){}
     		in.close();
     		connect.disconnect();
-    		event = new Event(eventID,owner,invitedListMap,iconID,topic,note,date);
+    		event = new Event(eventID,owner,invitedListMap,iconID,eventName,note,date);
     	}catch(IOException e){
     		e.printStackTrace();
     	};

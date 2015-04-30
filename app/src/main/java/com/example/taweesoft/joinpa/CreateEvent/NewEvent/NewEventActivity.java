@@ -1,5 +1,6 @@
 package com.example.taweesoft.joinpa.CreateEvent.NewEvent;
 
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,10 +14,16 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.taweesoft.joinpa.Library.Database;
 import com.example.taweesoft.joinpa.Library.DatePicker;
+import com.example.taweesoft.joinpa.Library.Event;
 import com.example.taweesoft.joinpa.Library.Friend;
+import com.example.taweesoft.joinpa.Library.Owner;
 import com.example.taweesoft.joinpa.Library.Resources;
+import com.example.taweesoft.joinpa.MainActivity;
 import com.example.taweesoft.joinpa.R;
+
+import java.util.Map;
 import java.util.Observable;
 import java.util.Calendar;
 import java.util.Date;
@@ -56,6 +63,7 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
         txt_eventName = (TextView)findViewById(R.id.txt_eventName);
         txt_note = (TextView)findViewById(R.id.txt_note);
         btn_create = (Button)findViewById(R.id.btn_create);
+        btn_create.setOnClickListener(new CreateEventAction());
         txt_date = (TextView)findViewById(R.id.txt_date);
         txt_time = (TextView)findViewById(R.id.txt_time);
         layout_date = (LinearLayout)findViewById(R.id.layout_date);
@@ -148,5 +156,42 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
 
     public NewEventController getController(){
         return  controller;
+    }
+
+    class CreateEventAction implements View.OnClickListener{
+        @Override
+        public void onClick(View v){
+            Date date = controller.getDateAndTime();
+            Date now = new Date();
+            String eventID = String.format("%02d%02d%04d%02d%02d%02d", now.getDay(),now.getMonth(),now.getYear(),now.getHours(),now.getMinutes(),now.getSeconds());
+            Owner owner = MainActivity.owner;
+            List<Friend> invitedList = selectedFriends;
+            int iconID = spn_icon.getSelectedItemPosition();
+            String eventName = txt_eventName.getText().toString();
+            String note = txt_note.getText().toString();
+            Map<Friend,Integer> invitedMap = Event.createInvitedMap(invitedList);
+            final Event event = new Event(eventID,owner,invitedMap,iconID,eventName,note,date);
+            MainActivity.owner.addEvent(event); // Add event to owner list.
+            AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected void onPreExecute() {
+                    NewEventActivity.this.finish();
+                }
+
+                @Override
+                protected Void doInBackground(Void... params) {
+                    Database.addEvent(event);
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Void aVoid) {
+
+                }
+
+
+            };
+            task.execute();
+        }
     }
 }
