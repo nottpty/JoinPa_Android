@@ -35,8 +35,8 @@ public class MyEventCustomAdapter extends ArrayAdapter<Event>{
         txt_eventName.setText(event.getTopic());
         txt_note.setText(event.getNote());
         Date date = event.getDate();
-        txt_date.setText(String.format("%02d/%02d/%02d",date.getDay(),date.getMonth(),date.getYear()));
-        txt_time.setText(String.format("%02d:%02d:%02d", date.getHours(), date.getMinutes(), date.getSeconds()));
+        txt_date.setText(String.format("%02d/%02d/%04d",date.getDate(),date.getMonth(),date.getYear()));
+        txt_time.setText(String.format("%02d:%02d", date.getHours(), date.getMinutes()));
         txt_joinNumber.setText(event.getInvitedList().size()+"");
         return view;
     }

@@ -1,5 +1,7 @@
 package com.example.taweesoft.joinpa.Library;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,6 +9,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -22,7 +25,7 @@ public class Database {
 	
 	public static Owner getOwner(String username,String password){
 		Owner owner = null;
-		HttpURLConnection connect = getConnection(String.format("SELECT * FROM tb_login WHERE Password=\'%s\'", password));
+		HttpURLConnection connect = getConnection(String.format("SELECT * FROM tb_login WHERE Username=\'%s\' AND Password=\'%s\'",username, password));
 		try{
 			BufferedReader in = new BufferedReader(new InputStreamReader(connect.getInputStream()));
 			String input;
@@ -37,7 +40,7 @@ public class Database {
 			}
 			in.close();
 			connect.disconnect();
-		}catch(Exception e){};
+		}catch(Exception e){ e.printStackTrace(); };
 		return owner;
 	}
     public static HttpURLConnection getConnection(String command){
@@ -163,7 +166,6 @@ public class Database {
         date.setYear(Integer.parseInt(dateArr[2]));
         date.setHours(Integer.parseInt(timeArr[0]));
         date.setMinutes(Integer.parseInt(timeArr[1]));
-        date.setSeconds(Integer.parseInt(timeArr[2]));
         return date;
     }
     public static void addJoiningList(String eventID,String username){
@@ -216,9 +218,9 @@ public class Database {
     		addJoiningList(eventID,friend.getUsername());
     		invitedListStr += ","+friend.getUsername();
     	}
-    	String dateStr = String.format("%02d/%02d/%02d", date.getDay(),date.getMonth(),1900+date.getYear());
-    	String time = String.format("%02d:%02d:%02d", date.getHours(),date.getMinutes(),date.getSeconds());
-    	HttpURLConnection connect = getConnection(String.format("INSERT INTO tb_event VALUES (\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\')", eventID,ownerName,invitedListStr,iconID,eventName,note,dateStr,time));
+    	String dateStr = String.format("%02d/%02d/%02d", date.getDate(),date.getMonth(),date.getYear());
+    	String time = String.format("%02d:%02d", date.getHours(),date.getMinutes());
+    	HttpURLConnection connect = getConnection(String.format("INSERT INTO tb_event VALUES (\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\')", eventID, ownerName, invitedListStr, iconID, eventName, note, dateStr, time));
     	try{
     		BufferedReader in = new BufferedReader(new InputStreamReader(connect.getInputStream()));
     		while(in.readLine() != null){}
