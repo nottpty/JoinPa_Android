@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.taweesoft.joinpa.CreateEvent.FriendView.FriendListView.FriendListActivity;
+import com.example.taweesoft.joinpa.FindFriend.FindFriendDialog;
 import com.example.taweesoft.joinpa.Library.JoiningEvent;
 import com.example.taweesoft.joinpa.JoiningEventView.JoiningListCustomAdapter;
 import com.example.taweesoft.joinpa.Library.Owner;
@@ -22,7 +23,7 @@ public class MainActivity extends ActionBarActivity {
     public static Owner owner;
     private ListView lv_joiningList;
     private List<JoiningEvent> joiningEventList;
-    private Button btn_myEvent,btn_createEvent;
+    private Button btn_myEvent,btn_createEvent,btn_findFriend;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +31,7 @@ public class MainActivity extends ActionBarActivity {
         owner = (Owner)getIntent().getSerializableExtra("Owner");
         initComponents();
         initMyEventList();
-        initMyEventButton();
-        initMyCreateEventButton();
+        initButton();
     }
 
     /**
@@ -41,6 +41,7 @@ public class MainActivity extends ActionBarActivity {
         btn_myEvent = (Button)findViewById(R.id.btn_myEvent);
         btn_createEvent = (Button)findViewById(R.id.btn_newEvent);
         lv_joiningList = (ListView)findViewById(R.id.lv_joiningList);
+        btn_findFriend = (Button)findViewById(R.id.btn_findFriend);
     }
 
     /**
@@ -53,20 +54,19 @@ public class MainActivity extends ActionBarActivity {
     }
 
     /**
-     *
+     * Initial buttons event.
      */
-    public void initMyEventButton(){
+    public void initButton(){
         ShowMyEventClick clickEvent = new ShowMyEventClick();
         btn_myEvent.setOnClickListener(clickEvent);
-    }
 
-    /**
-     * Initial create event button.
-     */
-    public void initMyCreateEventButton(){
         CreateEventClick createEventClick = new CreateEventClick();
         btn_createEvent.setOnClickListener(createEventClick);
+
+        ShowFindDialog findDialog = new ShowFindDialog();
+        btn_findFriend.setOnClickListener(findDialog);
     }
+
 
 //    public List<JoiningEvent> readJoiningEventList() {
 //        List<JoiningEvent> joiningEvents=null;
@@ -120,6 +120,16 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    /**
+     * Show find friend dialog.
+     */
+    class ShowFindDialog implements View.OnClickListener{
+        public void onClick(View v){
+            FindFriendDialog findFriend = new FindFriendDialog(MainActivity.this);
+            findFriend.openDialog();
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -138,7 +148,6 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

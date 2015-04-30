@@ -1,22 +1,18 @@
 package com.example.taweesoft.joinpa.Login;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.taweesoft.joinpa.Library.Database;
 import com.example.taweesoft.joinpa.Library.Owner;
-import com.example.taweesoft.joinpa.LoginState.FailedState;
-import com.example.taweesoft.joinpa.LoginState.LoginState;
-import com.example.taweesoft.joinpa.LoginState.SuccessState;
+import com.example.taweesoft.joinpa.Login.LoginState.FailedState;
+import com.example.taweesoft.joinpa.Login.LoginState.LoginState;
+import com.example.taweesoft.joinpa.Login.LoginState.SuccessState;
 import com.example.taweesoft.joinpa.R;
 
 import java.util.Observable;

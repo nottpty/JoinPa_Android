@@ -10,4 +10,5 @@
     <string name="title_activity_my_friend_list_view">MyFriendListView</string>
     <string name="title_activity_new_event">NewEventActivity</string>
     <string name="title_activity_custom_event_icon">custom_event_icon</string>
+    <string name="title_activity_find_friend">FindFriendActivity</string>
 </resources>

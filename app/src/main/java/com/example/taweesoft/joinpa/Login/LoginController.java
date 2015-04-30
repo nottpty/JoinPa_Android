@@ -3,10 +3,8 @@ package com.example.taweesoft.joinpa.Login;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.View;
-import android.widget.EditText;
 
-import com.example.taweesoft.joinpa.Library.Owner;
-import com.example.taweesoft.joinpa.LoginState.LoginState;
+import com.example.taweesoft.joinpa.Login.LoginState.LoginState;
 
 /**
  * Created by taweesoft on 30/4/2558.

@@ -4,9 +4,7 @@ import android.os.AsyncTask;
 
 import com.example.taweesoft.joinpa.Library.Database;
 import com.example.taweesoft.joinpa.Library.Owner;
-import com.example.taweesoft.joinpa.LoginState.FailedState;
-import com.example.taweesoft.joinpa.LoginState.LoginState;
-import com.example.taweesoft.joinpa.LoginState.SuccessState;
+import com.example.taweesoft.joinpa.Login.LoginState.LoginState;
 
 import java.util.Observable;
 

@@ -38,6 +38,11 @@
             android:name=".custom_event_icon"
             android:label="@string/title_activity_custom_event_icon" >
         </activity>
+        <activity
+            android:name=".FindFriend.FindFriendActivityDialog"
+            android:label="@string/title_activity_find_friend"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
     </application>
 
 </manifest>

@@ -20,7 +20,7 @@ import java.util.Scanner;
 
 public class Database {
 	private static String urlStr = Resources.URL;
-	protected static Map<String,Friend> allUser = getAllUser();
+	public static Map<String,Friend> allUser = getAllUser();
 	private final static String WAITING = "0";
 	
 	public static Owner getOwner(String username,String password){
