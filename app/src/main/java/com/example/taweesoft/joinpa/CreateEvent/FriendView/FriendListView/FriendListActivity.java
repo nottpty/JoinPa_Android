@@ -95,8 +95,8 @@ public class FriendListActivity extends ActionBarActivity implements Observer {
             NewEventModel model = new NewEventModel();
             Intent intent = new Intent(FriendListActivity.this, NewEventActivity.class);
             intent.putExtra("SelectedFriend",(ArrayList<Friend>)selectedFriend);
+            intent.putExtra("Model",model);
             startActivity(intent);
-            NewEventController controller = new NewEventController(model);
         }
     }
 }

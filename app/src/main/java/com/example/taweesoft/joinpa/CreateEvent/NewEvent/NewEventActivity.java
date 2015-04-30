@@ -13,34 +13,38 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.taweesoft.joinpa.Library.DatePicker;
 import com.example.taweesoft.joinpa.Library.Friend;
 import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.R;
-
+import java.util.Observable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Observer;
 
-public class NewEventActivity extends ActionBarActivity {
+public class NewEventActivity extends ActionBarActivity implements Observer {
     private Spinner spn_icon;
     private List<Friend> selectedFriends;
     private TextView txt_eventName,txt_note;
-    private TextView txt_day,txt_month,txt_year;
-    private TextView txt_hour,txt_minute;
-    private Button btn_selectDate,btn_create;
-    private LinearLayout layout_date;
+    private TextView txt_date;
+    private TextView txt_time;
+    private Button btn_create;
+    private LinearLayout layout_date,layout_time;
+    private NewEventController controller;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_event);
         //Get selected friends list from select friend activity.
         selectedFriends = (List<Friend>)getIntent().getSerializableExtra("SelectedFriend");
+        NewEventModel model = (NewEventModel)getIntent().getSerializableExtra("Model");
         initComponent();
         initSpinnerIcon();
         initDateTextView();
         initTimeTextView();
 
-        NewEventController.setView(this);
+        controller = new NewEventController(this,model);
     }
 
     /**
@@ -50,14 +54,11 @@ public class NewEventActivity extends ActionBarActivity {
         spn_icon = (Spinner)findViewById(R.id.spn_icon);
         txt_eventName = (TextView)findViewById(R.id.txt_eventName);
         txt_note = (TextView)findViewById(R.id.txt_note);
-        btn_selectDate = (Button)findViewById(R.id.btn_selectDate);
         btn_create = (Button)findViewById(R.id.btn_create);
-        txt_day = (TextView)findViewById(R.id.txt_day);
-        txt_month = (TextView)findViewById(R.id.txt_month);
-        txt_year = (TextView)findViewById(R.id.txt_year);
-        txt_hour = (TextView)findViewById(R.id.txt_hour);
-        txt_minute = (TextView)findViewById(R.id.txt_minute);
+        txt_date = (TextView)findViewById(R.id.txt_date);
+        txt_time = (TextView)findViewById(R.id.txt_time);
         layout_date = (LinearLayout)findViewById(R.id.layout_date);
+        layout_time = (LinearLayout)findViewById(R.id.layout_time);
     }
 
     /**
@@ -66,8 +67,6 @@ public class NewEventActivity extends ActionBarActivity {
     public void initSpinnerIcon(){
         CustomEventIcon adapter = new CustomEventIcon(this);
         spn_icon.setAdapter(adapter);
-        IconSelectedEvent action = new IconSelectedEvent();
-        spn_icon.setOnItemSelectedListener(action);
     }
 
     /**
@@ -78,9 +77,7 @@ public class NewEventActivity extends ActionBarActivity {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         int month = calendar.get(Calendar.MONTH)+1;
         int year = calendar.get(Calendar.YEAR);
-        txt_day.setText(String.format("%02d",day));
-        txt_month.setText(String.format("%02d",month));
-        txt_year.setText(String.format("%02d",year));
+        txt_date.setText(String.format("%02d/%02d/%04d",day,month,year));
     }
 
     /**
@@ -90,9 +87,18 @@ public class NewEventActivity extends ActionBarActivity {
         Date date = new Date();
         int hour = date.getHours();
         int minute = date.getMinutes();
-        txt_hour.setText(String.format("%02d",hour));
-        txt_minute.setText(String.format("%02d",minute));
+        txt_time.setText(String.format("%02d:%02d",hour,minute));
     }
+
+    public void update(Observable observable , Object obj){
+        String str = (String)obj;
+        if(str.contains("/")){ //If obj is date.
+            txt_date.setText(str);
+        }else if(str.contains(":")){ // If obj is time.
+            txt_time.setText(str);
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -115,23 +121,21 @@ public class NewEventActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    class IconSelectedEvent implements AdapterView.OnItemSelectedListener{
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            //Get integer of icon in each element of arrayAdapter(CustomEventIcon).
-            Integer iconKey = (Integer)parent.getItemAtPosition(position);
-            //Get event's name from map.
-            String eventName = Resources.eventsName.get(iconKey);
-            txt_eventName.setText(eventName);
-        }
 
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-
-        }
-    }
 
     public void setLayoutDateAction(View.OnClickListener action){
         this.layout_date.setOnClickListener(action);
+    }
+
+    public void setLayoutTimeAction(View.OnClickListener action){
+        this.layout_time.setOnClickListener(action);
+    }
+
+    public void setIconSpinnerAction(AdapterView.OnItemSelectedListener action){
+        this.spn_icon.setOnItemSelectedListener(action);
+    }
+
+    public void setEventName(String eventName){
+        this.txt_eventName.setText(eventName);
     }
 }

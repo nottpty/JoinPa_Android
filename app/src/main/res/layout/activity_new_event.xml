@@ -42,48 +42,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="00"
-            android:id="@+id/txt_day" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="/"
-            android:id="@+id/textView7" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="00"
-            android:id="@+id/txt_month" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="/"
-            android:id="@+id/textView6" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="00"
-            android:id="@+id/txt_year" />
+            android:text="00/00/0000"
+            android:id="@+id/txt_date" />
 
     </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Date"
-        android:id="@+id/btn_selectDate"
-        android:layout_above="@+id/btn_create"
-        android:layout_alignLeft="@+id/btn_create"
-        android:layout_alignStart="@+id/btn_create"
-        android:layout_marginBottom="34dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -98,28 +60,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/layout_date"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:id="@+id/layout_time">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="00"
-            android:id="@+id/txt_hour" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text=":"
-            android:id="@+id/textView9" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="00"
-            android:id="@+id/txt_minute" />
+            android:text="00:00"
+            android:id="@+id/txt_time" />
 
     </LinearLayout>
 
