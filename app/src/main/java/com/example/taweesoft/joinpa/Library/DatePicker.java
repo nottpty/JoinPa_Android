@@ -4,7 +4,10 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
+
+import com.example.taweesoft.joinpa.CreateEvent.NewEvent.NewEventActivity;
 
 import java.util.Calendar;
 import java.util.Observer;
@@ -17,7 +20,9 @@ public class DatePicker extends DialogFragment implements DatePickerDialog.OnDat
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         observable = new Observable();
-        observable.addObserver((Observer)getActivity());
+        NewEventActivity activity = (NewEventActivity)getActivity();
+        Observer model = (Observer)activity.getController().getModel();
+        observable.addObserver(model);
         // Use the current date as the default date in the picker
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
@@ -30,7 +35,8 @@ public class DatePicker extends DialogFragment implements DatePickerDialog.OnDat
     @Override
     public void onDateSet(android.widget.DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         observable.setChanged();
-        observable.notifyObservers(String.format("%02d/%02d/%04d", dayOfMonth, monthOfYear+1, year));
+        int[] dateArr = new int[]{dayOfMonth,monthOfYear,year};
+        observable.notifyObservers(dateArr);
     }
 
 }

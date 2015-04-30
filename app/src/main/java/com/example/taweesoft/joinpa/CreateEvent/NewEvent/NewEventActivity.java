@@ -39,6 +39,7 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
         //Get selected friends list from select friend activity.
         selectedFriends = (List<Friend>)getIntent().getSerializableExtra("SelectedFriend");
         NewEventModel model = (NewEventModel)getIntent().getSerializableExtra("Model");
+        model.addObserver(this);
         initComponent();
         initSpinnerIcon();
         initDateTextView();
@@ -90,13 +91,19 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
         txt_time.setText(String.format("%02d:%02d",hour,minute));
     }
 
+    /**
+     * Observe the NewEventModel.
+     */
     public void update(Observable observable , Object obj){
-        String str = (String)obj;
-        if(str.contains("/")){ //If obj is date.
-            txt_date.setText(str);
-        }else if(str.contains(":")){ // If obj is time.
-            txt_time.setText(str);
-        }
+        if(obj.getClass() != Date.class) return;
+        Date date = (Date)obj;
+        int day = date.getDate();
+        int month = date.getMonth();
+        int year = date.getYear();
+        int hour = date.getHours();
+        int minute = date.getMinutes();
+        txt_date.setText(String.format("%02d/%02d/%04d",day,month,year));
+        txt_time.setText(String.format("%02d:%02d",hour,minute));
     }
 
     @Override
@@ -137,5 +144,9 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
 
     public void setEventName(String eventName){
         this.txt_eventName.setText(eventName);
+    }
+
+    public NewEventController getController(){
+        return  controller;
     }
 }

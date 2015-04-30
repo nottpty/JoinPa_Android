@@ -11,6 +11,8 @@ import com.example.taweesoft.joinpa.Library.DatePicker;
 import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.Library.TimePicker;
 
+import java.util.Date;
+
 /**
  * Created by taweesoft on 29/4/2558.
  */
@@ -54,5 +56,12 @@ public class NewEventController extends Activity{
         public void onNothingSelected(AdapterView<?> parent) {
 
         }
+    }
+
+    public Date getDateAndTime(){
+        return model.getDateAndTime();
+    }
+    public NewEventModel getModel(){
+        return this.model;
     }
 }

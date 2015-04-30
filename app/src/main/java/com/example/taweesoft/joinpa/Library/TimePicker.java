@@ -6,6 +6,8 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.taweesoft.joinpa.CreateEvent.NewEvent.NewEventActivity;
+
 import java.util.Calendar;
 import java.util.Observer;
 
@@ -17,7 +19,9 @@ public class TimePicker extends DialogFragment implements TimePickerDialog.OnTim
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         observable = new Observable();
-        observable.addObserver((Observer)getActivity());
+        NewEventActivity activity = (NewEventActivity)getActivity();
+        Observer model = (Observer)activity.getController().getModel();
+        observable.addObserver(model);
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
@@ -26,7 +30,7 @@ public class TimePicker extends DialogFragment implements TimePickerDialog.OnTim
 
     public void onTimeSet(android.widget.TimePicker timerPicker,int hour, int minute){
         observable.setChanged();
-        Log.d("XXX : ", hour + " " + minute);
-        observable.notifyObservers(String.format("%02d:%02d",hour,minute));
+        int[] dateArr = new int[]{hour,minute};
+        observable.notifyObservers(dateArr);
     }
 }
