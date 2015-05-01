@@ -13,5 +13,6 @@ public class SuccessState implements LoginState{
         Intent intent = new Intent(loginAct, MainActivity.class);
         intent.putExtra("Owner",loginAct.getOwner());
         loginAct.startActivity(intent);
+        loginAct.finish();
     }
 }

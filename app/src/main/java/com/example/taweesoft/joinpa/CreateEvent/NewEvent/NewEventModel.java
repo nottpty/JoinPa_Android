@@ -22,6 +22,9 @@ public class NewEventModel extends Observable implements Serializable,Observer{
 
     public NewEventModel(){
         date = new Date();
+        date.setMonth(date.getMonth()+1);
+        date.setYear(date.getYear()+1900);
+
     }
 
     public void setDate(int[] dateArr){

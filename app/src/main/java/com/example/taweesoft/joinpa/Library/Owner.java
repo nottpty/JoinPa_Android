@@ -27,5 +27,7 @@ public class Owner extends User{
 	public void addEvent(Event e){
 		eventList.add(e);
 	}
+
+    public void addFriend(Friend friend) { friendList.add(friend); }
 	
 }

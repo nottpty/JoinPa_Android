@@ -2,6 +2,8 @@ package com.example.taweesoft.joinpa.Library;
 
 import android.util.Log;
 
+import com.example.taweesoft.joinpa.MainActivity;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -304,6 +306,16 @@ public class Database {
             connect.disconnect();
         }catch(IOException e){ e.printStackTrace(); }
     }
-
+    public static void addFriend(Friend friend){
+        String ownerName = MainActivity.owner.getUsername();
+        String friendName = friend.getUsername();
+        HttpURLConnection connect = getConnection(String.format("INSERT INTO tb_friendList VALUES (\'%s\',\'%s\')",ownerName,friendName));
+        try{
+            Scanner scan = new Scanner(connect.getInputStream());
+            while(scan.hasNext()) scan.next();
+            scan.close();
+            connect.disconnect();
+        }catch(IOException e){ e.printStackTrace(); }
+    }
 
 }
