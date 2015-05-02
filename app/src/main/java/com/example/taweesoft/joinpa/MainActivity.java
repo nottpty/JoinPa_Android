@@ -146,14 +146,16 @@ public class MainActivity extends ActionBarActivity implements Observer{
     @Override
     public void update(Observable observable, Object data) {
         if( data == null ) return;
-        JoiningEvent joiningEvent = (JoiningEvent)data;
+        final JoiningEvent joiningEvent = (JoiningEvent)data;
         owner.moveToJoined(joiningEvent);
-        runOnUiThread(new Runnable() { // Because original thread can touch this view.
+        runOnUiThread(new Runnable(){ //Because original thread and touch this view.
             @Override
             public void run() {
                 joinListAdapter.notifyDataSetChanged();
             }
         });
+        UpdateListViewAndNotifyOwner upAndNotify = new UpdateListViewAndNotifyOwner(joiningEvent);
+        upAndNotify.execute();
 
     }
 

@@ -13,14 +13,14 @@ import java.util.Map;
  * Created by taweesoft on 27/4/2558.
  */
 public class JoiningEvent extends Event {
-    String ownerName;
-    public JoiningEvent(String eventID,String ownerName,Map<User,Integer> invitedList,int iconID,String topic,String note,Date date){
+    private User owner;
+    public JoiningEvent(String eventID,User owner,Map<User,Integer> invitedList,int iconID,String topic,String note,Date date){
         super(eventID,invitedList,iconID,topic,note,date);
-        this.ownerName = ownerName;
+        this.owner = owner;
     }
 
-    public String getOwnerName(){
-        return this.ownerName;
+    public User getEventOwner(){
+        return this.owner;
     }
 
     public void setStatus(int status){

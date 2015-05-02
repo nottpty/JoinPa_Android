@@ -28,6 +28,7 @@ public class Resources {
         eventsName.put(icons.get(1),"Lunch");
         eventsName.put(icons.get(2),"Play game");
         eventsName.put(icons.get(3),"Home");
+
     }
 
     public static String deviceID = "key";

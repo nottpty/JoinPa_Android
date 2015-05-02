@@ -48,6 +48,13 @@ public class GCMIntentService extends GCMBaseIntentService {
         String message;
         // Message from PHP server
         message = data.getStringExtra("message");
+        int iconID = R.drawable.a1;
+        if(message.contains("@@")){
+            String[] msgArr = message.split("@@");
+            iconID = Resources.icons.get(Integer.parseInt(msgArr[0]));
+            message = msgArr[1];
+            Log.d("OOO : " , message);
+        }
         // Open a new activity called GCMMessageView
         Intent intent = new Intent(this, MainActivity.class);
         // Pass data to the new activity
@@ -56,8 +63,10 @@ public class GCMIntentService extends GCMBaseIntentService {
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
         // Create the notification with a notification builder
+
+
         Notification notification = new Notification.Builder(this)
-                .setSmallIcon(R.drawable.a1)
+                .setSmallIcon(iconID)
                 .setWhen(System.currentTimeMillis())
                 .setContentTitle("Join Pa!!")
                 .setContentText(message).setContentIntent(pIntent)

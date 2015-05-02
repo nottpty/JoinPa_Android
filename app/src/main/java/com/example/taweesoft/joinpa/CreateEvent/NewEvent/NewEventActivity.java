@@ -173,7 +173,7 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
             Map<User,Integer> invitedMap = Event.createInvitedMap(invitedList);
             final Event event = new Event(eventID,owner,invitedMap,iconID,eventName,note,date);
             MainActivity.owner.addEvent(event); // Add event to owner list.
-            final String msg = String.format("\'%s\' %s has invited you to join his event",eventName,owner.getUsername());
+            final String msg = String.format("%s@@\'%s\' %s has invited you to join his event",iconID,eventName,owner.getUsername());
             AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
                 @Override
                 protected void onPreExecute() {

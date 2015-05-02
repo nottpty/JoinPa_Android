@@ -256,12 +256,13 @@ public class Database {
                     String[] dataArr = input.split("\t");
                     //[, EventID, OwnerName, InvitedList, IconID, Topic, Note, Date, Time]
                     String ownerName = dataArr[2];
+                    User owner = allUser.get(ownerName);
                     Map<User,Integer> invitedList = getMapInvitedList(eventID);
                     String[] dateArr = dataArr[7].split("/");
                     String[] timeArr = dataArr[8].split(":");
                     int iconID = Integer.parseInt(dataArr[4]);
                     Date date = createDate(dateArr,timeArr);
-                    event = new JoiningEvent(eventID,ownerName,invitedList,iconID,dataArr[5],dataArr[6],date);
+                    event = new JoiningEvent(eventID,owner,invitedList,iconID,dataArr[5],dataArr[6],date);
                 }
                 count++;
             }

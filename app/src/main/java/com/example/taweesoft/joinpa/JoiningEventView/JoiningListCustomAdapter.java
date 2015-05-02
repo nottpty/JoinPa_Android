@@ -52,7 +52,7 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
         btn_join.setOnClickListener(joinAction);
         btn_decline.setOnClickListener(declineAction);
         txt_topic.setText(event.getTopic());
-        txt_OwnerName.setText(event.getOwnerName());
+        txt_OwnerName.setText(event.getEventOwner().getUsername());
         return view;
     }
 
