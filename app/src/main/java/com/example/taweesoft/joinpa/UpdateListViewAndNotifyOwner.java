@@ -18,7 +18,7 @@ public class UpdateListViewAndNotifyOwner extends AsyncTask<Void,Void,Void> {
     @Override
     protected Void doInBackground(Void... params) {
         String ownerNotiKey = event.getEventOwner().getNotifyKey();
-        String msg = String.format("\'%s\' %s has join you event",event.getTopic(),MainActivity.owner.getUsername());
+        String msg = String.format("\'%s\' %s has joined your event",event.getTopic(),MainActivity.owner.getUsername());
         Database.sendMsg(ownerNotiKey, msg);
         return null;
     }

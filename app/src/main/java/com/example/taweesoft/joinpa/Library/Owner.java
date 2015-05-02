@@ -9,10 +9,13 @@ public class Owner extends User{
 	private List<Friend> friendList;
     private List<JoiningEvent> joiningEvents;
     private List<JoiningEvent> joinedEvent;
+    private LoadMyEvent loadMyEvent;
 	public Owner(String username,String notifyKey){
 		super(username,notifyKey);
+        eventList = new ArrayList<Event>();
         joinedEvent = new ArrayList<JoiningEvent>();
-		eventList = Database.getMyEvent(this);
+		loadMyEvent = new LoadMyEvent(this);
+        loadMyEvent.load();
 		friendList = Database.getFriendList(this);
         joiningEvents = Database.myJoiningEvents(this);
 	}
@@ -38,5 +41,9 @@ public class Owner extends User{
     public void moveToJoined(JoiningEvent event){
         joiningEvents.remove(event);
         joinedEvent.add(event);
+    }
+
+    public void setEventList(List<Event> eventList){
+        this.eventList = eventList;
     }
 }

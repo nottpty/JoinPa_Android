@@ -1,6 +1,8 @@
 package com.example.taweesoft.joinpa.JoiningEventView;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -47,24 +49,36 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
         TextView txt_OwnerName = (TextView)view.findViewById(R.id.txt_OwnerName);
         Button btn_join = (Button)view.findViewById(R.id.btn_join);
         Button btn_decline = (Button)view.findViewById(R.id.btn_decline);
-        JoinEventAction joinAction = new JoinEventAction(event,JOIN);
-        JoinEventAction declineAction = new JoinEventAction(event,DECLINE);
-        btn_join.setOnClickListener(joinAction);
-        btn_decline.setOnClickListener(declineAction);
+        btn_join.setOnClickListener(setYesEventForJoinConfirm(event));
+        btn_decline.setOnClickListener(setYesEventForDeclineConfirm(event));
         txt_topic.setText(event.getTopic());
         txt_OwnerName.setText(event.getEventOwner().getUsername());
         return view;
     }
 
-    class JoinEventAction implements View.OnClickListener{
+    public View.OnClickListener setYesEventForJoinConfirm(JoiningEvent event){
+        String message = String.format("Join to \'%s\'\nBy %s",event.getTopic(),event.getEventOwner().getUsername());
+        JoinEventAction joinAction = new JoinEventAction(event,JOIN);
+        ShowComfirmDialog joinConfirm = new ShowComfirmDialog(event,message,joinAction);
+        return joinConfirm;
+    }
+
+    public View.OnClickListener setYesEventForDeclineConfirm(JoiningEvent event){
+        String message = String.format("Decline the \'%s\' event\nBy %s",event.getTopic(),event.getEventOwner().getUsername());
+        JoinEventAction declineAction = new JoinEventAction(event,DECLINE);
+        ShowComfirmDialog declineConfirm = new ShowComfirmDialog(event,message,declineAction);
+        return declineConfirm;
+    }
+    class JoinEventAction implements DialogInterface.OnClickListener{
         private JoiningEvent event;
         private int status;
         public JoinEventAction(JoiningEvent event,int status){
             this.event = event;
             this.status = status;
         }
+
         @Override
-        public void onClick(View v){
+        public void onClick(DialogInterface dialog, int which) {
             AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
                 @Override
                 protected Void doInBackground(Void... params) {
@@ -72,7 +86,6 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
                     int index = MainActivity.owner.getJoiningEvents().indexOf(event);
                     JoiningEvent currentEvent = MainActivity.owner.getJoiningEvents().get(index);
                     currentEvent.setStatus(status);
-                    Log.d("III : ", observable.countObservers() + "");
                     observable.setChanged();
                     observable.notifyObservers(currentEvent);
                     /*Update in database.*/
@@ -81,6 +94,23 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
                 }
             };
             task.execute();
+        }
+    }
+
+    class ShowComfirmDialog implements View.OnClickListener{
+        private AlertDialog.Builder dialog;
+        private JoiningEvent event;
+        public ShowComfirmDialog(JoiningEvent event,String message,JoinEventAction yesEvent){
+            this.event = event;
+            dialog = new AlertDialog.Builder(getContext());
+            dialog.setMessage(message);
+            dialog.setPositiveButton("YES",yesEvent);
+            dialog.setNegativeButton("NO", null);
+        }
+
+        @Override
+        public void onClick(View v) {
+            dialog.create().show();
         }
     }
 }

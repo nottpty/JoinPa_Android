@@ -271,7 +271,7 @@ public class Database {
     }
     public static List<JoiningEvent> myJoiningEvents(Owner owner){
         List<JoiningEvent> events = new ArrayList<JoiningEvent>();
-        HttpURLConnection connect = getConnection(String.format("SELECT * FROM tb_joinList WHERE Username=\'%s\'",owner.getUsername()));
+        HttpURLConnection connect = getConnection(String.format("SELECT * FROM tb_joinList WHERE Username=\'%s\' AND Status=\'0\'",owner.getUsername()));
         try{
             BufferedReader in = new BufferedReader(new InputStreamReader(connect.getInputStream()));
             String input;
