@@ -20,6 +20,7 @@ import com.example.taweesoft.joinpa.JoiningEventView.JoiningListCustomAdapter;
 import com.example.taweesoft.joinpa.Library.Owner;
 import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.MyEventView.MyEventActivity;
+import com.example.taweesoft.joinpa.Notification.NotifyOwner;
 
 import java.util.List;
 import java.util.Observable;

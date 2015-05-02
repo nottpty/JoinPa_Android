@@ -8,9 +8,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import com.example.taweesoft.joinpa.InvitedList.InvitedListDialog;
 import com.example.taweesoft.joinpa.Library.Event;
 import com.example.taweesoft.joinpa.MainActivity;
 import com.example.taweesoft.joinpa.R;
@@ -76,6 +78,17 @@ public class MyEventActivity extends ActionBarActivity {
             List<Event> myEventList = MainActivity.owner.getEventList();
             MyEventCustomAdapter adapter = new MyEventCustomAdapter(MyEventActivity.this,myEventList);
             lv_myEventList.setAdapter(adapter);
+            lv_myEventList.setOnItemClickListener(new ViewInvitedListAction());
+        }
+    }
+
+    class ViewInvitedListAction implements AdapterView.OnItemClickListener{
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            List<Event> myEvent = MainActivity.owner.getEventList();
+            InvitedListDialog dialog = new InvitedListDialog(MyEventActivity.this,myEvent.get(position));
+            dialog.openDialog();
         }
     }
 }

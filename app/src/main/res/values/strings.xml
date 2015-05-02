@@ -11,4 +11,5 @@
     <string name="title_activity_new_event">NewEventActivity</string>
     <string name="title_activity_custom_event_icon">custom_event_icon</string>
     <string name="title_activity_find_friend">FindFriendActivity</string>
+    <string name="title_activity_one_event">OneEvent</string>
 </resources>

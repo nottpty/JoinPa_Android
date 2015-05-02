@@ -12,6 +12,9 @@ import java.util.Map;
  * Created by taweesoft on 29/4/2558.
  */
 public class Resources {
+    public static final int WAITING = 0;
+    public static final int JOIN = 1;
+    public static final int DECLINE = 2;
     public static List<Integer> icons = new ArrayList<Integer>(Arrays.asList(
             R.drawable.a0,
             R.drawable.a1,

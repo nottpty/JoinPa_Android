@@ -5,9 +5,13 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.PowerManager;
 import android.util.Log;
 
+import com.example.taweesoft.joinpa.JoiningEventView.OneEvent;
 import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.MainActivity;
 import com.example.taweesoft.joinpa.R;
@@ -56,14 +60,16 @@ public class GCMIntentService extends GCMBaseIntentService {
             Log.d("OOO : " , message);
         }
         // Open a new activity called GCMMessageView
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, OneEvent.class);
         // Pass data to the new activity
         intent.putExtra("message", message);
         // Starts the activity on notification click
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
         // Create the notification with a notification builder
-
+        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION); // Play notification sound
+        Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), sound);
+        r.play();
 
         Notification notification = new Notification.Builder(this)
                 .setSmallIcon(iconID)

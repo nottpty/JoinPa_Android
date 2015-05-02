@@ -3,10 +3,15 @@
     package="com.example.taweesoft.joinpa" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <permission android:name="com.example.taweesoft.joinpa.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+
+    <permission
+        android:name="com.example.taweesoft.joinpa.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
     <uses-permission android:name="com.example.taweesoft.joinpa.permission.C2D_MESSAGE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -50,6 +55,11 @@
                 <category android:name="com.androidbegin.gcmtutorial" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".JoiningEventView.OneEvent"
+            android:label="@string/title_activity_one_event" >
+        </activity>
     </application>
 
 </manifest>
