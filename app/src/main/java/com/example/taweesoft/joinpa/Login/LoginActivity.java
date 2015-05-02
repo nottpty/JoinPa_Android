@@ -1,6 +1,7 @@
 package com.example.taweesoft.joinpa.Login;
 
 import android.app.AlertDialog;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -33,6 +34,7 @@ public class LoginActivity extends ActionBarActivity implements Observer {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        super.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_login);
         GCMRegistrar.checkDevice(this);
         GCMRegistrar.checkManifest(this);

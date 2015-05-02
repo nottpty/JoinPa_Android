@@ -38,6 +38,7 @@ public class Database {
 					String[] information = input.split("\t");
 					//[, username, password, notifyKey]
 					owner = new Owner(information[1],information[3]);
+                    Log.d("OWNER DATABASE : ", owner.hashCode()+"");
 				}
 				count++;
 			}
@@ -153,7 +154,7 @@ public class Database {
                     String[] timeArr = dataArr[8].split(":"); //[08, 00, 00]
     				Date date = createDate(dateArr,timeArr);
     				Event event = new Event(eventID,owner,invitedList,iconID,topic,note,date);
-    				
+    				Log.d("PPP : ", event.getTopic());
     				eventList.add(event);
     			}
     			count++;

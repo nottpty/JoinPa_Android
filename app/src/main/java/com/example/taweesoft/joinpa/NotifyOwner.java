@@ -8,10 +8,10 @@ import com.example.taweesoft.joinpa.Library.JoiningEvent;
 /**
  * Created by taweesoft on 2/5/2558.
  */
-public class UpdateListViewAndNotifyOwner extends AsyncTask<Void,Void,Void> {
+public class NotifyOwner extends AsyncTask<Void,Void,Void> {
 
     private JoiningEvent event;
-    public UpdateListViewAndNotifyOwner(JoiningEvent event){
+    public NotifyOwner(JoiningEvent event){
         this.event = event;
     }
 

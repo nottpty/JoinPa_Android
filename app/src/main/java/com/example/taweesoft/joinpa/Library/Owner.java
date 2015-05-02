@@ -15,7 +15,6 @@ public class Owner extends User{
         eventList = new ArrayList<Event>();
         joinedEvent = new ArrayList<JoiningEvent>();
 		loadMyEvent = new LoadMyEvent(this);
-        loadMyEvent.load();
 		friendList = Database.getFriendList(this);
         joiningEvents = Database.myJoiningEvents(this);
 	}
@@ -45,5 +44,13 @@ public class Owner extends User{
 
     public void setEventList(List<Event> eventList){
         this.eventList = eventList;
+    }
+
+    public boolean isLoadFinish(){
+        return loadMyEvent.isDone();
+    }
+
+    public void loadMyEvent(){
+        loadMyEvent.load();
     }
 }

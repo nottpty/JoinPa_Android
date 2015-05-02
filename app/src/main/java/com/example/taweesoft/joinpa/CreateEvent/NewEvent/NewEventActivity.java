@@ -1,5 +1,6 @@
 package com.example.taweesoft.joinpa.CreateEvent.NewEvent;
 
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -43,6 +44,7 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        super.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_new_event);
         //Get selected friends list from select friend activity.
         selectedFriends = (List<Friend>)getIntent().getSerializableExtra("SelectedFriend");

@@ -1,6 +1,7 @@
 package com.example.taweesoft.joinpa;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -34,8 +35,10 @@ public class MainActivity extends ActionBarActivity implements Observer{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        super.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
         owner = (Owner)getIntent().getSerializableExtra("Owner");
+        owner.loadMyEvent(); //Because can not call load inside the owner's constructor(Intent didn't pass by reference)
         checkNotiKey();
         initComponents();
         initMyEventList();
@@ -154,8 +157,11 @@ public class MainActivity extends ActionBarActivity implements Observer{
                 joinListAdapter.notifyDataSetChanged();
             }
         });
-        UpdateListViewAndNotifyOwner upAndNotify = new UpdateListViewAndNotifyOwner(joiningEvent);
-        upAndNotify.execute();
+        if(joiningEvent.getMyStatus() == 1){ // Joined
+            NotifyOwner upAndNotify = new NotifyOwner(joiningEvent);
+            upAndNotify.execute();
+        }
+
 
     }
 

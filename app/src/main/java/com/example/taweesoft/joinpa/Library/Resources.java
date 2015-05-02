@@ -32,4 +32,6 @@ public class Resources {
     }
 
     public static String deviceID = "key";
+
+    public static Owner owner = null;
 }
