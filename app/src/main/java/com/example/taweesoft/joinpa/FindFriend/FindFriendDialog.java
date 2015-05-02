@@ -38,16 +38,16 @@ public class FindFriendDialog implements Observer{
     private Finder finder;
     private Friend friend;
     private FindFriendController controller;
-    private AddState state;
+
     public AddState foundState = new FoundState();
     public AddState notFoundState = new NotFoundState();
 
     public FindFriendDialog(Context context){
         this.context = context;
         finder = localFinder;
-        state = notFoundState;
         FindFriendModel model = new FindFriendModel();
         controller = new FindFriendController(this,model);
+        controller.setState(notFoundState);
     }
 
     public void openDialog(){
@@ -70,7 +70,7 @@ public class FindFriendDialog implements Observer{
         if(((Object)observable).getClass() == DatabaseFinder.class){
             if(data == null) {
                 layout_friendName.setBackgroundColor(0xffff4d32);
-                state = notFoundState;
+                controller.setState(notFoundState);
                 txt_tapToAdd.setVisibility(View.INVISIBLE);
                 return;
             }
@@ -86,7 +86,7 @@ public class FindFriendDialog implements Observer{
         if(!controller.isAlreadyAdd(friend)){
             layout_friendName.setBackgroundColor(0xff88ff47);
             txt_tapToAdd.setText("Tap to add   ");
-            state = foundState;
+            controller.setState(foundState);
         }else{
             layout_friendName.setBackgroundColor(0xfffdff34);
             txt_tapToAdd.setText("Already friend with you   ");
@@ -114,13 +114,11 @@ public class FindFriendDialog implements Observer{
     class AddFriendAction implements View.OnClickListener{
         @Override
         public void onClick(View v) {
-            state.addNewFriend(FindFriendDialog.this,friend);
+            controller.addNewFriend(FindFriendDialog.this,friend);
         }
     }
 
-    public void setState(AddState state){
-        this.state = state;
-    }
+
 
     public Context getContext(){
         return context;

@@ -1,5 +1,6 @@
 package com.example.taweesoft.joinpa.FindFriend;
 
+import com.example.taweesoft.joinpa.FindFriend.FindFriend.State.AddState;
 import com.example.taweesoft.joinpa.Library.Friend;
 
 /**
@@ -16,5 +17,13 @@ public class FindFriendController {
 
     public boolean isAlreadyAdd(Friend friend){
         return model.isAlreadyAdd(friend);
+    }
+
+    public void setState(AddState state){
+        model.setState(state);
+    }
+
+    public void addNewFriend(FindFriendDialog view, Friend friend){
+        model.addNewFriend(view,friend);
     }
 }

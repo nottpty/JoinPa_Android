@@ -22,7 +22,7 @@ public class FoundState implements AddState{
             protected Void doInBackground(Void... params) {
                 MainActivity.owner.addFriend(friend);
                 Database.addFriend(friend);
-                view.setState(view.notFoundState);
+                view.getController().setState(view.notFoundState);
                 return null;
             }
         };
