@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.taweesoft.joinpa.MainActivity;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -323,6 +324,48 @@ public class Database {
         String name = MainActivity.owner.getUsername();
         String eventID = event.getEventID();
         HttpURLConnection connect = getConnection(String.format("UPDATE tb_joinList SET Status=\'%s\' WHERE EventID=\'%S\' AND Username=\'%s\'",status,eventID,name));
+        try{
+            Scanner scan = new Scanner(connect.getInputStream());
+            while(scan.hasNext()) scan.next();
+            scan.close();
+            connect.disconnect();
+        }catch(IOException e) { e.printStackTrace(); }
+    }
+
+    public static void sendMsg(String key,String msg){
+        HttpURLConnection connect = null;
+        try{
+            String url = "http://www.cmvk-tech.com/joinpa/gcm_engine.php";
+            URL obj = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            con.setRequestMethod("POST");
+            con.setRequestProperty("User-Agent", "Mozilla/5.0");
+            con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+            String message = "message=" + msg;
+            String regisKey = "registrationIDs=" + key;
+            String apiKey = "apiKey=AIzaSyAJfTqAcHM-TlWYFawJXfCmPDR23PB7-Bs";
+            String parameter = apiKey+"&"+regisKey+"&"+message;
+            con.setDoOutput(true);
+            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+            wr.writeBytes(parameter);
+            wr.flush();
+            wr.close();
+
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    public static void updateNotificationKey(String key,String username){
+        HttpURLConnection connect = getConnection(String.format("UPDATE tb_login SET NotiKey=\'%s\' WHERE Username=\'%s\'",key,username));
         try{
             Scanner scan = new Scanner(connect.getInputStream());
             while(scan.hasNext()) scan.next();

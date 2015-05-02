@@ -166,13 +166,14 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
             Date now = new Date();
             String eventID = String.format("%02d%02d%04d%02d%02d%02d", now.getDay(),now.getMonth(),now.getYear(),now.getHours(),now.getMinutes(),now.getSeconds());
             Owner owner = MainActivity.owner;
-            List<Friend> invitedList = selectedFriends;
+            final List<Friend> invitedList = selectedFriends;
             int iconID = spn_icon.getSelectedItemPosition();
             String eventName = txt_eventName.getText().toString();
             String note = txt_note.getText().toString();
             Map<User,Integer> invitedMap = Event.createInvitedMap(invitedList);
             final Event event = new Event(eventID,owner,invitedMap,iconID,eventName,note,date);
             MainActivity.owner.addEvent(event); // Add event to owner list.
+            final String msg = String.format("\'%s\' %s has invited you to join his event",eventName,owner.getUsername());
             AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
                 @Override
                 protected void onPreExecute() {
@@ -182,6 +183,9 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
                 @Override
                 protected Void doInBackground(Void... params) {
                     Database.addEvent(event);
+                    for(Friend friend : invitedList){
+                        Database.sendMsg(friend.getNotifyKey(),msg);
+                    }
                     return null;
                 }
 

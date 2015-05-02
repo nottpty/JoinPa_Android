@@ -1,6 +1,7 @@
 package com.example.taweesoft.joinpa;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,9 +13,11 @@ import android.widget.ListView;
 
 import com.example.taweesoft.joinpa.CreateEvent.FriendView.FriendListView.FriendListActivity;
 import com.example.taweesoft.joinpa.FindFriend.FindFriendDialog;
+import com.example.taweesoft.joinpa.Library.Database;
 import com.example.taweesoft.joinpa.Library.JoiningEvent;
 import com.example.taweesoft.joinpa.JoiningEventView.JoiningListCustomAdapter;
 import com.example.taweesoft.joinpa.Library.Owner;
+import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.MyEventView.MyEventActivity;
 
 import java.util.List;
@@ -33,6 +36,7 @@ public class MainActivity extends ActionBarActivity implements Observer{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         owner = (Owner)getIntent().getSerializableExtra("Owner");
+        checkNotiKey();
         initComponents();
         initMyEventList();
         initButton();
@@ -172,5 +176,22 @@ public class MainActivity extends ActionBarActivity implements Observer{
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void checkNotiKey(){
+        CheckExistNotiKey task = new CheckExistNotiKey();
+        task.execute();
+    }
+    class CheckExistNotiKey extends AsyncTask<Void,Void,Void>{
+        @Override
+        protected Void doInBackground(Void... params) {
+            String currentRegistrationID = Resources.deviceID;
+            Log.d("OOO: ", currentRegistrationID);
+            String dbRegistrationID = owner.getNotifyKey();
+            if(!(currentRegistrationID.equals(dbRegistrationID))){
+                Database.updateNotificationKey(currentRegistrationID,owner.getUsername());
+            }
+            return null;
+        }
     }
 }

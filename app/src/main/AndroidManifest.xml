@@ -3,7 +3,10 @@
     package="com.example.taweesoft.joinpa" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <permission android:name="com.example.taweesoft.joinpa.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="com.example.taweesoft.joinpa.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -34,15 +37,19 @@
             android:name=".CreateEvent.NewEvent.NewEventActivity"
             android:label="@string/title_activity_new_event" >
         </activity>
-        <activity
-            android:name=".custom_event_icon"
-            android:label="@string/title_activity_custom_event_icon" >
-        </activity>
-        <activity
-            android:name=".FindFriend.FindFriendActivityDialog"
-            android:label="@string/title_activity_find_friend"
-            android:theme="@android:style/Theme.Dialog" >
-        </activity>
+
+        <service android:name=".GCMIntentService" />
+
+        <receiver
+            android:name="com.google.android.gcm.GCMBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="com.androidbegin.gcmtutorial" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

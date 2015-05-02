@@ -13,7 +13,9 @@ import com.example.taweesoft.joinpa.Library.Owner;
 import com.example.taweesoft.joinpa.Login.LoginState.FailedState;
 import com.example.taweesoft.joinpa.Login.LoginState.LoginState;
 import com.example.taweesoft.joinpa.Login.LoginState.SuccessState;
+import com.example.taweesoft.joinpa.GCMIntentService;
 import com.example.taweesoft.joinpa.R;
+import com.google.android.gcm.GCMRegistrar;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -32,6 +34,10 @@ public class LoginActivity extends ActionBarActivity implements Observer {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        GCMRegistrar.checkDevice(this);
+        GCMRegistrar.checkManifest(this);
+        GCMRegistrar.register(LoginActivity.this,GCMIntentService.SENDER_ID);
+
         initComponents();
         loginDialogBuilder = new AlertDialog.Builder(this);
         dialog = loginDialogBuilder.create();
