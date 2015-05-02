@@ -17,4 +17,11 @@ public class User implements Serializable{
 	public String getNotifyKey(){
 		return notifyKey;
 	}
+
+    public boolean equals(Object obj){
+        if(obj == null) return false;
+        if(!(obj instanceof User)) return false;
+        User friend = (User)obj;
+        return getUsername().equals(friend.getUsername());
+    }
 }

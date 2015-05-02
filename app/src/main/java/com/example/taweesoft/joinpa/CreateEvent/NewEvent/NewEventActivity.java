@@ -20,6 +20,7 @@ import com.example.taweesoft.joinpa.Library.Event;
 import com.example.taweesoft.joinpa.Library.Friend;
 import com.example.taweesoft.joinpa.Library.Owner;
 import com.example.taweesoft.joinpa.Library.Resources;
+import com.example.taweesoft.joinpa.Library.User;
 import com.example.taweesoft.joinpa.MainActivity;
 import com.example.taweesoft.joinpa.R;
 
@@ -169,7 +170,7 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
             int iconID = spn_icon.getSelectedItemPosition();
             String eventName = txt_eventName.getText().toString();
             String note = txt_note.getText().toString();
-            Map<Friend,Integer> invitedMap = Event.createInvitedMap(invitedList);
+            Map<User,Integer> invitedMap = Event.createInvitedMap(invitedList);
             final Event event = new Event(eventID,owner,invitedMap,iconID,eventName,note,date);
             MainActivity.owner.addEvent(event); // Add event to owner list.
             AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {

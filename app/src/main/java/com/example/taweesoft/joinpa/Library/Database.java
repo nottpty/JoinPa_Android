@@ -146,7 +146,7 @@ public class Database {
                     String eventID = dataArr[1];
                     String topic = dataArr[5];
                     String note = dataArr[6];
-    				Map<Friend,Integer> invitedList = getMapInvitedList(dataArr[1]);
+    				Map<User,Integer> invitedList = getMapInvitedList(dataArr[1]);
     				int iconID = Integer.parseInt(dataArr[4]);
     				String[] dateArr = dataArr[7].split("/"); //[10, 03, 2015]
                     String[] timeArr = dataArr[8].split(":"); //[08, 00, 00]
@@ -182,9 +182,9 @@ public class Database {
     	};
     }
     
-    public static Map<Friend,Integer> getMapInvitedList(String eventID){
+    public static Map<User,Integer> getMapInvitedList(String eventID){
     	HttpURLConnection connect = getConnection(String.format("SELECT * FROM tb_joinList WHERE EventID=\'%s\'",eventID));
-    	Map<Friend,Integer> invitedList = new HashMap<Friend,Integer>();
+    	Map<User,Integer> invitedList = new HashMap<User,Integer>();
     	try{
     		BufferedReader in = new BufferedReader(new InputStreamReader(connect.getInputStream()));
     		String input;
@@ -212,11 +212,11 @@ public class Database {
         String eventName = event.getTopic();
         String note = event.getNote();
     	String eventID = event.getEventID();
-    	Map<Friend,Integer> invitedListMap = event.getInvitedList();
+    	Map<User,Integer> invitedListMap = event.getInvitedList();
     	String ownerName = owner.getUsername();
     	String invitedListStr="";
-    	for(Map.Entry<Friend,Integer> each : invitedListMap.entrySet()){
-            Friend friend = each.getKey();
+    	for(Map.Entry<User,Integer> each : invitedListMap.entrySet()){
+            User friend = each.getKey();
     		addJoiningList(eventID,friend.getUsername());
     		invitedListStr += ","+friend.getUsername();
     	}
@@ -255,7 +255,7 @@ public class Database {
                     String[] dataArr = input.split("\t");
                     //[, EventID, OwnerName, InvitedList, IconID, Topic, Note, Date, Time]
                     String ownerName = dataArr[2];
-                    Map<Friend,Integer> invitedList = getMapInvitedList(eventID);
+                    Map<User,Integer> invitedList = getMapInvitedList(eventID);
                     String[] dateArr = dataArr[7].split("/");
                     String[] timeArr = dataArr[8].split(":");
                     int iconID = Integer.parseInt(dataArr[4]);
@@ -279,8 +279,10 @@ public class Database {
                     String[] dataArr = input.split("\t");
                     //[, EventID, Username, Status]
                     String eventID = dataArr[1];
+                    int status = Integer.parseInt(dataArr[3]);
                     JoiningEvent joiningEvent = getJoiningEvent(eventID);
-                    events.add(joiningEvent);
+                    if(status != 0) owner.addJoinedEvent(joiningEvent);
+                    else events.add(joiningEvent);
                 }
                 count++;
             }
@@ -317,5 +319,15 @@ public class Database {
             connect.disconnect();
         }catch(IOException e){ e.printStackTrace(); }
     }
-
+    public static void joinEvent(JoiningEvent event,int status){
+        String name = MainActivity.owner.getUsername();
+        String eventID = event.getEventID();
+        HttpURLConnection connect = getConnection(String.format("UPDATE tb_joinList SET Status=\'%s\' WHERE EventID=\'%S\' AND Username=\'%s\'",status,eventID,name));
+        try{
+            Scanner scan = new Scanner(connect.getInputStream());
+            while(scan.hasNext()) scan.next();
+            scan.close();
+            connect.disconnect();
+        }catch(IOException e) { e.printStackTrace(); }
+    }
 }

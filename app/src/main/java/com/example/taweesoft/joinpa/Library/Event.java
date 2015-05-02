@@ -1,5 +1,7 @@
 package com.example.taweesoft.joinpa.Library;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
@@ -9,14 +11,14 @@ import java.util.Map;
 
 public class Event implements Serializable{
 	private Owner owner;
-	private Map<Friend,Integer> invitedList;
+	private Map<User,Integer> invitedList;
 	private int iconID;
 	private String topic;
 	private String note;
 	private Date date;
     private String eventID;
 	
-	public Event(String eventID,Owner owner,Map<Friend,Integer> invitedList,int iconID,String topic,String note,Date date){
+	public Event(String eventID,Owner owner,Map<User,Integer> invitedList,int iconID,String topic,String note,Date date){
 		this.eventID = eventID;
         this.owner = owner;
 		this.invitedList = invitedList;
@@ -26,7 +28,7 @@ public class Event implements Serializable{
 		this.date = date;
 	}
 
-    public Event(String eventID,Map<Friend,Integer> invitedList,int iconID,String topic,String note,Date date){
+    public Event(String eventID,Map<User,Integer> invitedList,int iconID,String topic,String note,Date date){
         this.eventID = eventID;
         this.invitedList = invitedList;
         this.iconID = iconID;
@@ -35,7 +37,7 @@ public class Event implements Serializable{
         this.date = date;
     }
 
-	public Map<Friend,Integer> getInvitedList(){
+	public Map<User,Integer> getInvitedList(){
 		return invitedList;
 	}
 	
@@ -79,17 +81,24 @@ public class Event implements Serializable{
 		this.date = date;
 	}
 
-	public void setInvitedList(Map<Friend, Integer> invitedList) {
+	public void setInvitedList(Map<User, Integer> invitedList) {
 		this.invitedList = invitedList;
 	}
 
 	public String getEventID(){ return eventID; };
 
-    public static Map<Friend,Integer> createInvitedMap(List<Friend> invitedList){
-        Map<Friend,Integer> invitedListMap = new HashMap<Friend,Integer>();
-        for(Friend friend : invitedList){
+    public static Map<User,Integer> createInvitedMap(List<Friend> invitedList){
+        Map<User,Integer> invitedListMap = new HashMap<User,Integer>();
+        for(User friend : invitedList){
             invitedListMap.put(friend, 0);
         }
         return invitedListMap;
+    }
+
+    public boolean equals(Object obj){
+        if( obj == null ) return false;
+        if( !(obj instanceof Event) ) return false;
+        Event event = (JoiningEvent)obj;
+        return getEventID().equals(event.getEventID());
     }
 }

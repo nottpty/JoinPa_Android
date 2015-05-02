@@ -5,10 +5,5 @@ public class Friend extends User{
 		super(username,notifyKey);
 	}
 
-    public boolean equals(Object obj){
-        if(obj == null) return false;
-        if(obj.getClass() != Friend.class) return false;
-        Friend friend = (Friend)obj;
-        return super.getUsername().equals(friend.getUsername());
-    }
+
 }

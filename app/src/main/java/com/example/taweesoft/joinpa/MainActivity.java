@@ -3,6 +3,7 @@ package com.example.taweesoft.joinpa;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,13 +18,16 @@ import com.example.taweesoft.joinpa.Library.Owner;
 import com.example.taweesoft.joinpa.MyEventView.MyEventActivity;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements Observer{
     public static Owner owner;
     private ListView lv_joiningList;
     private List<JoiningEvent> joiningEventList;
     private Button btn_myEvent,btn_createEvent,btn_findFriend;
+    private JoiningListCustomAdapter joinListAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +53,8 @@ public class MainActivity extends ActionBarActivity {
      */
     public void initMyEventList(){
         joiningEventList = owner.getJoiningEvents();
-        JoiningListCustomAdapter adapter = new JoiningListCustomAdapter(this,joiningEventList);
-        lv_joiningList.setAdapter(adapter);
+        joinListAdapter = new JoiningListCustomAdapter(this,joiningEventList);
+        lv_joiningList.setAdapter(joinListAdapter);
     }
 
     /**
@@ -128,6 +132,25 @@ public class MainActivity extends ActionBarActivity {
             FindFriendDialog findFriend = new FindFriendDialog(MainActivity.this);
             findFriend.openDialog();
         }
+    }
+
+
+
+    /**
+     * Update listview on joining event.
+     */
+    @Override
+    public void update(Observable observable, Object data) {
+        if( data == null ) return;
+        JoiningEvent joiningEvent = (JoiningEvent)data;
+        owner.moveToJoined(joiningEvent);
+        runOnUiThread(new Runnable() { // Because original thread can touch this view.
+            @Override
+            public void run() {
+                joinListAdapter.notifyDataSetChanged();
+            }
+        });
+
     }
 
     @Override
