@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -32,7 +33,8 @@ public class MyEventActivity extends ActionBarActivity implements Observer {
         super.onCreate(savedInstanceState);
         super.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_my_event);
-
+        MyEventModel model = new MyEventModel();
+        controller = new MyEventController(this,model);
         initComponents();
     }
 
@@ -85,10 +87,8 @@ public class MyEventActivity extends ActionBarActivity implements Observer {
         @Override
         protected void onPostExecute(Void aVoid) {
             progressBar.setVisibility(View.INVISIBLE);
-            List<Event> myEventList = Resources.owner.getEventList();
-            MyEventCustomAdapter adapter = new MyEventCustomAdapter(MyEventActivity.this,myEventList);
-            lv_myEventList.setAdapter(adapter);
-            lv_myEventList.setOnItemClickListener(new ViewInvitedListAction());
+            controller.setListViewAdapter();
+            controller.setListViewClickAction();
         }
     }
 
@@ -96,4 +96,7 @@ public class MyEventActivity extends ActionBarActivity implements Observer {
         lv_myEventList.setOnItemClickListener(action);
     }
 
+    public void setLisViewAdapter( ArrayAdapter adapter){
+        lv_myEventList.setAdapter(adapter);
+    }
 }

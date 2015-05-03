@@ -14,40 +14,32 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Created by taweesoft on 2/5/2558.
  */
-public class InvitedListDialog {
+public class InvitedListDialog{
     private Context context;
     private Event event;
+    private ListView lv_invitedList;
+    private InvitedListController controller;
     public InvitedListDialog(Context context,Event event){
         this.context = context;
         this.event = event;
+        InvitedListModel model = new InvitedListModel();
+        controller = new InvitedListController(this,model);
     }
 
     public void openDialog(){
         Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); //Hide the action bar.
         dialog.setContentView(R.layout.invited_list);
-        ListView lv_invitedList = (ListView)dialog.findViewById(R.id.lv_invitedList);
-        List<Map<User,Integer>> sortedListMap = sortedMap(event.getInvitedList());
+        lv_invitedList = (ListView)dialog.findViewById(R.id.lv_invitedList);
+        List<Map<User,Integer>> sortedListMap = controller.sortedMap(event.getInvitedList());
         InvitedListaCustomAdapter adapter = new InvitedListaCustomAdapter(context,sortedListMap);
         lv_invitedList.setAdapter(adapter);
         dialog.show();
-    }
-
-    public List<Map<User,Integer>> sortedMap(Map<User,Integer> unsortMap){
-        List<Map<User,Integer>> sortedListMap = new ArrayList<Map<User,Integer>>();
-        for(Map.Entry<User,Integer> each : unsortMap.entrySet()){
-            int status = each.getValue().intValue();
-            Map<User,Integer> map = new HashMap<User,Integer>();
-            map.put(each.getKey(),each.getValue());
-            int index = 0;
-            if(status == Resources.WAITING)
-                index = sortedListMap.size();
-            sortedListMap.add(index,map);
-        }
-        return sortedListMap;
     }
 }

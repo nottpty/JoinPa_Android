@@ -42,6 +42,9 @@ public class InvitedListaCustomAdapter extends ArrayAdapter<Map<User,Integer>> {
             case Resources.WAITING :
                 color = Color.GRAY;
                 break;
+            case Resources.DECLINE :
+                color = Color.RED;
+                break;
         }
         txt_status.setBackgroundColor(color);
         return convertView;

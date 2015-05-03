@@ -30,4 +30,14 @@ public class MyEventController {
             dialog.openDialog();
         }
     }
+
+    public void setListViewAdapter(){
+        List<Event> myEventList = Resources.owner.getEventList();
+        MyEventCustomAdapter adapter = new MyEventCustomAdapter(view,myEventList);
+        view.setLisViewAdapter(adapter);
+    }
+
+    public void setListViewClickAction(){
+        view.setListViewClickAction(new ViewInvitedListAction());
+    }
 }
