@@ -50,8 +50,7 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
             view = LayoutInflater.from(getContext()).inflate(R.layout.activity_joining_event_view,parent,false);
 
         TextView txt_topic = (TextView)view.findViewById(R.id.txt_topic);
-        TextView txt_OwnerName = (TextView)view.findViewById(R.id.txt_OwnerName);
-        TextView txt_note = (TextView)view.findViewById(R.id.txt_note);
+        TextView txt_OwnerName = (TextView)view.findViewById(R.id.txt_ownerName);
         TextView txt_date = (TextView)view.findViewById(R.id.txt_date);
         TextView txt_time = (TextView)view.findViewById(R.id.txt_time);
         TextView btn_join = (TextView)view.findViewById(R.id.btn_join);
@@ -64,7 +63,6 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
         btn_decline.setOnClickListener(setYesEventForDeclineConfirm(event));
         txt_topic.setText(event.getTopic());
         txt_OwnerName.setText(event.getEventOwner().getUsername());
-        txt_note.setText(event.getNote());
         Date date = event.getDate();
         txt_date.setText(String.format("%02d/%02d/%04d",date.getDate(),date.getMonth(),date.getYear()));
         txt_time.setText(String.format("%02d:%02d",date.getHours(),date.getMinutes()));

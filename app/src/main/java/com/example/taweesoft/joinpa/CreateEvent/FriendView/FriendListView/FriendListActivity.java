@@ -1,5 +1,7 @@
 package com.example.taweesoft.joinpa.CreateEvent.FriendView.FriendListView;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.ActionBarActivity;
@@ -15,6 +17,7 @@ import android.widget.ListView;
 import com.example.taweesoft.joinpa.CreateEvent.NewEvent.NewEventActivity;
 import com.example.taweesoft.joinpa.CreateEvent.NewEvent.NewEventController;
 import com.example.taweesoft.joinpa.CreateEvent.NewEvent.NewEventModel;
+import com.example.taweesoft.joinpa.FindFriend.FindFriendDialog;
 import com.example.taweesoft.joinpa.Library.Friend;
 import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.MainActivity;
@@ -29,7 +32,7 @@ import java.util.Observer;
 public class FriendListActivity extends ActionBarActivity implements Observer {
     private List<Friend> selectedFriend = new ArrayList<Friend>();
     private ListView lv_friendsList;
-    private Button btn_next;
+    private Button btn_next,btn_findFriend;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +40,7 @@ public class FriendListActivity extends ActionBarActivity implements Observer {
         setContentView(R.layout.activity_friend_list);
         initComponent();
         setListViewAdapter();
-        initNextButton();
+        initButton();
     }
 
     /**
@@ -46,6 +49,7 @@ public class FriendListActivity extends ActionBarActivity implements Observer {
     public void initComponent(){
         lv_friendsList = (ListView)findViewById(R.id.lv_friendsList);
         btn_next = (Button)findViewById(R.id.btn_next);
+        btn_findFriend = (Button)findViewById(R.id.btn_findFriend);
     }
 
     /**
@@ -59,9 +63,11 @@ public class FriendListActivity extends ActionBarActivity implements Observer {
     /**
      * Initial next button event.
      */
-    public void initNextButton(){
-        NextEvent action = new NextEvent();
+    public void initButton(){
+        ShowEventCreator action = new ShowEventCreator(this);
         btn_next.setOnClickListener(action);
+        ShowFindDialog findDialog = new ShowFindDialog(this);
+        btn_findFriend.setOnClickListener(findDialog);
     }
 
     @Override
@@ -93,14 +99,41 @@ public class FriendListActivity extends ActionBarActivity implements Observer {
         selectedFriend = (List<Friend>)obj;
     }
 
-    class NextEvent implements View.OnClickListener{
+    class ShowEventCreator implements View.OnClickListener{
+        private Activity activity;
+        public ShowEventCreator(Activity activity){
+            this.activity = activity;
+        }
+
         public void onClick(View v){
-            NewEventModel model = new NewEventModel();
-            Intent intent = new Intent(FriendListActivity.this, NewEventActivity.class);
-            intent.putExtra("SelectedFriend",(ArrayList<Friend>)selectedFriend);
-            intent.putExtra("Model",model);
-            FriendListActivity.this.finish();
-            startActivity(intent);
+            if(selectedFriend.size() > 0){
+                NewEventModel model = new NewEventModel();
+                Intent intent = new Intent(FriendListActivity.this, NewEventActivity.class);
+                intent.putExtra("SelectedFriend",(ArrayList<Friend>)selectedFriend);
+                intent.putExtra("Model",model);
+                FriendListActivity.this.finish();
+                startActivity(intent);
+            }else{
+                AlertDialog dialog = new AlertDialog.Builder(activity).create();
+                dialog.setMessage("You did not select any friend");
+                dialog.show();
+            }
+
+        }
+    }
+
+    /**
+     * Show find friend dialog.
+     */
+    class ShowFindDialog implements View.OnClickListener{
+        private Activity activity;
+        public ShowFindDialog(Activity activity){
+            this.activity = activity;
+        }
+
+        public void onClick(View v){
+            FindFriendDialog findFriend = new FindFriendDialog(activity);
+            findFriend.openDialog();
         }
     }
 }

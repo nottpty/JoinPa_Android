@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -29,7 +30,7 @@ public class FriendListCustomAdapter extends ArrayAdapter<Friend>{
     private AdapterObservable observable;
     private List<Friend> selectedFriend = new ArrayList<Friend>();
     private List<Friend> friendList;
-    private LinearLayout layout_name;
+    private FrameLayout layout_name;
     public FriendListCustomAdapter(Context context,List<Friend> friendList){
         super(context,0,friendList);
         observable = new AdapterObservable();
@@ -42,9 +43,9 @@ public class FriendListCustomAdapter extends ArrayAdapter<Friend>{
         if(view == null)
             view = LayoutInflater.from(getContext()).inflate(R.layout.activity_friend_list_view,parent,false);
         TextView txt_friendName = (TextView)view.findViewById(R.id.txt_friendName);
-        layout_name = (LinearLayout)view.findViewById(R.id.layout_name);
+        layout_name = (FrameLayout)view.findViewById(R.id.layout_name);
         txt_friendName.setText(friend.getUsername());
-        SelectFriendEvent event = new SelectFriendEvent(friend,layout_name);
+        final SelectFriendEvent event = new SelectFriendEvent(friend,layout_name);
         view.setOnClickListener(event);
         return view;
     }
@@ -52,18 +53,18 @@ public class FriendListCustomAdapter extends ArrayAdapter<Friend>{
     class SelectFriendEvent implements View.OnClickListener{
         private Boolean isCheck = false;
         private Friend friend;
-        private LinearLayout layout;
-        public SelectFriendEvent(Friend friend, LinearLayout layout){
+        private final FrameLayout layout;
+        public SelectFriendEvent(Friend friend, FrameLayout layout){
             this.friend = friend;
             this.layout = layout;
         }
         public void onClick(View v){
             if(!isCheck){
                 selectedFriend.add(friend);
-                layout.setBackgroundColor(0xff38ff4f);
+                layout.setBackgroundResource(R.drawable.friend_card_clicked);
             }else{
                 selectedFriend.remove(friend);
-                layout.setBackgroundColor(0xff72c7ff);
+                layout.setBackgroundResource(R.drawable.friend_card);
             }
             observable.setChanged();
             observable.notifyObservers(selectedFriend);

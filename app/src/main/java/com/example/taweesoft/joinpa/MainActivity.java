@@ -72,8 +72,7 @@ public class MainActivity extends ActionBarActivity implements Observer{
         CreateEventClick createEventClick = new CreateEventClick();
         btn_createEvent.setOnClickListener(createEventClick);
 
-        ShowFindDialog findDialog = new ShowFindDialog();
-        btn_findFriend.setOnClickListener(findDialog);
+
     }
 
 
@@ -129,15 +128,7 @@ public class MainActivity extends ActionBarActivity implements Observer{
         }
     }
 
-    /**
-     * Show find friend dialog.
-     */
-    class ShowFindDialog implements View.OnClickListener{
-        public void onClick(View v){
-            FindFriendDialog findFriend = new FindFriendDialog(MainActivity.this);
-            findFriend.openDialog();
-        }
-    }
+
 
 
 
