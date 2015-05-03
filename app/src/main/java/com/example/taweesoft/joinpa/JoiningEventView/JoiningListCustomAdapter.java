@@ -13,14 +13,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.taweesoft.joinpa.InvitedList.InvitedListDialog;
 import com.example.taweesoft.joinpa.Library.Database;
 import com.example.taweesoft.joinpa.Library.JoiningEvent;
 import com.example.taweesoft.joinpa.Library.Observable;
+import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.Library.User;
 import com.example.taweesoft.joinpa.MainActivity;
 import com.example.taweesoft.joinpa.R;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Observer;
@@ -47,12 +50,22 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
 
         TextView txt_topic = (TextView)view.findViewById(R.id.txt_topic);
         TextView txt_OwnerName = (TextView)view.findViewById(R.id.txt_OwnerName);
+        TextView txt_note = (TextView)view.findViewById(R.id.txt_note);
+        TextView txt_date = (TextView)view.findViewById(R.id.txt_date);
+        TextView txt_time = (TextView)view.findViewById(R.id.txt_time);
         Button btn_join = (Button)view.findViewById(R.id.btn_join);
+        Button btn_invitedList = (Button)view.findViewById(R.id.btn_invitedList);
         Button btn_decline = (Button)view.findViewById(R.id.btn_decline);
         btn_join.setOnClickListener(setYesEventForJoinConfirm(event));
+        btn_invitedList.setOnClickListener(new ShowInvitedListDialog(event));
         btn_decline.setOnClickListener(setYesEventForDeclineConfirm(event));
         txt_topic.setText(event.getTopic());
         txt_OwnerName.setText(event.getEventOwner().getUsername());
+        txt_note.setText(event.getNote());
+        Date date = event.getDate();
+        txt_date.setText(String.format("%02d/%02d/%04d",date.getDate(),date.getMonth(),date.getYear()));
+        txt_time.setText(String.format("%02d:%02d",date.getHours(),date.getMinutes()));
+
         return view;
     }
 
@@ -83,8 +96,8 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
                 @Override
                 protected Void doInBackground(Void... params) {
                     /*Set status in owner's joiningEvent*/
-                    int index = MainActivity.owner.getJoiningEvents().indexOf(event);
-                    JoiningEvent currentEvent = MainActivity.owner.getJoiningEvents().get(index);
+                    int index = Resources.owner.getJoiningEvents().indexOf(event);
+                    JoiningEvent currentEvent = Resources.owner.getJoiningEvents().get(index);
                     currentEvent.setStatus(status);
                     observable.setChanged();
                     observable.notifyObservers(currentEvent);
@@ -111,6 +124,19 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
         @Override
         public void onClick(View v) {
             dialog.create().show();
+        }
+    }
+
+    class ShowInvitedListDialog implements View.OnClickListener{
+        private JoiningEvent event;
+        private InvitedListDialog dialog;
+        public ShowInvitedListDialog(JoiningEvent event){
+            this.event = event;
+            dialog = new InvitedListDialog(getContext(),event);
+        }
+        @Override
+        public void onClick(View v) {
+            dialog.openDialog();
         }
     }
 }

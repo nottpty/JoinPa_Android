@@ -16,6 +16,7 @@ import com.example.taweesoft.joinpa.CreateEvent.NewEvent.NewEventActivity;
 import com.example.taweesoft.joinpa.CreateEvent.NewEvent.NewEventController;
 import com.example.taweesoft.joinpa.CreateEvent.NewEvent.NewEventModel;
 import com.example.taweesoft.joinpa.Library.Friend;
+import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.MainActivity;
 import com.example.taweesoft.joinpa.R;
 
@@ -51,7 +52,7 @@ public class FriendListActivity extends ActionBarActivity implements Observer {
      * Set adapter for listview.
      */
     public void setListViewAdapter(){
-        FriendListCustomAdapter adapter = new FriendListCustomAdapter(this, MainActivity.owner.getFriendList());
+        FriendListCustomAdapter adapter = new FriendListCustomAdapter(this, Resources.owner.getFriendList());
         lv_friendsList.setAdapter(adapter);
     }
 

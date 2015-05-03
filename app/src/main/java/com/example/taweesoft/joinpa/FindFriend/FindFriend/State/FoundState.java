@@ -6,6 +6,7 @@ import android.widget.Toast;
 import com.example.taweesoft.joinpa.FindFriend.FindFriendDialog;
 import com.example.taweesoft.joinpa.Library.Database;
 import com.example.taweesoft.joinpa.Library.Friend;
+import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.MainActivity;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class FoundState implements AddState{
         AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                MainActivity.owner.addFriend(friend);
+                Resources.owner.addFriend(friend);
                 Database.addFriend(friend);
                 view.getController().setState(view.notFoundState);
                 return null;

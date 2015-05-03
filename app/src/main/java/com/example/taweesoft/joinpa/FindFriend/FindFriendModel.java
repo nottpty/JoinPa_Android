@@ -6,6 +6,7 @@ import com.example.taweesoft.joinpa.FindFriend.FindFriend.State.AddState;
 import com.example.taweesoft.joinpa.FindFriend.FindFriend.State.FoundState;
 import com.example.taweesoft.joinpa.FindFriend.FindFriend.State.NotFoundState;
 import com.example.taweesoft.joinpa.Library.Friend;
+import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.MainActivity;
 
 import java.util.List;
@@ -18,8 +19,8 @@ import java.util.Observer;
 public class FindFriendModel extends Observable{
     private AddState state;
     public boolean isAlreadyAdd(Friend friend){
-        List<Friend> friendList = MainActivity.owner.getFriendList();
-        boolean isYou = MainActivity.owner.getUsername().equals(friend.getUsername());
+        List<Friend> friendList = Resources.owner.getFriendList();
+        boolean isYou = Resources.owner.getUsername().equals(friend.getUsername());
         return friendList.contains(friend) || isYou;
     }
 

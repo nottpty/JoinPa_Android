@@ -14,20 +14,25 @@ import android.widget.ProgressBar;
 
 import com.example.taweesoft.joinpa.InvitedList.InvitedListDialog;
 import com.example.taweesoft.joinpa.Library.Event;
+import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.MainActivity;
 import com.example.taweesoft.joinpa.R;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 
-public class MyEventActivity extends ActionBarActivity {
+public class MyEventActivity extends ActionBarActivity implements Observer {
     private ListView lv_myEventList;
     private ProgressBar progressBar;
+    private MyEventController controller;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_my_event);
+
         initComponents();
     }
 
@@ -62,33 +67,33 @@ public class MyEventActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void update(Observable observable, Object data) {
+
+    }
+
     class RunProgressBar extends AsyncTask<Void,Void,Void>{
         protected void onPreExecute(){
             progressBar.setVisibility(View.VISIBLE);
         }
         @Override
         protected Void doInBackground(Void... params) {
-            while(!MainActivity.owner.isLoadFinish()){ }
+            while(!Resources.owner.isLoadFinish()){ }
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             progressBar.setVisibility(View.INVISIBLE);
-            List<Event> myEventList = MainActivity.owner.getEventList();
+            List<Event> myEventList = Resources.owner.getEventList();
             MyEventCustomAdapter adapter = new MyEventCustomAdapter(MyEventActivity.this,myEventList);
             lv_myEventList.setAdapter(adapter);
             lv_myEventList.setOnItemClickListener(new ViewInvitedListAction());
         }
     }
 
-    class ViewInvitedListAction implements AdapterView.OnItemClickListener{
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            List<Event> myEvent = MainActivity.owner.getEventList();
-            InvitedListDialog dialog = new InvitedListDialog(MyEventActivity.this,myEvent.get(position));
-            dialog.openDialog();
-        }
+    public void setListViewClickAction( AdapterView.OnItemClickListener action){
+        lv_myEventList.setOnItemClickListener(action);
     }
+
 }

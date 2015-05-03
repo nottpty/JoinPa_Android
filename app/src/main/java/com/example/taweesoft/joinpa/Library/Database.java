@@ -102,7 +102,7 @@ public class Database {
     				String[] eachFriend = input.split("\t");
     				// [, OwnerName, friendName]
     				String friendName = eachFriend[2];
-    				friendList.add((Friend)getEachUser(friendName));
+    				friendList.add(0,(Friend)getEachUser(friendName));
     			}
     			count++;
     		}
@@ -155,7 +155,7 @@ public class Database {
     				Date date = createDate(dateArr,timeArr);
     				Event event = new Event(eventID,owner,invitedList,iconID,topic,note,date);
     				Log.d("PPP : ", event.getTopic());
-    				eventList.add(event);
+    				eventList.add(0,event);
     			}
     			count++;
     		}
@@ -285,7 +285,7 @@ public class Database {
                     int status = Integer.parseInt(dataArr[3]);
                     JoiningEvent joiningEvent = getJoiningEvent(eventID);
                     if(status != 0) owner.addJoinedEvent(joiningEvent);
-                    else events.add(joiningEvent);
+                    else events.add(0,joiningEvent);
                 }
                 count++;
             }
@@ -312,7 +312,7 @@ public class Database {
         }catch(IOException e){ e.printStackTrace(); }
     }
     public static void addFriend(Friend friend){
-        String ownerName = MainActivity.owner.getUsername();
+        String ownerName = Resources.owner.getUsername();
         String friendName = friend.getUsername();
         HttpURLConnection connect = getConnection(String.format("INSERT INTO tb_friendList VALUES (\'%s\',\'%s\')",ownerName,friendName));
         try{
@@ -323,7 +323,7 @@ public class Database {
         }catch(IOException e){ e.printStackTrace(); }
     }
     public static void joinEvent(JoiningEvent event,int status){
-        String name = MainActivity.owner.getUsername();
+        String name = Resources.owner.getUsername();
         String eventID = event.getEventID();
         HttpURLConnection connect = getConnection(String.format("UPDATE tb_joinList SET Status=\'%s\' WHERE EventID=\'%S\' AND Username=\'%s\'",status,eventID,name));
         try{

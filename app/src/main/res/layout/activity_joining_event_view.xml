@@ -50,6 +50,70 @@
                 android:layout_below="@+id/txt_topic"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Note : "
+                android:id="@+id/textView6" />
+
+            <TextView
+                android:text="Note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_note"
+                android:layout_below="@+id/txt_topic"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date : "
+                android:id="@+id/textView6" />
+
+            <TextView
+                android:text="Date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_date"
+                android:layout_below="@+id/txt_topic"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time : "
+                android:id="@+id/textView6" />
+
+            <TextView
+                android:text="Time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_time"
+                android:layout_below="@+id/txt_topic"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
         </LinearLayout>
 
     </LinearLayout>
@@ -71,5 +135,13 @@
         android:layout_alignBottom="@+id/btn_join"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Invited"
+        android:id="@+id/btn_invitedList"
+        android:layout_alignBottom="@+id/btn_decline"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

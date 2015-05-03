@@ -15,6 +15,7 @@ public class Owner extends User{
         eventList = new ArrayList<Event>();
         joinedEvent = new ArrayList<JoiningEvent>();
 		loadMyEvent = new LoadMyEvent(this);
+        loadMyEvent();
 		friendList = Database.getFriendList(this);
         joiningEvents = Database.myJoiningEvents(this);
 	}
@@ -30,16 +31,16 @@ public class Owner extends User{
     public List<JoiningEvent> getJoiningEvents() { return joiningEvents; }
 	
 	public void addEvent(Event e){
-		eventList.add(e);
+		eventList.add(0,e);
 	}
 
-    public void addFriend(Friend friend) { friendList.add(friend); }
+    public void addFriend(Friend friend) { friendList.add(0,friend); }
 
-    public void addJoinedEvent(JoiningEvent event) { joinedEvent.add(event); }
+    public void addJoinedEvent(JoiningEvent event) { joinedEvent.add(0,event); }
 
     public void moveToJoined(JoiningEvent event){
         joiningEvents.remove(event);
-        joinedEvent.add(event);
+        joinedEvent.add(0,event);
     }
 
     public void setEventList(List<Event> eventList){

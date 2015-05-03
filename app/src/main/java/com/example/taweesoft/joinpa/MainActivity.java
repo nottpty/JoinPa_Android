@@ -28,7 +28,6 @@ import java.util.Observer;
 
 
 public class MainActivity extends ActionBarActivity implements Observer{
-    public static Owner owner;
     private ListView lv_joiningList;
     private List<JoiningEvent> joiningEventList;
     private Button btn_myEvent,btn_createEvent,btn_findFriend;
@@ -38,8 +37,6 @@ public class MainActivity extends ActionBarActivity implements Observer{
         super.onCreate(savedInstanceState);
         super.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
-        owner = (Owner)getIntent().getSerializableExtra("Owner");
-        owner.loadMyEvent(); //Because can not call load inside the owner's constructor(Intent didn't pass by reference)
         checkNotiKey();
         initComponents();
         initMyEventList();
@@ -60,7 +57,7 @@ public class MainActivity extends ActionBarActivity implements Observer{
      * Initial list view
      */
     public void initMyEventList(){
-        joiningEventList = owner.getJoiningEvents();
+        joiningEventList = Resources.owner.getJoiningEvents();
         joinListAdapter = new JoiningListCustomAdapter(this,joiningEventList);
         lv_joiningList.setAdapter(joinListAdapter);
     }
@@ -151,7 +148,9 @@ public class MainActivity extends ActionBarActivity implements Observer{
     public void update(Observable observable, Object data) {
         if( data == null ) return;
         final JoiningEvent joiningEvent = (JoiningEvent)data;
-        owner.moveToJoined(joiningEvent);
+        Log.d("OOO1: ", Resources.owner.getJoiningEvents().size()+"");
+        Resources.owner.moveToJoined(joiningEvent);
+        Log.d("OOO2: ", Resources.owner.getJoiningEvents().size()+"");
         runOnUiThread(new Runnable(){ //Because original thread and touch this view.
             @Override
             public void run() {
@@ -195,10 +194,9 @@ public class MainActivity extends ActionBarActivity implements Observer{
         @Override
         protected Void doInBackground(Void... params) {
             String currentRegistrationID = Resources.deviceID;
-            Log.d("OOO: ", currentRegistrationID);
-            String dbRegistrationID = owner.getNotifyKey();
+            String dbRegistrationID = Resources.owner.getNotifyKey();
             if(!(currentRegistrationID.equals(dbRegistrationID))){
-                Database.updateNotificationKey(currentRegistrationID,owner.getUsername());
+                Database.updateNotificationKey(currentRegistrationID,Resources.owner.getUsername());
             }
             return null;
         }

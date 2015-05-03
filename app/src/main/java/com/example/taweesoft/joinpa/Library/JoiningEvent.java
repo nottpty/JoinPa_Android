@@ -25,14 +25,14 @@ public class JoiningEvent extends Event {
 
     public void setStatus(int status){
         Map<User,Integer> invitedList = getInvitedList();
-        invitedList.put(MainActivity.owner,status);
+        invitedList.put(Resources.owner,status);
     }
 
     public int getMyStatus(){
         Map<User,Integer> invitedList = getInvitedList();
         Log.d("OOO : " , invitedList.size() + "");
         for(Map.Entry<User, Integer> each : invitedList.entrySet()){
-            if(each.getKey().equals(MainActivity.owner))
+            if(each.getKey().equals(Resources.owner))
                 return each.getValue();
         }
         return -1;

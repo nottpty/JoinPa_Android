@@ -3,6 +3,7 @@ package com.example.taweesoft.joinpa.CreateEvent.NewEvent;
 import android.util.Log;
 
 import com.example.taweesoft.joinpa.Library.Owner;
+import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.MainActivity;
 
 import java.io.Serializable;
@@ -16,7 +17,7 @@ import java.util.Observer;
 public class NewEventModel extends Observable implements Serializable,Observer{
     private Date date = null;
     private int iconID = 0;
-    private Owner owner = MainActivity.owner;
+    private Owner owner = Resources.owner;
     private String eventName;
     private String note;
 
