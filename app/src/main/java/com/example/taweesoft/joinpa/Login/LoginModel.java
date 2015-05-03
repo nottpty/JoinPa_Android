@@ -46,8 +46,8 @@ public class LoginModel extends Observable {
                 else if(Database.checkExistUsername(username))
                     notifyObservers("2@@Username already exist");
                 else{
-                    Database.addNewUser(username,password,Resources.deviceID);
-                    notifyObservers("3@@Sign up successful Please login");
+                    Database.addNewUser(username.toLowerCase(),password,Resources.deviceID);
+                    notifyObservers("3@@Sign up successful. Please login");
                 }
                 return null;
             }

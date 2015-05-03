@@ -7,141 +7,232 @@
     tools:context="com.example.taweesoft.joinpa.JoiningEventView">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/invited_card"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentStart="false"
+        android:orientation="vertical"
+        android:gravity="bottom"
+        android:weightSum="1"
         android:id="@+id/linearLayout2">
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Topic : "
-                android:id="@+id/editText1" />
-
-            <TextView android:text="Topic" android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txt_topic" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Owner : "
-                android:id="@+id/textView" />
-
-            <TextView
-                android:text="Owner name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txt_OwnerName"
-                android:layout_below="@+id/txt_topic"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:layout_weight="0.97">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Note : "
-                android:id="@+id/textView6" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="5dp">
 
-            <TextView
-                android:text="Note"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txt_note"
-                android:layout_below="@+id/txt_topic"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                <ImageView
+                    android:layout_width="59dp"
+                    android:layout_height="90dp"
+                    android:id="@+id/img_iconBig"
+                    android:src="@drawable/toilet_big" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="55dp"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom">
+
+                    <TextView android:text="Topic" android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/txt_topic"
+                        android:textSize="20dp"
+                        android:gravity="center_horizontal"
+                        android:textStyle="bold|italic" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Note : "
+                        android:id="@+id/textView6"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:text="Note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/txt_note"
+                        android:layout_below="@+id/txt_topic"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Time : "
+                        android:id="@+id/textView6"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:text="Time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/txt_time"
+                        android:layout_below="@+id/txt_topic"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date : "
+                        android:id="@+id/textView6"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:text="Date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/txt_date"
+                        android:layout_below="@+id/txt_topic"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+                </LinearLayout>
+
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Date : "
-                android:id="@+id/textView6" />
-
-            <TextView
-                android:text="Date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txt_date"
-                android:layout_below="@+id/txt_topic"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Time : "
-                android:id="@+id/textView6" />
-
-            <TextView
-                android:text="Time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txt_time"
-                android:layout_below="@+id/txt_topic"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-        </LinearLayout>
+        <TextView
+            android:text="Owner name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_OwnerName"
+            android:layout_below="@+id/txt_topic"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="right"
+            android:layout_weight="0"
+            android:textColor="#ffffffff"
+            android:paddingRight="10dp"
+            android:textStyle="bold"
+            android:textSize="25dp" />
 
     </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Join"
-        android:id="@+id/btn_join"
+        android:weightSum="3"
+        android:id="@+id/linearLayout4"
+        android:layout_gravity="bottom"
         android:layout_below="@+id/linearLayout2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Decline"
-        android:id="@+id/btn_decline"
-        android:layout_alignBottom="@+id/btn_join"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:paddingTop="10dp">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Invited"
-        android:id="@+id/btn_invitedList"
-        android:layout_alignBottom="@+id/btn_decline"
-        android:layout_centerHorizontal="true" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="55dp"
+                android:id="@+id/btn_join"
+                android:layout_alignBottom="@+id/btn_invitedList"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:autoText="false"
+                android:background="@drawable/join_button1"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/activity_horizontal_margin" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_invitedList"
+                android:layout_alignBottom="@+id/btn_invitedList"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:autoText="false"
+                android:background="@drawable/invitedlist_button"
+                android:layout_weight="0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_decline"
+                android:layout_alignBottom="@+id/btn_invitedList"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:autoText="false"
+                android:background="@drawable/decline_button"
+                android:layout_weight="0" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

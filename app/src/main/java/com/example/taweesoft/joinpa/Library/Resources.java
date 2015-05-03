@@ -21,10 +21,17 @@ public class Resources {
     public static final int REGIS_SUCCESS = 3;
     public static final int LOGIN_SUCCESS = 4;
     public static List<Integer> icons = new ArrayList<Integer>(Arrays.asList(
-            R.drawable.a0,
-            R.drawable.a1,
-            R.drawable.a2,
-            R.drawable.a3
+            R.drawable.toilet_small,
+            R.drawable.lunch_small,
+            R.drawable.playgame_small,
+            R.drawable.home_small
+    ));
+
+    public static List<Integer> iconsBig = new ArrayList<Integer>(Arrays.asList(
+            R.drawable.toilet_big,
+            R.drawable.lunch_big,
+            R.drawable.playgame_big,
+            R.drawable.home_big
     ));
 
     public static Map<Integer,String> eventsName= new HashMap<Integer,String>();
