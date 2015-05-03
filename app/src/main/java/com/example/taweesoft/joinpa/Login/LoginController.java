@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.View;
 
+import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.Login.LoginState.LoginState;
 
 /**
@@ -11,18 +12,25 @@ import com.example.taweesoft.joinpa.Login.LoginState.LoginState;
  */
 public class LoginController {
     private LoginModel model;
-    private LoginActivity loginActivity;
-    public LoginController(LoginActivity loginActivity,LoginModel model){
+    private LoginDialog loginDialog;
+    public LoginController(LoginDialog loginDialog,LoginModel model){
         this.model = model;
-        this.loginActivity = loginActivity;
-        model.addObserver(loginActivity);
-        loginActivity.setLoginAction(new LoginEvent(loginActivity.getAlertDialog()));
+        this.loginDialog = loginDialog;
+        model.addObserver(loginDialog);
+        loginDialog.setLoginAction(new LoginEvent(loginDialog.getAlertDialog()));
+        loginDialog.setSignUpAction(new SignUpAction());
     }
 
-    public void doLogin(){
-        String username = loginActivity.getUsername();
-        String password = loginActivity.getPassword();
-        model.doLogin(username,password);
+    public void doSignIn(){
+        String username = loginDialog.getUsername();
+        String password = loginDialog.getPassword();
+        model.doSignIn(username,password);
+    }
+
+    public void doSignUp(){
+        String username = loginDialog.getUsername();
+        String password = loginDialog.getPassword();
+        model.doSignUp(username,password);
     }
 
     /**
@@ -38,13 +46,23 @@ public class LoginController {
             dialog.setCancelable(false);
             dialog.setOnCancelListener(new DismissLoginDialogEvent());
             dialog.show();
-            doLogin();
+            doSignIn();
         }
     }
 
     class DismissLoginDialogEvent implements DialogInterface.OnCancelListener{
         public void onCancel(DialogInterface dialog){
-            model.getState().performed(loginActivity);
+            model.getState().performed(loginDialog.getActivity());
+        }
+    }
+
+    class SignUpAction implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            loginDialog.showMessage("Checking...", Resources.CHECKING);
+            String username = loginDialog.getUsername();
+            String password = loginDialog.getPassword();
+            model.doSignUp(username,password);
         }
     }
 

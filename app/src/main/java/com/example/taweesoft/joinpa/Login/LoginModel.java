@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 
 import com.example.taweesoft.joinpa.Library.Database;
 import com.example.taweesoft.joinpa.Library.Owner;
+import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.Login.LoginState.LoginState;
 
 import java.util.Observable;
@@ -16,7 +17,7 @@ public class LoginModel extends Observable {
     private Owner owner=null;
     private LoginState state;
 
-    public void doLogin(final String username,final String password){
+    public void doSignIn(final String username,final String password){
         AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
 
             @Override
@@ -33,6 +34,26 @@ public class LoginModel extends Observable {
 
         };
         task.execute();
+    }
+
+    public void doSignUp(final String username, final String password){
+        AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                setChanged();
+                if(Resources.isIllegalText(username, password))
+                    notifyObservers("1@@Username or password has illegal character");
+                else if(Database.checkExistUsername(username))
+                    notifyObservers("2@@Username already exist");
+                else{
+                    Database.addNewUser(username,password,Resources.deviceID);
+                    notifyObservers("3@@Sign up successful Please login");
+                }
+                return null;
+            }
+        };
+        task.execute();
+
     }
 
     public LoginState getState(){

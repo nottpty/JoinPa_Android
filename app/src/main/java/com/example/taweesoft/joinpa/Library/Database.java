@@ -47,6 +47,7 @@ public class Database {
 		}catch(Exception e){ e.printStackTrace(); };
 		return owner;
 	}
+
     public static HttpURLConnection getConnection(String command){
         HttpURLConnection connect = null;
         BufferedReader in=null;
@@ -89,6 +90,7 @@ public class Database {
     	};
     	return allUser;
     }
+
     public static List<Friend> getFriendList(Owner owner){
     	String ownerName = owner.getUsername();
     	List<Friend> friendList = new ArrayList<Friend>();
@@ -172,6 +174,7 @@ public class Database {
         date.setMinutes(Integer.parseInt(timeArr[1]));
         return date;
     }
+
     public static void addJoiningList(String eventID,String username){
     	HttpURLConnection connect = getConnection(String.format("INSERT INTO tb_joinList VALUES (\'%s\',\'%s\',\'%s\')", eventID,username,WAITING));
     	try{
@@ -236,6 +239,7 @@ public class Database {
     	};
     	return event;
     }
+
     public static Friend searchFriendInUsers(String username){
     	Collection<Friend> collection = allUser.values();
     	for(User user : collection) {
@@ -270,6 +274,7 @@ public class Database {
         }catch(IOException e){ e.printStackTrace();}
         return event;
     }
+
     public static List<JoiningEvent> myJoiningEvents(Owner owner){
         List<JoiningEvent> events = new ArrayList<JoiningEvent>();
         HttpURLConnection connect = getConnection(String.format("SELECT * FROM tb_joinList WHERE Username=\'%s\' AND Status=\'0\'",owner.getUsername()));
@@ -311,6 +316,7 @@ public class Database {
             connect.disconnect();
         }catch(IOException e){ e.printStackTrace(); }
     }
+
     public static void addFriend(Friend friend){
         String ownerName = Resources.owner.getUsername();
         String friendName = friend.getUsername();
@@ -322,6 +328,7 @@ public class Database {
             connect.disconnect();
         }catch(IOException e){ e.printStackTrace(); }
     }
+
     public static void joinEvent(JoiningEvent event,int status){
         String name = Resources.owner.getUsername();
         String eventID = event.getEventID();
@@ -366,6 +373,7 @@ public class Database {
             e.printStackTrace();
         }
     }
+
     public static void updateNotificationKey(String key,String username){
         HttpURLConnection connect = getConnection(String.format("UPDATE tb_login SET NotiKey=\'%s\' WHERE Username=\'%s\'",key,username));
         try{
@@ -374,5 +382,27 @@ public class Database {
             scan.close();
             connect.disconnect();
         }catch(IOException e) { e.printStackTrace(); }
+    }
+
+    public static boolean checkExistUsername(String username){
+        HttpURLConnection connect = getConnection(String.format("SELECT * FROM tb_login WHERE Username=\'%s\'",username));
+        try{
+            Scanner scan = new Scanner(connect.getInputStream());
+            scan.nextLine();
+            if(scan.hasNextLine()) return true;
+            scan.close();
+            connect.disconnect();
+        }catch(IOException e){ e.printStackTrace(); }
+        return false;
+    }
+
+    public static void addNewUser(String username,String password, String notiKey){
+        HttpURLConnection connect = getConnection(String.format("INSERT INTO tb_login VALUES (\'%s\',\'%s\',\'%s\')",username,password,notiKey));
+        try{
+            Scanner scan = new Scanner(connect.getInputStream());
+            while(scan.hasNextLine()) scan.nextLine();
+            scan.close();
+            connect.disconnect();
+        }catch(IOException e){ e.printStackTrace();}
     }
 }

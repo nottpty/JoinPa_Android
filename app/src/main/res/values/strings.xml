@@ -12,4 +12,5 @@
     <string name="title_activity_custom_event_icon">custom_event_icon</string>
     <string name="title_activity_find_friend">FindFriendActivity</string>
     <string name="title_activity_one_event">OneEvent</string>
+    <string name="title_activity_first">FirstActivity</string>
 </resources>

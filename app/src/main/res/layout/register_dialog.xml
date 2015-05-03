@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="1">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:orientation="horizontal"
@@ -10,11 +9,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:background="#ff5fff8f"
-        android:gravity="center_vertical"
         android:layout_weight="0">
 
         <EditText
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:id="@+id/txt_username"
             android:layout_weight="1"
@@ -23,9 +21,8 @@
             android:gravity="center_vertical|center_horizontal"
             android:singleLine="true"
             android:hint="USERNAME"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,12 +30,12 @@
             android:text="Message"
             android:id="@+id/txt_msg1"
             android:layout_weight="1"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:visibility="invisible"
-            android:textColor="#ffff0c1a"
             android:layout_alignBottom="@+id/txt_username"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:visibility="invisible"
+            android:textColor="#ffff0c1a" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -46,13 +43,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="#ff8affd1"
-        android:layout_weight="0"
-        android:gravity="center_vertical">
+        android:background="#ff8affd1" >
 
         <EditText
-            android:layout_width="fill_parent"
-            android:layout_height="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="59dp"
             android:id="@+id/txt_password"
             android:layout_weight="1"
             android:background="@android:color/transparent"
@@ -61,9 +56,8 @@
             android:password="true"
             android:singleLine="true"
             android:hint="PASSWORD"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -71,13 +65,12 @@
             android:text="Message"
             android:id="@+id/txt_msg2"
             android:layout_weight="1"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:visibility="invisible"
-            android:textColor="#ffff0c1a"
             android:layout_alignBottom="@+id/txt_password"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
+            android:layout_alignParentEnd="true"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:visibility="invisible"
+            android:textColor="#ffff0c1a" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -89,26 +82,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign In"
-            android:id="@+id/txt_signIn"
-            android:textSize="30dp"
+            android:text="Sign up"
+            android:id="@+id/txt_signUp"
+            android:textSize="45dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_weight="0"
-            android:layout_alignParentEnd="false" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sign up"
-            android:id="@+id/txt_signUp"
-            android:textSize="30dp"
-            android:layout_weight="0"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:textColor="#ffe591ac" />
 
     </RelativeLayout>
-
 </LinearLayout>
