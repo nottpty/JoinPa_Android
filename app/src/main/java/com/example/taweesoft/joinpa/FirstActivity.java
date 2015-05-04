@@ -1,5 +1,6 @@
 package com.example.taweesoft.joinpa;
 
+import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.Login.LoginDialog;
@@ -18,8 +20,8 @@ import java.io.File;
 import java.util.Scanner;
 
 
-public class FirstActivity extends ActionBarActivity {
-    private Button btn_signIn,btn_signUp;
+public class FirstActivity extends Activity {
+    private TextView btn_signIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +39,8 @@ public class FirstActivity extends ActionBarActivity {
      * Initial componenets.
      */
     public void initComponents(){
-        btn_signIn = (Button)findViewById(R.id.btn_signIn);
+        btn_signIn = (TextView)findViewById(R.id.btn_signIn);
         btn_signIn.setOnClickListener(new ShowSignInDialog());
-        btn_signUp = (Button)findViewById(R.id.btn_signUp);
     }
 
     class ShowSignInDialog implements View.OnClickListener{
@@ -73,13 +74,11 @@ public class FirstActivity extends ActionBarActivity {
 
     public void AutoLogin(){
         try{
-            Log.d("WWWWWW : ", Resources.file.exists()+"");
             if(!Resources.file.exists())
                 Resources.file.createNewFile();
             else{
                 Scanner scan = new Scanner(Resources.file);
                 int status = (Integer.parseInt(scan.next()));
-                Log.d("EEEE : " , status + "");
                 if(status == Resources.IS_AUTOLOGIN){
                     String username = scan.next();
                     String password = scan.next();
