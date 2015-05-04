@@ -1,5 +1,7 @@
 package com.example.taweesoft.joinpa.Library;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,15 +11,17 @@ public class Owner extends User{
 	private List<Friend> friendList;
     private List<JoiningEvent> joiningEvents;
     private List<JoiningEvent> joinedEvent;
-    private LoadMyEvent loadMyEvent;
+    private LoadData loadMyEvent,loadMyJoinedEvent;
 	public Owner(String username,String notifyKey){
 		super(username,notifyKey);
         eventList = new ArrayList<Event>();
         joinedEvent = new ArrayList<JoiningEvent>();
 		loadMyEvent = new LoadMyEvent(this);
-        loadMyEvent();
+        loadMyJoinedEvent = new LoadMyJoinedEvent(this);
+        loadData(loadMyEvent);
+        loadData(loadMyJoinedEvent);
 		friendList = Database.getFriendList(this);
-        joiningEvents = Database.myJoiningEvents(this);
+        joiningEvents = Database.myJoiningEvents(this,Resources.WAITING);
 	}
 	
 	public List<Friend> getFriendList(){
@@ -47,15 +51,23 @@ public class Owner extends User{
         this.eventList = eventList;
     }
 
-    public boolean isLoadFinish(){
-        return loadMyEvent.isDone();
+    public boolean isLoadMyEventFinish(){
+        return loadMyEvent.isFinished();
     }
 
-    public void loadMyEvent(){
-        loadMyEvent.load();
+    public boolean isLoadMyJoinedFinish(){
+        return loadMyJoinedEvent.isFinished();
     }
 
+    public void loadData(LoadData loadData){
+        loadData.load();
+    }
     public List<JoiningEvent> getJoinedEvent(){
         return joinedEvent;
+    }
+
+    public void setJoinedEvent(List<JoiningEvent> joinedEvent){
+        Log.d("LLLLL : ", joinedEvent+"");
+        this.joinedEvent = joinedEvent;
     }
 }

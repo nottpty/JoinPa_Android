@@ -80,7 +80,7 @@ public class MyEventActivity extends ActionBarActivity implements Observer {
         }
         @Override
         protected Void doInBackground(Void... params) {
-            while(!Resources.owner.isLoadFinish()){ }
+            while(!Resources.owner.isLoadMyEventFinish()){ }
             return null;
         }
 

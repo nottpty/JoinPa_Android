@@ -1,10 +1,13 @@
 package com.example.taweesoft.joinpa.MyJoinedEvent;
 
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.ProgressBar;
 
 import com.example.taweesoft.joinpa.InvitedList.InvitedListModel;
 import com.example.taweesoft.joinpa.Library.JoiningEvent;
@@ -19,12 +22,12 @@ import java.util.Map;
 
 public class MyJoinedEventActivity extends ActionBarActivity {
     private ExpandableListView ep_lv_myJoinedEvent;
+    private ProgressBar pbg_loading;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_joined_event);
         initComponents();
-        setExpandableListView();
     }
 
     /**
@@ -32,6 +35,9 @@ public class MyJoinedEventActivity extends ActionBarActivity {
      */
     public void initComponents(){
         ep_lv_myJoinedEvent = (ExpandableListView)findViewById(R.id.ep_lv_myJoinedEvent);
+        pbg_loading = (ProgressBar)findViewById(R.id.pgb_loading);
+        CheckLoading task = new CheckLoading();
+        task.execute();
     }
 
     public void setExpandableListView(){
@@ -43,7 +49,6 @@ public class MyJoinedEventActivity extends ActionBarActivity {
         }
         MyJoinedEventCustomAdapter adapter = new MyJoinedEventCustomAdapter(this,joinedEvent,allInvitedList);
         ep_lv_myJoinedEvent.setAdapter(adapter);
-        ep_lv_myJoinedEvent.expandGroup(0);
     }
 
     @Override
@@ -66,5 +71,24 @@ public class MyJoinedEventActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    class CheckLoading extends AsyncTask<Void,Void,Void>{
+        @Override
+        protected void onPreExecute() {
+            pbg_loading.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            while(!Resources.owner.isLoadMyJoinedFinish()){}
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            pbg_loading.setVisibility(View.INVISIBLE);
+            setExpandableListView();
+        }
     }
 }

@@ -275,9 +275,10 @@ public class Database {
         return event;
     }
 
-    public static List<JoiningEvent> myJoiningEvents(Owner owner){
+    public static List<JoiningEvent> myJoiningEvents(Owner owner,int whichStatus){
+        Log.d("OOOOOO : ", whichStatus +"");
         List<JoiningEvent> events = new ArrayList<JoiningEvent>();
-        HttpURLConnection connect = getConnection(String.format("SELECT * FROM tb_joinList WHERE Username=\'%s\' AND Status=\'0\'",owner.getUsername()));
+        HttpURLConnection connect = getConnection(String.format("SELECT * FROM tb_joinList WHERE Username=\'%s\' AND Status=\'%s\'",owner.getUsername(),whichStatus));
         try{
             BufferedReader in = new BufferedReader(new InputStreamReader(connect.getInputStream()));
             String input;
@@ -285,12 +286,11 @@ public class Database {
             while((input = in.readLine()) != null){
                 if(count!=0){
                     String[] dataArr = input.split("\t");
+                    Log.d("EEEE : ", whichStatus + " " + Arrays.toString(dataArr));
                     //[, EventID, Username, Status]
                     String eventID = dataArr[1];
-                    int status = Integer.parseInt(dataArr[3]);
                     JoiningEvent joiningEvent = getJoiningEvent(eventID);
-                    if(status != 0) owner.addJoinedEvent(joiningEvent);
-                    else events.add(0,joiningEvent);
+                    events.add(0,joiningEvent);
                 }
                 count++;
             }
