@@ -37,10 +37,10 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
     private final int DECLINE = 2;
     private Observable observable;
     private List<JoiningEvent> joiningList;
-    public JoiningListCustomAdapter(Context context,List<JoiningEvent> joiningEventList){
+    public JoiningListCustomAdapter(Context context,Object observer,List<JoiningEvent> joiningEventList){
         super(context,0,joiningEventList);
         observable = new Observable();
-        observable.addObserver((Observer)context);
+        observable.addObserver((Observer)observer);
     }
 
     public View getView(int position, View view, ViewGroup parent){

@@ -72,4 +72,8 @@ public class LoginController {
     public void setState(LoginState state){
         model.setState(state);
     }
+
+    public void executeState(){
+        model.getState().performed(loginDialog.getActivity());
+    }
 }

@@ -29,14 +29,16 @@ public class Resources {
             R.drawable.toilet_small,
             R.drawable.lunch_small,
             R.drawable.playgame_small,
-            R.drawable.home_small
+            R.drawable.home_small,
+            R.drawable.seven_eleven_small
     ));
 
     public static List<Integer> iconsBig = new ArrayList<Integer>(Arrays.asList(
             R.drawable.toilet_big,
             R.drawable.lunch_big,
             R.drawable.playgame_big,
-            R.drawable.home_big
+            R.drawable.home_big,
+            R.drawable.seven_eleven_big
     ));
 
     public static Map<Integer,String> eventsName= new HashMap<Integer,String>();
@@ -48,7 +50,7 @@ public class Resources {
         eventsName.put(icons.get(1),"Lunch");
         eventsName.put(icons.get(2),"Play game");
         eventsName.put(icons.get(3),"Home");
-
+        eventsName.put(icons.get(4),"7-Eleven");
     }
 
     public static String deviceID = "key";

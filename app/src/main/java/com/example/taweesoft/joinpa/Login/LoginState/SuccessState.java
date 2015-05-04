@@ -9,6 +9,7 @@ import com.example.taweesoft.joinpa.FirstActivity;
 import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.Login.LoginDialog;
 import com.example.taweesoft.joinpa.MainActivity;
+import com.example.taweesoft.joinpa.MainFragment;
 
 import java.io.FileOutputStream;
 
@@ -25,7 +26,7 @@ public class SuccessState implements LoginState{
         }catch(Exception e){
             e.printStackTrace();
         }
-        Intent intent = new Intent(firstActivity,MainActivity.class);
+        Intent intent = new Intent(firstActivity,MainFragment.class);
         firstActivity.startActivity(intent);
         firstActivity.finish();
     }

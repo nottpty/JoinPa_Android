@@ -110,6 +110,7 @@ public class LoginDialog implements Observer {
                     Resources.password = getPassword();
                     alertDialog.setMessage("Logged in");
                     controller.setState(successState);
+                    controller.executeState();
                     alertDialog.setCancelable(true);
                     return;
                 }
