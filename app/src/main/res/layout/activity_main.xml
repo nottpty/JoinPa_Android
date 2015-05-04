@@ -53,7 +53,7 @@
     <Button
         android:layout_width="94dp"
         android:layout_height="45dp"
-        android:id="@+id/btn_findFriend"
+        android:id="@+id/btn_myJoinedEvent"
         android:background="@drawable/button_find_friend"
         android:layout_weight="1"
         android:layout_gravity="bottom"

@@ -1,5 +1,6 @@
 package com.example.taweesoft.joinpa;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
@@ -20,6 +21,7 @@ import com.example.taweesoft.joinpa.JoiningEventView.JoiningListCustomAdapter;
 import com.example.taweesoft.joinpa.Library.Owner;
 import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.MyEventView.MyEventActivity;
+import com.example.taweesoft.joinpa.MyJoinedEvent.MyJoinedEventActivity;
 import com.example.taweesoft.joinpa.Notification.NotifyOwner;
 
 import java.util.List;
@@ -30,7 +32,7 @@ import java.util.Observer;
 public class MainActivity extends ActionBarActivity implements Observer{
     private ListView lv_joiningList;
     private List<JoiningEvent> joiningEventList;
-    private Button btn_myEvent,btn_createEvent,btn_findFriend;
+    private Button btn_myEvent,btn_createEvent,btn_myJoinedEvent;
     private JoiningListCustomAdapter joinListAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class MainActivity extends ActionBarActivity implements Observer{
         btn_myEvent = (Button)findViewById(R.id.btn_myEvent);
         btn_createEvent = (Button)findViewById(R.id.btn_newEvent);
         lv_joiningList = (ListView)findViewById(R.id.lv_joiningList);
-        btn_findFriend = (Button)findViewById(R.id.btn_findFriend);
+        btn_myJoinedEvent = (Button)findViewById(R.id.btn_myJoinedEvent);
     }
 
     /**
@@ -66,12 +68,14 @@ public class MainActivity extends ActionBarActivity implements Observer{
      * Initial buttons event.
      */
     public void initButton(){
-        ShowMyEventClick clickEvent = new ShowMyEventClick();
+        ShowMyEventClick clickEvent = new ShowMyEventClick(this);
         btn_myEvent.setOnClickListener(clickEvent);
 
-        CreateEventClick createEventClick = new CreateEventClick();
+        CreateEventClick createEventClick = new CreateEventClick(this);
         btn_createEvent.setOnClickListener(createEventClick);
 
+        ShowMyJoinedEvent joinedEventClick = new ShowMyJoinedEvent(this);
+        btn_myJoinedEvent.setOnClickListener(joinedEventClick);
 
     }
 
@@ -112,8 +116,14 @@ public class MainActivity extends ActionBarActivity implements Observer{
      * Show My event action.
      */
     class ShowMyEventClick implements View.OnClickListener{
+        private Activity activity;
+
+        public ShowMyEventClick(Activity activity){
+            this.activity = activity;
+        }
+
         public void onClick(View v){
-            Intent intent = new Intent(MainActivity.this,MyEventActivity.class);
+            Intent intent = new Intent(activity,MyEventActivity.class);
             startActivity(intent);
         }
     }
@@ -122,14 +132,34 @@ public class MainActivity extends ActionBarActivity implements Observer{
      * Show friend list for invite to event.
      */
     class CreateEventClick implements View.OnClickListener{
+        private Activity activity;
+
+        public CreateEventClick(Activity activity){
+            this.activity = activity;
+        }
+
         public void onClick(View v){
-            Intent intent = new Intent(MainActivity.this, FriendListActivity.class);
+            Intent intent = new Intent(activity, FriendListActivity.class);
             startActivity(intent);
         }
     }
 
+    /**
+     * Show joined event.
+     */
+    class ShowMyJoinedEvent implements View.OnClickListener{
+        private Activity activity;
 
+        public ShowMyJoinedEvent(Activity activity){
+            this.activity = activity;
+        }
 
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(activity, MyJoinedEventActivity.class);
+            activity.startActivity(intent);
+        }
+    }
 
 
     /**

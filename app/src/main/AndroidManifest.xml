@@ -60,6 +60,10 @@
             android:name=".JoiningEventView.OneEvent"
             android:label="@string/title_activity_one_event" >
         </activity>
+        <activity
+            android:name=".MyJoinedEvent.MyJoinedEventActivity"
+            android:label="@string/title_activity_my_joined_event" >
+        </activity>
     </application>
 
 </manifest>

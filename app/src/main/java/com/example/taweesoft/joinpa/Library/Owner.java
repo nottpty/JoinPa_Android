@@ -54,4 +54,8 @@ public class Owner extends User{
     public void loadMyEvent(){
         loadMyEvent.load();
     }
+
+    public List<JoiningEvent> getJoinedEvent(){
+        return joinedEvent;
+    }
 }

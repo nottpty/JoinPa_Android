@@ -101,4 +101,12 @@ public class Event implements Serializable{
         Event event = (JoiningEvent)obj;
         return getEventID().equals(event.getEventID());
     }
+
+    public String getDateStr(){
+        return String.format("%02d/%02d/%02d",date.getDate(),date.getMonth(),date.getYear());
+    }
+
+    public String getTimeStr(){
+        return String.format("%02d:%02d",date.getHours(),date.getMinutes());
+    }
 }

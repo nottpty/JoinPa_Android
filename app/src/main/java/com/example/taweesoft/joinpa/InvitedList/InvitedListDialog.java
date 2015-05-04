@@ -6,16 +6,11 @@ import android.view.Window;
 import android.widget.ListView;
 
 import com.example.taweesoft.joinpa.Library.Event;
-import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.Library.User;
 import com.example.taweesoft.joinpa.R;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Created by taweesoft on 2/5/2558.
@@ -38,7 +33,7 @@ public class InvitedListDialog{
         dialog.setContentView(R.layout.invited_list);
         lv_invitedList = (ListView)dialog.findViewById(R.id.lv_invitedList);
         List<Map<User,Integer>> sortedListMap = controller.sortedMap(event.getInvitedList());
-        InvitedListaCustomAdapter adapter = new InvitedListaCustomAdapter(context,sortedListMap);
+        InvitedListCustomAdapter adapter = new InvitedListCustomAdapter(context,sortedListMap);
         lv_invitedList.setAdapter(adapter);
         dialog.show();
     }

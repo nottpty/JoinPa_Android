@@ -24,8 +24,17 @@ public class JoiningEvent extends Event {
     }
 
     public void setStatus(int status){
+        Log.d("JJJJJ : ", getInvitedList().size()+"");
         Map<User,Integer> invitedList = getInvitedList();
-        invitedList.put(Resources.owner,status);
+        for(Map.Entry<User,Integer> each : invitedList.entrySet()){
+            if(each.getKey().getUsername().equals(Resources.owner.getUsername())){
+                invitedList.remove(each.getKey());
+                invitedList.put(Resources.owner,status);
+
+                Log.d("JJJJJ1 : ", getInvitedList().size()+"");
+                return;
+            }
+        }
     }
 
     public int getMyStatus(){

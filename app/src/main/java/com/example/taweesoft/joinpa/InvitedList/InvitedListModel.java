@@ -13,7 +13,7 @@ import java.util.Observable;
  * Created by taweesoft on 3/5/2558.
  */
 public class InvitedListModel{
-    public List<Map<User,Integer>> sortedMap(Map<User,Integer> unsortMap){
+    public static List<Map<User,Integer>> sortedMap(Map<User,Integer> unsortMap){
         List<Map<User,Integer>> sortedListMap = new ArrayList<Map<User,Integer>>();
         for(Map.Entry<User,Integer> each : unsortMap.entrySet()){
             int status = each.getValue().intValue();

@@ -31,6 +31,7 @@ public class MyEventCustomAdapter extends ArrayAdapter<Event>{
         TextView txt_eventName  = (TextView)view.findViewById(R.id.txt_eventName);
         TextView txt_date = (TextView)view.findViewById(R.id.txt_date);
         TextView txt_time = (TextView)view.findViewById(R.id.txt_time);
+        TextView txt_note = (TextView)view.findViewById(R.id.txt_note);
         TextView txt_joinNumber = (TextView)view.findViewById(R.id.txt_joinNumber);
         ImageView img_iconBig = (ImageView)view.findViewById(R.id.img_iconBig);
         img_iconBig.setImageResource(Resources.iconsBig.get(event.getIconID()));
@@ -39,6 +40,7 @@ public class MyEventCustomAdapter extends ArrayAdapter<Event>{
         txt_date.setText(String.format("%02d/%02d/%04d",date.getDate(),date.getMonth(),date.getYear()));
         txt_time.setText(String.format("%02d:%02d", date.getHours(), date.getMinutes()));
         txt_joinNumber.setText(event.getInvitedList().size()+"");
+        txt_note.setText(event.getNote());
         return view;
     }
 }

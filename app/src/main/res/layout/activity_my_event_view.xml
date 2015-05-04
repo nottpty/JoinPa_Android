@@ -48,7 +48,8 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1.00"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical|bottom"
+                    android:paddingBottom="10dp">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -73,6 +74,15 @@
                         android:layout_height="wrap_content"
                         android:text="Time"
                         android:id="@+id/txt_time"
+                        android:textSize="15dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Note"
+                        android:id="@+id/txt_note"
                         android:textSize="15dp"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp" />

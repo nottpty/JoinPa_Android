@@ -2,6 +2,7 @@ package com.example.taweesoft.joinpa.InvitedList;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +19,8 @@ import java.util.Map;
 /**
  * Created by taweesoft on 2/5/2558.
  */
-public class InvitedListaCustomAdapter extends ArrayAdapter<Map<User,Integer>> {
-    public InvitedListaCustomAdapter(Context context, List<Map<User,Integer>> mapList){
+public class InvitedListCustomAdapter extends ArrayAdapter<Map<User,Integer>> {
+    public InvitedListCustomAdapter(Context context, List<Map<User, Integer>> mapList){
         super(context,0,mapList);
     }
 
@@ -28,6 +29,7 @@ public class InvitedListaCustomAdapter extends ArrayAdapter<Map<User,Integer>> {
         Map<User,Integer> map = getItem(position);
         Map.Entry<User,Integer> each = map.entrySet().iterator().next();
         String username = each.getKey().getUsername();
+        Log.d("LLLLL : ", username);
         int status = each.getValue().intValue();
         if(convertView == null)
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.invited_list_view,parent,false);
