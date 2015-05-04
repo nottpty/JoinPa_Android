@@ -42,11 +42,7 @@ public class LoginController {
             this.dialog = dialog;
         }
         public void onClick(View v){
-            dialog.setMessage("Logging in...");
-            dialog.setCancelable(false);
-            dialog.setOnCancelListener(new DismissLoginDialogEvent());
-            dialog.show();
-            doSignIn();
+           login(dialog);
         }
     }
 
@@ -66,6 +62,13 @@ public class LoginController {
         }
     }
 
+    public void login(AlertDialog dialog){
+        dialog.setMessage("Logging in...");
+        dialog.setCancelable(false);
+        dialog.setOnCancelListener(new DismissLoginDialogEvent());
+        dialog.show();
+        doSignIn();
+    }
     public void setState(LoginState state){
         model.setState(state);
     }

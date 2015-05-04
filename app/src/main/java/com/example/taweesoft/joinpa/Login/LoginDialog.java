@@ -38,13 +38,16 @@ public class LoginDialog implements Observer {
     private EditText txt_username,txt_password;
     private TextView txt_signUp,txt_signIn,txt_msg1,txt_msg2;
     private AlertDialog alertDialog;
+    private Dialog dialog;
     public LoginDialog(Activity activity){
         this.activity = activity;
         alertDialog = new AlertDialog.Builder(activity).create();
+        initComponents();
     }
 
-    public void openDialog(){
-        Dialog dialog = new Dialog(activity);
+
+    public void initComponents(){
+        dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); //Hide the action bar.
         dialog.setContentView(R.layout.activity_login);
         txt_username = (EditText)dialog.findViewById(R.id.txt_username);
@@ -55,6 +58,9 @@ public class LoginDialog implements Observer {
         txt_msg2 = (TextView)dialog.findViewById(R.id.txt_msg2);
         LoginModel model = new LoginModel();
         controller = new LoginController(this,model);
+    }
+
+    public void openDialog(){
         dialog.show();
     }
 
@@ -101,6 +107,7 @@ public class LoginDialog implements Observer {
                 }
                 if(data.getClass() == Owner.class){
                     Resources.owner = (Owner)data;
+                    Resources.password = getPassword();
                     alertDialog.setMessage("Logged in");
                     controller.setState(successState);
                     alertDialog.setCancelable(true);
@@ -146,6 +153,15 @@ public class LoginDialog implements Observer {
 
     public Activity getActivity(){
         return activity;
+    }
+
+    public LoginController getController(){
+        return controller;
+    }
+
+    public void setUsernamePassword(String username,String password){
+        txt_username.setText(username);
+        txt_password.setText(password);
     }
 
 }

@@ -1,7 +1,10 @@
 package com.example.taweesoft.joinpa.Library;
 
+import android.os.Environment;
+
 import com.example.taweesoft.joinpa.R;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -20,6 +23,8 @@ public class Resources {
     public static final int EXIST = 2;
     public static final int REGIS_SUCCESS = 3;
     public static final int LOGIN_SUCCESS = 4;
+    public static final int IS_AUTOLOGIN = 1;
+    public static final int NOT_AUTOLOGIN = 2;
     public static List<Integer> icons = new ArrayList<Integer>(Arrays.asList(
             R.drawable.toilet_small,
             R.drawable.lunch_small,
@@ -54,4 +59,10 @@ public class Resources {
         final String illegalText = "#$%~!@^&*()-_=+,.;\'\"<>?";
         return username.matches(illegalText) || password.matches(illegalText);
     }
+
+    public static File sdCard = Environment.getExternalStorageDirectory();
+    public static File dir = new File (sdCard.getAbsolutePath() + "/");
+    public static File file = new File(dir,"JoinPa.txt");
+
+    public static String password = "";
 }

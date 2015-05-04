@@ -1,19 +1,26 @@
 package com.example.taweesoft.joinpa;
 
 import android.content.pm.ActivityInfo;
+import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.Login.LoginDialog;
 import com.google.android.gcm.GCMRegistrar;
+
+import java.io.File;
+import java.util.Scanner;
 
 
 public class FirstActivity extends ActionBarActivity {
     private Button btn_signIn,btn_signUp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +30,7 @@ public class FirstActivity extends ActionBarActivity {
         GCMRegistrar.checkManifest(this);
         GCMRegistrar.register(this,GCMIntentService.SENDER_ID);
         initComponents();
+        AutoLogin();
     }
 
     /**
@@ -61,5 +69,27 @@ public class FirstActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void AutoLogin(){
+        try{
+            Log.d("WWWWWW : ", Resources.file.exists()+"");
+            if(!Resources.file.exists())
+                Resources.file.createNewFile();
+            else{
+                Scanner scan = new Scanner(Resources.file);
+                int status = (Integer.parseInt(scan.next()));
+                Log.d("EEEE : " , status + "");
+                if(status == Resources.IS_AUTOLOGIN){
+                    String username = scan.next();
+                    String password = scan.next();
+                    LoginDialog loginDialog = new LoginDialog(FirstActivity.this);
+                    loginDialog.setUsernamePassword(username,password);
+                    loginDialog.getController().login(loginDialog.getAlertDialog());
+                }
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }
