@@ -20,7 +20,7 @@ import java.util.Map;
  * Created by taweesoft on 2/5/2558.
  */
 public class InvitedListCustomAdapter extends ArrayAdapter<Map<User,Integer>> {
-    public InvitedListCustomAdapter(Context context, List<Map<User, Integer>> mapList){
+    public InvitedListCustomAdapter(Context context, final List<Map<User, Integer>> mapList){
         super(context,0,mapList);
     }
 

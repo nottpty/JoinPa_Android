@@ -19,38 +19,41 @@
         android:layout_above="@+id/btn_newEvent" />
 
     <Button
-        android:layout_width="94dp"
-        android:layout_height="45dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:id="@+id/btn_myEvent"
         android:layout_alignWithParentIfMissing="false"
-        android:background="@drawable/button_myevent"
+        android:background="@drawable/button_my_event"
         android:layout_weight="1"
         android:layout_gravity="bottom"
-        android:layout_alignBottom="@+id/relativeLayout"
+        android:layout_above="@+id/relativeLayout"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="24dp"
+        android:layout_marginBottom="5dp" />
 
     <Button
         android:layout_width="55dp"
         android:layout_height="60dp"
         android:id="@+id/btn_newEvent"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/button_plus"
+        android:background="@drawable/button_new_event"
         android:layout_weight="1"
         android:layout_alignBottom="@+id/btn_myEvent"
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="94dp"
-        android:layout_height="45dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:id="@+id/btn_myJoinedEvent"
-        android:background="@drawable/button_find_friend"
+        android:background="@drawable/button_my_joined_event"
         android:layout_weight="1"
         android:layout_gravity="bottom"
-        android:layout_alignTop="@+id/btn_myEvent"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentStart="false" />
+        android:layout_marginRight="24dp"
+        android:layout_above="@+id/relativeLayout"
+        android:layout_alignRight="@+id/relativeLayout"
+        android:layout_alignEnd="@+id/relativeLayout"
+        android:layout_marginBottom="5dp" />
 
     <RelativeLayout
         android:layout_width="fill_parent"

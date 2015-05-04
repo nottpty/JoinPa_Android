@@ -71,7 +71,7 @@ public class MyJoinedEventCustomAdapter extends BaseExpandableListAdapter{
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         Log.d("OOOO : " , "RRRRRRR");
-        invitedListCustomAdapter = new InvitedListCustomAdapter(activity,childView.get(groupPosition));
+
         JoiningEvent event = parentView.get(groupPosition);
 
         Log.d("UUUU : " , event.getTopic());
@@ -90,7 +90,7 @@ public class MyJoinedEventCustomAdapter extends BaseExpandableListAdapter{
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        Log.d("OOOO : " , "RRRRRRR");
+        invitedListCustomAdapter = new InvitedListCustomAdapter(activity,childView.get(groupPosition));
         return invitedListCustomAdapter.getView(childPosition,convertView,parent);
     }
 
