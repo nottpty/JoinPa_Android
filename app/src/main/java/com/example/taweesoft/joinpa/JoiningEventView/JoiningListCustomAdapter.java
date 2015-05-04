@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.taweesoft.joinpa.InvitedList.InvitedListDialog;
@@ -37,10 +38,10 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
     private final int DECLINE = 2;
     private Observable observable;
     private List<JoiningEvent> joiningList;
-    public JoiningListCustomAdapter(Context context,Object observer,List<JoiningEvent> joiningEventList){
+    public JoiningListCustomAdapter(Context context,List<JoiningEvent> joiningEventList){
         super(context,0,joiningEventList);
         observable = new Observable();
-        observable.addObserver((Observer)observer);
+        observable.addObserver((Observer)context);
     }
 
     public View getView(int position, View view, ViewGroup parent){
@@ -58,7 +59,7 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
         TextView btn_invitedList = (TextView)view.findViewById(R.id.btn_invitedList);
         TextView btn_decline = (TextView)view.findViewById(R.id.btn_decline);
         ImageView img_iconBig = (ImageView)view.findViewById(R.id.img_iconBig);
-        img_iconBig.setImageResource(Resources.iconsBig.get(event.getIconID()));
+        img_iconBig.setImageResource(Resources.iconForCard.get(event.getIconID()));
         btn_join.setOnClickListener(setYesEventForJoinConfirm(event));
         btn_invitedList.setOnClickListener(new ShowInvitedListDialog(event));
         btn_decline.setOnClickListener(setYesEventForDeclineConfirm(event));

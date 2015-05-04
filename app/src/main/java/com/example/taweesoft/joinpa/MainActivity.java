@@ -4,19 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.taweesoft.joinpa.CreateEvent.FriendView.FriendListView.FriendListActivity;
 import com.example.taweesoft.joinpa.FindFriend.FindFriendDialog;
@@ -35,38 +30,30 @@ import java.util.Observable;
 import java.util.Observer;
 
 
-public class MainActivity extends Fragment implements Observer{
+public class MainActivity extends ActionBarActivity implements Observer{
     private ListView lv_joiningList;
     private List<JoiningEvent> joiningEventList;
     private Button btn_myEvent,btn_createEvent,btn_myJoinedEvent;
     private JoiningListCustomAdapter joinListAdapter;
-    private View v;
-    private Activity activity;
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity = getActivity();
+        super.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setContentView(R.layout.activity_main);
         checkNotiKey();
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.activity_main, container, false);
         initComponents();
         initMyEventList();
         initButton();
-        return v;
     }
+
     /**
      * Initial components
      */
     public void initComponents(){
-        btn_myEvent = (Button)v.findViewById(R.id.btn_myEvent);
-        btn_createEvent = (Button)v.findViewById(R.id.btn_newEvent);
-        lv_joiningList = (ListView)v.findViewById(R.id.lv_joiningList);
-        btn_myJoinedEvent = (Button)v.findViewById(R.id.btn_myJoinedEvent);
+        btn_myEvent = (Button)findViewById(R.id.btn_myEvent);
+        btn_createEvent = (Button)findViewById(R.id.btn_newEvent);
+        lv_joiningList = (ListView)findViewById(R.id.lv_joiningList);
+        btn_myJoinedEvent = (Button)findViewById(R.id.btn_myJoinedEvent);
     }
 
     /**
@@ -74,7 +61,7 @@ public class MainActivity extends Fragment implements Observer{
      */
     public void initMyEventList(){
         joiningEventList = Resources.owner.getJoiningEvents();
-        joinListAdapter = new JoiningListCustomAdapter(activity,this,joiningEventList);
+        joinListAdapter = new JoiningListCustomAdapter(this,joiningEventList);
         lv_joiningList.setAdapter(joinListAdapter);
     }
 
@@ -82,13 +69,13 @@ public class MainActivity extends Fragment implements Observer{
      * Initial buttons event.
      */
     public void initButton(){
-        ShowMyEventClick clickEvent = new ShowMyEventClick(activity);
+        ShowMyEventClick clickEvent = new ShowMyEventClick(this);
         btn_myEvent.setOnClickListener(clickEvent);
 
-        CreateEventClick createEventClick = new CreateEventClick(activity);
+        CreateEventClick createEventClick = new CreateEventClick(this);
         btn_createEvent.setOnClickListener(createEventClick);
 
-        ShowMyJoinedEvent joinedEventClick = new ShowMyJoinedEvent(activity);
+        ShowMyJoinedEvent joinedEventClick = new ShowMyJoinedEvent(this);
         btn_myJoinedEvent.setOnClickListener(joinedEventClick);
 
     }
@@ -186,7 +173,7 @@ public class MainActivity extends Fragment implements Observer{
         Log.d("OOO1: ", Resources.owner.getJoiningEvents().size()+"");
         Resources.owner.moveToJoined(joiningEvent);
         Log.d("OOO2: ", Resources.owner.getJoiningEvents().size()+"");
-        activity.runOnUiThread(new Runnable(){ //Because original thread and touch this view.
+        runOnUiThread(new Runnable(){ //Because original thread and touch this view.
             @Override
             public void run() {
                 joinListAdapter.notifyDataSetChanged();
@@ -200,8 +187,28 @@ public class MainActivity extends Fragment implements Observer{
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }else if( id == R.id.action_logout){
+            logout();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     public void checkNotiKey(){
         CheckExistNotiKey task = new CheckExistNotiKey();
@@ -219,5 +226,9 @@ public class MainActivity extends Fragment implements Observer{
         }
     }
 
-
+    public void logout(){
+        Resources.file.delete();
+        Intent intent = new Intent(this,FirstActivity.class);
+        startActivity(intent);
+    }
 }

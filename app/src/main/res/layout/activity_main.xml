@@ -1,63 +1,65 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.taweesoft.joinpa.MainActivity"
     android:orientation="vertical"
-    android:background="#ff91d5ff">
+    android:background="@drawable/blur_background1"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin">
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="439dp"
+        android:layout_height="wrap_content"
         android:id="@+id/lv_joiningList"
+        android:smoothScrollbar="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="false"
-        android:layout_alignParentStart="false"
-        android:smoothScrollbar="true"
-        android:layout_above="@+id/linearLayout3" />
+        android:layout_above="@+id/btn_newEvent" />
+
+    <Button
+        android:layout_width="94dp"
+        android:layout_height="45dp"
+        android:id="@+id/btn_myEvent"
+        android:layout_alignWithParentIfMissing="false"
+        android:background="@drawable/button_myevent"
+        android:layout_weight="1"
+        android:layout_gravity="bottom"
+        android:layout_alignBottom="@+id/relativeLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="55dp"
+        android:layout_height="60dp"
+        android:id="@+id/btn_newEvent"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_plus"
+        android:layout_weight="1"
+        android:layout_alignBottom="@+id/btn_myEvent"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="94dp"
+        android:layout_height="45dp"
+        android:id="@+id/btn_myJoinedEvent"
+        android:background="@drawable/button_find_friend"
+        android:layout_weight="1"
+        android:layout_gravity="bottom"
+        android:layout_alignTop="@+id/btn_myEvent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentStart="false" />
 
     <RelativeLayout
-        android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="false"
-        android:id="@+id/linearLayout3"
-        android:layout_alignParentTop="true"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:background="@android:color/white">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/relativeLayout">
 
-        <Button
-            android:layout_width="94dp"
-            android:layout_height="45dp"
-            android:id="@+id/btn_myEvent"
-            android:layout_alignWithParentIfMissing="false"
-            android:background="@drawable/button_myevent"
-            android:layout_weight="1"
-            android:layout_gravity="bottom"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <Button
-            android:layout_width="55dp"
-            android:layout_height="60dp"
-            android:id="@+id/btn_newEvent"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/button_plus"
-            android:layout_weight="1"
-            android:layout_alignTop="@+id/btn_myEvent"
-            android:layout_centerHorizontal="true" />
-
-        <Button
-            android:layout_width="94dp"
-            android:layout_height="45dp"
-            android:id="@+id/btn_myJoinedEvent"
-            android:background="@drawable/button_find_friend"
-            android:layout_weight="1"
-            android:layout_gravity="bottom"
-            android:layout_alignTop="@+id/btn_newEvent"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

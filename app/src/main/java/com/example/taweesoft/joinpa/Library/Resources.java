@@ -30,7 +30,9 @@ public class Resources {
             R.drawable.lunch_small,
             R.drawable.playgame_small,
             R.drawable.home_small,
-            R.drawable.seven_eleven_small
+            R.drawable.dota_small,
+            R.drawable.drink_small,
+            R.drawable.fitness_small
     ));
 
     public static List<Integer> iconsBig = new ArrayList<Integer>(Arrays.asList(
@@ -38,9 +40,19 @@ public class Resources {
             R.drawable.lunch_big,
             R.drawable.playgame_big,
             R.drawable.home_big,
-            R.drawable.seven_eleven_big
+            R.drawable.dota_big,
+            R.drawable.drink_big,
+            R.drawable.fitness_big
     ));
-
+    public static List<Integer> iconForCard = new ArrayList<Integer>(Arrays.asList(
+            R.drawable.toilet_card,
+            R.drawable.lunch_card,
+            R.drawable.playgame_card,
+            R.drawable.home_card,
+            R.drawable.dota_card,
+            R.drawable.drink_card,
+            R.drawable.fitness_card
+    ));
     public static Map<Integer,String> eventsName= new HashMap<Integer,String>();
 
     public static final String URL = "http://www.cmvk-tech.com/joinpa/connectDB.php";
@@ -50,7 +62,10 @@ public class Resources {
         eventsName.put(icons.get(1),"Lunch");
         eventsName.put(icons.get(2),"Play game");
         eventsName.put(icons.get(3),"Home");
-        eventsName.put(icons.get(4),"7-Eleven");
+        eventsName.put(icons.get(4),"Dota");
+        eventsName.put(icons.get(5),"Drink");
+        eventsName.put(icons.get(6),"Fitness");
+
     }
 
     public static String deviceID = "key";
