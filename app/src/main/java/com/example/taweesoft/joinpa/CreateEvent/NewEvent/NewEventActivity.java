@@ -35,12 +35,13 @@ import java.util.Observer;
 public class NewEventActivity extends ActionBarActivity implements Observer {
     private Spinner spn_icon;
     private List<Friend> selectedFriends;
-    private TextView txt_eventName,txt_note;
+    private TextView txt_note;
     private TextView txt_date;
     private TextView txt_time;
     private Button btn_create;
     private LinearLayout layout_date,layout_time;
     private NewEventController controller;
+    private String eventName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +64,6 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
      */
     public void initComponent(){
         spn_icon = (Spinner)findViewById(R.id.spn_icon);
-        txt_eventName = (TextView)findViewById(R.id.txt_eventName);
         txt_note = (TextView)findViewById(R.id.txt_note);
         btn_create = (Button)findViewById(R.id.btn_create);
         btn_create.setOnClickListener(new CreateEventAction());
@@ -154,7 +154,7 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
     }
 
     public void setEventName(String eventName){
-        this.txt_eventName.setText(eventName);
+        this.eventName = eventName;
     }
 
     public NewEventController getController(){
@@ -172,7 +172,6 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
             Owner owner = Resources.owner;
             final List<Friend> invitedList = selectedFriends;
             int iconID = spn_icon.getSelectedItemPosition();
-            String eventName = txt_eventName.getText().toString();
             String note = txt_note.getText().toString();
             Map<User,Integer> invitedMap = Event.createInvitedMap(invitedList);
 

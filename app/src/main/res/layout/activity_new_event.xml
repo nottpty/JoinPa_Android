@@ -4,72 +4,125 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.taweesoft.joinpa.CreateEvent.NewEvent.NewEventActivity">
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spn_icon"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Event name"
-        android:id="@+id/txt_eventName"
-        android:layout_below="@+id/spn_icon"
-        android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txt_note"
-        android:layout_marginTop="74dp"
-        android:layout_below="@+id/txt_eventName"
-        android:layout_centerHorizontal="true" />
+    tools:context="com.example.taweesoft.joinpa.CreateEvent.NewEvent.NewEventActivity"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_note"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/layout_date">
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="00/00/0000"
-            android:id="@+id/txt_date" />
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/btn_create"
+            android:layout_alignEnd="@+id/btn_create"
+            android:id="@+id/linearLayout"
+            android:gravity="center_vertical">
 
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:id="@+id/imageView10"
+                android:src="@drawable/event_icon" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spn_icon"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="4dp">
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:id="@+id/imageView13"
+                android:src="@drawable/note_icon" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_note"
+                android:layout_below="@+id/txt_eventName"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1"
+                android:layout_marginLeft="18dp"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_note"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/layout_date"
+            android:gravity="center_vertical"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:id="@+id/imageView11"
+                android:src="@drawable/calendar_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="00/00/0000"
+                android:id="@+id/txt_date"
+                android:paddingLeft="18dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_date"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/layout_time"
+            android:gravity="center_vertical"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:id="@+id/imageView12"
+                android:src="@drawable/clock_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="00:00"
+                android:id="@+id/txt_time"
+                android:paddingLeft="18dp" />
+
+        </LinearLayout>
     </LinearLayout>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:id="@+id/btn_create"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/plus_icon"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_date"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/layout_time">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="00:00"
-            android:id="@+id/txt_time" />
-
-    </LinearLayout>
 
 </RelativeLayout>
