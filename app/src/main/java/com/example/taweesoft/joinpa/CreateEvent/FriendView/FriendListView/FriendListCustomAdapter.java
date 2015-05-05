@@ -31,24 +31,26 @@ public class FriendListCustomAdapter extends ArrayAdapter<Friend>{
     private AdapterObservable observable;
     private List<Friend> selectedFriend = new ArrayList<Friend>();
     private List<Friend> friendList;
-    private boolean[] isCheckedState;
+    private List<Boolean> isCheckedState;
 
     public FriendListCustomAdapter(Context context,List<Friend> friendList){
         super(context,0,friendList);
         observable = new AdapterObservable();
         observable.addObserver((Observer)context);
         this.friendList = friendList;
-        isCheckedState = new boolean[friendList.size()];
+        isCheckedState = new ArrayList<Boolean>();
+        initialBooleanList(new boolean[friendList.size()]);
     }
-    public View getView(int position, View view, ViewGroup parent){
 
+    public View getView(int position, View view, ViewGroup parent){
+        checkForNewFriend();
         Friend friend = getItem(position);
         view = LayoutInflater.from(getContext()).inflate(R.layout.activity_friend_list_view,null);
         TextView txt_friendName = (TextView)view.findViewById(R.id.txt_friendName);
         CheckBox cb_check = (CheckBox)view.findViewById(R.id.cb_check);
         SelectFriendEvent event = new SelectFriendEvent(friend,position);
         cb_check.setOnClickListener(event);
-        cb_check.setChecked(isCheckedState[position]);
+        cb_check.setChecked(isCheckedState.get(position));
         txt_friendName.setText(friend.getUsername());
 
         return view;
@@ -62,8 +64,8 @@ public class FriendListCustomAdapter extends ArrayAdapter<Friend>{
         }
         @Override
         public void onClick(View v) {
-            boolean checked = !isCheckedState[position];
-            isCheckedState[position] = checked;
+            boolean checked = !isCheckedState.get(position);
+            isCheckedState.set(position,checked);
             if(checked)
                 selectedFriend.add(friend);
             else
@@ -76,6 +78,20 @@ public class FriendListCustomAdapter extends ArrayAdapter<Friend>{
     class AdapterObservable extends Observable{
         public void setChanged(){
             super.setChanged();
+        }
+    }
+
+    public void checkForNewFriend(){
+        if(friendList.size() != isCheckedState.size()){
+            int diff = friendList.size() - isCheckedState.size();
+            for(int i = 0; i< diff ; i++)
+                isCheckedState.add(0,false);
+        }
+    }
+
+    public void initialBooleanList(boolean[] arr){
+        for(boolean bool : arr){
+            isCheckedState.add(bool);
         }
     }
 }

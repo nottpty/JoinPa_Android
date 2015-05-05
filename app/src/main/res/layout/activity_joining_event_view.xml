@@ -102,7 +102,8 @@
                     android:id="@+id/btn_join"
                     android:layout_weight="1"
                     android:background="#ffffffff"
-                    android:textColor="#ffffc009" />
+                    android:textColor="#ffffc009"
+                    android:textSize="13dp" />
 
                 <Button
                     android:layout_width="wrap_content"
@@ -110,7 +111,8 @@
                     android:text="Decline"
                     android:id="@+id/btn_decline"
                     android:layout_weight="1"
-                    android:background="#ffffffff" />
+                    android:background="#ffffffff"
+                    android:textSize="13dp" />
 
                 <Button
                     android:layout_width="wrap_content"
@@ -118,7 +120,8 @@
                     android:text="List"
                     android:id="@+id/btn_invitedList"
                     android:layout_weight="1"
-                    android:background="#ffffffff" />
+                    android:background="#ffffffff"
+                    android:textSize="13dp" />
             </LinearLayout>
         </LinearLayout>
 

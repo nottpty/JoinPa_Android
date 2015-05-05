@@ -82,4 +82,6 @@ public class Resources {
     public static File file = new File(dir,"JoinPa.txt");
 
     public static String password = "";
+
+    public static boolean isNewData = false;
 }

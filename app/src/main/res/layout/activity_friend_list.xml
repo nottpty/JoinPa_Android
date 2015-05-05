@@ -14,31 +14,27 @@
         android:layout_alignParentTop="false"
         android:layout_alignParentLeft="false"
         android:layout_alignParentStart="true"
-        android:choiceMode="multipleChoice"
         android:clickable="true"
         android:layout_above="@+id/btn_findFriend" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Next"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/btn_next"
         android:layout_weight="0"
         android:layout_gravity="center_horizontal"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/lv_friendsList"
-        android:layout_alignEnd="@+id/lv_friendsList" />
+        android:layout_alignEnd="@+id/lv_friendsList"
+        android:background="@drawable/next_icon" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/btn_findFriend"
-        android:background="@drawable/button_find_friend"
-        android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@+id/btn_next"
-        android:layout_alignTop="@+id/btn_next"
-        android:layout_toLeftOf="@+id/btn_next"
-        android:layout_marginRight="155dp"
-        android:layout_marginEnd="155dp" />
+        android:background="@drawable/plus_icon"
+        android:layout_alignBottom="@+id/btn_next"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

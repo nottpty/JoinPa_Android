@@ -44,6 +44,7 @@ public class MainActivity extends ActionBarActivity implements Observer{
         initComponents();
         initMyEventList();
         initButton();
+        updateInBackground();
     }
 
     /**
@@ -206,6 +207,8 @@ public class MainActivity extends ActionBarActivity implements Observer{
             return true;
         }else if( id == R.id.action_logout){
             logout();
+        }else if( id == R.id.action_refresh){
+            updateListView();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -230,5 +233,46 @@ public class MainActivity extends ActionBarActivity implements Observer{
         Resources.file.delete();
         Intent intent = new Intent(this,FirstActivity.class);
         startActivity(intent);
+    }
+
+    class UpdateJoiningEventListView extends AsyncTask<Void, Void, Void>{
+        @Override
+        protected Void doInBackground(Void... params) {
+            Log.d("XXXXX1 : " , Resources.owner.getJoiningEvents().size()+"");
+            Resources.owner.setJoiningEvents(Database.myJoiningEvents(Resources.owner,Resources.WAITING));
+            Log.d("XXXXX2 : " , Resources.owner.getJoiningEvents().size()+"");
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            runOnUiThread(new Runnable(){
+                @Override
+                public void run() {
+                    joinListAdapter.notifyDataSetChanged();
+                }
+            });
+        }
+    };
+
+    public void updateListView(){
+        UpdateJoiningEventListView task = new UpdateJoiningEventListView();
+        task.execute();
+    }
+
+    public void updateInBackground(){
+        Runnable runnable = new Runnable(){
+            @Override
+            public void run() {
+                while(true){
+                    if(Resources.isNewData){
+                        updateListView();
+                        Resources.isNewData = false;
+                    }
+                }
+            }
+        };
+        Thread thread = new Thread(runnable);
+        thread.start();
     }
 }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.taweesoft.joinpa.InvitedList.InvitedListCustomAdapter;
@@ -77,10 +78,18 @@ public class MyJoinedEventCustomAdapter extends BaseExpandableListAdapter{
         Log.d("UUUU : " , event.getTopic());
         if(convertView == null)
             convertView = LayoutInflater.from(activity).inflate(R.layout.my_joined_event_view,parent,false);
+        LinearLayout layout_note = (LinearLayout)convertView.findViewById(R.id.layout_note);
+        TextView txt_note = (TextView)convertView.findViewById(R.id.txt_note);
+        TextView txt_eventName = (TextView)convertView.findViewById(R.id.txt_eventName);
         TextView txt_ownerName = (TextView)convertView.findViewById(R.id.txt_ownerName);
         TextView txt_date = (TextView)convertView.findViewById(R.id.txt_date);
         TextView txt_time = (TextView)convertView.findViewById(R.id.txt_time);
         ImageView img_iconBig = (ImageView)convertView.findViewById(R.id.img_iconBig);
+        if(event.getNote().equals(""))
+            layout_note.setVisibility(View.GONE);
+        else
+            txt_note.setText(event.getNote());
+        txt_eventName.setText(event.getTopic());
         txt_ownerName.setText(event.getEventOwner().getUsername());
         txt_date.setText(event.getDateStr());
         txt_time.setText(event.getTimeStr());

@@ -67,7 +67,11 @@ public class Owner extends User{
     }
 
     public void setJoinedEvent(List<JoiningEvent> joinedEvent){
-        Log.d("LLLLL : ", joinedEvent+"");
         this.joinedEvent = joinedEvent;
+    }
+
+    public void setJoiningEvents(List<JoiningEvent> joiningEvent){
+        this.joiningEvents.clear();
+        this.joiningEvents.addAll(joiningEvent);
     }
 }

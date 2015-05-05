@@ -187,10 +187,10 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
 
                 @Override
                 protected Void doInBackground(Void... params) {
+                    Database.addEvent(event);
                     for(Friend friend : invitedList){
                         Database.sendMsg(friend.getNotifyKey(),msg);
                     }
-                    Database.addEvent(event);
                     return null;
                 }
 

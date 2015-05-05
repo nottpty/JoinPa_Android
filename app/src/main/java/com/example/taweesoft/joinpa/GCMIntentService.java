@@ -24,8 +24,6 @@ import java.util.TimerTask;
  * Created by taweesoft on 2/5/2558.
  */
 public class GCMIntentService extends GCMBaseIntentService {
-
-    private static final String TAG = "GCM Tutorial::Service";
     // Use your PROJECT ID from Google API into SENDER_ID
     public static final String SENDER_ID = "472972918645";
 
@@ -35,16 +33,12 @@ public class GCMIntentService extends GCMBaseIntentService {
 
     @Override
     protected void onRegistered(Context context, String registrationId) {
-
-        Log.i(TAG, "onRegistered: registrationId=" + registrationId);
         Resources.deviceID = registrationId;
-        Log.d("XXXXXXX : " , registrationId);
     }
 
     @Override
     protected void onUnregistered(Context context, String registrationId) {
 
-        Log.i(TAG, "onUnregistered: registrationId=" + registrationId);
     }
 
     @Override
@@ -58,9 +52,10 @@ public class GCMIntentService extends GCMBaseIntentService {
             iconID = Resources.icons.get(Integer.parseInt(msgArr[0]));
             message = msgArr[1];
             Log.d("OOO : " , message);
+            Resources.isNewData = true;
         }
         // Open a new activity called GCMMessageView
-        Intent intent = new Intent(this, OneEvent.class);
+        Intent intent = new Intent(this, FirstActivity.class);
         // Pass data to the new activity
         intent.putExtra("message", message);
         // Starts the activity on notification click

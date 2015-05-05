@@ -28,40 +28,161 @@
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
-                    android:background="@drawable/invited_list_green"
-                    android:layout_weight="0.57">
+                    android:background="@drawable/joined_bg"
+                    android:weightSum="1"
+                    android:gravity="center_vertical">
 
                     <ImageView
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:id="@+id/imageView"
+                        android:layout_width="82dp"
+                        android:layout_height="82dp"
+                        android:id="@+id/img_iconBig"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/friend_icon" />
+                        android:src="@drawable/home_big" />
                 </LinearLayout>
 
-                <RelativeLayout
-                    android:orientation="horizontal"
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="fill_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:id="@+id/imageView4"
+                            android:layout_weight="0"
+                            android:src="@drawable/event_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:text="Event name"
+                            android:id="@+id/txt_eventName"
+                            android:textSize="20dp"
+                            android:gravity="center_vertical"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:paddingLeft="10dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Friend name"
-                        android:id="@+id/txt_friendName"
-                        android:textSize="20dp"
-                        android:gravity="center_vertical"
-                        android:layout_weight="3"
                         android:layout_gravity="center_horizontal"
-                        android:layout_centerVertical="true"
-                        android:layout_centerHorizontal="true" />
-                </RelativeLayout>
+                        android:weightSum="2"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:id="@+id/imageView2"
+                                android:src="@drawable/calendar_icon" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="Date"
+                                android:id="@+id/txt_date"
+                                android:layout_weight="1"
+                                android:paddingLeft="10dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="match_parent"
+                                android:id="@+id/imageView3"
+                                android:src="@drawable/clock_icon" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="Time"
+                                android:id="@+id/txt_time"
+                                android:layout_weight="1"
+                                android:paddingLeft="10dp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:id="@+id/imageView6"
+                            android:src="@drawable/note_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Note"
+                            android:id="@+id/txt_note"
+                            android:layout_weight="1"
+                            android:paddingLeft="10dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:id="@+id/imageView5"
+                            android:src="@drawable/person_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Owner name"
+                            android:id="@+id/txt_ownerName"
+                            android:layout_weight="1"
+                            android:paddingLeft="10dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>
