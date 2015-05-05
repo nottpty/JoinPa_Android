@@ -50,7 +50,7 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
         if(view == null)
             view = LayoutInflater.from(getContext()).inflate(R.layout.activity_joining_event_view,parent,false);
 
-        TextView txt_topic = (TextView)view.findViewById(R.id.txt_topic);
+        TextView txt_topic = (TextView)view.findViewById(R.id.txt_eventName);
         TextView txt_OwnerName = (TextView)view.findViewById(R.id.txt_ownerName);
         TextView txt_date = (TextView)view.findViewById(R.id.txt_date);
         TextView txt_time = (TextView)view.findViewById(R.id.txt_time);
@@ -58,8 +58,12 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
         TextView btn_join = (TextView)view.findViewById(R.id.btn_join);
         TextView btn_invitedList = (TextView)view.findViewById(R.id.btn_invitedList);
         TextView btn_decline = (TextView)view.findViewById(R.id.btn_decline);
+        LinearLayout layout_iconBG = (LinearLayout)view.findViewById(R.id.layout_iconBG);
+        LinearLayout layout_note = (LinearLayout)view.findViewById(R.id.layout_note);
         ImageView img_iconBig = (ImageView)view.findViewById(R.id.img_iconBig);
-        img_iconBig.setImageResource(Resources.iconForCard.get(event.getIconID()));
+        img_iconBig.setImageResource(Resources.iconsBig.get(event.getIconID()));
+        layout_iconBG.setBackgroundResource(Resources.cardBG.get(event.getIconID()));
+
         btn_join.setOnClickListener(setYesEventForJoinConfirm(event));
         btn_invitedList.setOnClickListener(new ShowInvitedListDialog(event));
         btn_decline.setOnClickListener(setYesEventForDeclineConfirm(event));
@@ -68,7 +72,10 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
         Date date = event.getDate();
         txt_date.setText(String.format("%02d/%02d/%04d",date.getDate(),date.getMonth(),date.getYear()));
         txt_time.setText(String.format("%02d:%02d",date.getHours(),date.getMinutes()));
-        txt_note.setText(event.getNote());
+        if(event.getNote().equals(""))
+            layout_note.setVisibility(View.GONE);
+        else
+            txt_note.setText(event.getNote());
         return view;
     }
 

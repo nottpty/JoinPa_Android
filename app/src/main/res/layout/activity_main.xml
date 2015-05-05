@@ -4,9 +4,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.taweesoft.joinpa.MainActivity"
     android:orientation="vertical"
-    android:background="@drawable/blur_background1"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin">
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:background="@drawable/light_blue_blur_small">
 
     <ListView
         android:layout_width="match_parent"
@@ -23,21 +23,21 @@
         android:layout_height="55dp"
         android:id="@+id/btn_myEvent"
         android:layout_alignWithParentIfMissing="false"
-        android:background="@drawable/button_my_event"
+        android:background="@drawable/event_icon"
         android:layout_weight="1"
         android:layout_gravity="bottom"
         android:layout_above="@+id/relativeLayout"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="24dp"
+        android:layout_marginLeft="12dp"
         android:layout_marginBottom="5dp" />
 
     <Button
-        android:layout_width="55dp"
-        android:layout_height="60dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
         android:id="@+id/btn_newEvent"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/button_new_event"
+        android:background="@drawable/plus_icon"
         android:layout_weight="1"
         android:layout_alignBottom="@+id/btn_myEvent"
         android:layout_centerHorizontal="true" />
@@ -46,10 +46,10 @@
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:id="@+id/btn_myJoinedEvent"
-        android:background="@drawable/button_my_joined_event"
+        android:background="@drawable/checked_icon"
         android:layout_weight="1"
         android:layout_gravity="bottom"
-        android:layout_marginRight="24dp"
+        android:layout_marginRight="12dp"
         android:layout_above="@+id/relativeLayout"
         android:layout_alignRight="@+id/relativeLayout"
         android:layout_alignEnd="@+id/relativeLayout"

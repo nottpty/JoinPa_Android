@@ -44,14 +44,14 @@ public class Resources {
             R.drawable.drink_big,
             R.drawable.fitness_big
     ));
-    public static List<Integer> iconForCard = new ArrayList<Integer>(Arrays.asList(
-            R.drawable.toilet_card,
-            R.drawable.lunch_card,
-            R.drawable.playgame_card,
-            R.drawable.home_card,
-            R.drawable.dota_card,
-            R.drawable.drink_card,
-            R.drawable.fitness_card
+    public static List<Integer> cardBG = new ArrayList<Integer>(Arrays.asList(
+            R.drawable.toilet_card_bg,
+            R.drawable.lunch_card_bg,
+            R.drawable.playgame_card_bg,
+            R.drawable.home_card_bg,
+            R.drawable.dota_card_bg,
+            R.drawable.drink_card_bg,
+            R.drawable.fitness_card_bg
     ));
     public static Map<Integer,String> eventsName= new HashMap<Integer,String>();
 

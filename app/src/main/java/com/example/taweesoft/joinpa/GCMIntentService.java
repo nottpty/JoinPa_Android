@@ -5,6 +5,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -46,14 +48,18 @@ public class GCMIntentService extends GCMBaseIntentService {
         String message;
         // Message from PHP server
         message = data.getStringExtra("message");
+
         int iconID = R.drawable.a1;
         if(message.contains("@@")){
             String[] msgArr = message.split("@@");
-            iconID = Resources.icons.get(Integer.parseInt(msgArr[0]));
+            iconID = Resources.iconsBig.get(Integer.parseInt(msgArr[0]));
             message = msgArr[1];
             Log.d("OOO : " , message);
             Resources.isNewData = true;
         }
+
+        Bitmap bitmap= BitmapFactory.decodeResource(context.getResources(), iconID);
+
         // Open a new activity called GCMMessageView
         Intent intent = new Intent(this, FirstActivity.class);
         // Pass data to the new activity
@@ -65,6 +71,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION); // Play notification sound
         Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), sound);
         r.play();
+
 
         Notification notification = new Notification.Builder(this)
                 .setSmallIcon(iconID)

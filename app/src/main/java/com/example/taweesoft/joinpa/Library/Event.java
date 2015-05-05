@@ -17,6 +17,7 @@ public class Event implements Serializable{
 	private String note;
 	private Date date;
     private String eventID;
+    private int joinedNumber,waitingNumber,declineNumber;
 	
 	public Event(String eventID,Owner owner,Map<User,Integer> invitedList,int iconID,String topic,String note,Date date){
 		this.eventID = eventID;
@@ -26,6 +27,7 @@ public class Event implements Serializable{
 		this.topic = topic;
 		this.note = note;
 		this.date = date;
+        calculateNumber();
 	}
 
     public Event(String eventID,Map<User,Integer> invitedList,int iconID,String topic,String note,Date date){
@@ -35,6 +37,7 @@ public class Event implements Serializable{
         this.topic = topic;
         this.note = note;
         this.date = date;
+        calculateNumber();
     }
 
 	public Map<User,Integer> getInvitedList(){
@@ -108,5 +111,34 @@ public class Event implements Serializable{
 
     public String getTimeStr(){
         return String.format("%02d:%02d",date.getHours(),date.getMinutes());
+    }
+
+    public int getJoinedNumber(){
+        return joinedNumber;
+    }
+
+    public int getWaitingNumber(){
+        return waitingNumber;
+    }
+
+    public int getDeclineNumber(){
+        return declineNumber;
+    }
+
+    public void calculateNumber(){
+        for(Map.Entry<User,Integer> each : invitedList.entrySet()){
+            int status=each.getValue();
+            switch(status){
+                case 0:
+                    waitingNumber++;
+                    break;
+                case 1:
+                    joinedNumber++;
+                    break;
+                case 2:
+                    declineNumber++;
+                    break;
+            }
+        }
     }
 }

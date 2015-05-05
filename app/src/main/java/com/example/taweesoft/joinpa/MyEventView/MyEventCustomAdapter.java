@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.taweesoft.joinpa.Library.Event;
@@ -32,15 +33,25 @@ public class MyEventCustomAdapter extends ArrayAdapter<Event>{
         TextView txt_date = (TextView)view.findViewById(R.id.txt_date);
         TextView txt_time = (TextView)view.findViewById(R.id.txt_time);
         TextView txt_note = (TextView)view.findViewById(R.id.txt_note);
-        TextView txt_joinNumber = (TextView)view.findViewById(R.id.txt_joinNumber);
+        TextView txt_joined = (TextView)view.findViewById(R.id.txt_joined);
+        TextView txt_waiting = (TextView)view.findViewById(R.id.txt_waiting);
+        TextView txt_decline = (TextView)view.findViewById(R.id.txt_decline);
+        LinearLayout layout_note = (LinearLayout)view.findViewById(R.id.layout_note);
+        LinearLayout layout_iconBG = (LinearLayout)view.findViewById(R.id.layout_iconBG);
         ImageView img_iconBig = (ImageView)view.findViewById(R.id.img_iconBig);
-        img_iconBig.setImageResource(Resources.iconForCard.get(event.getIconID()));
+        layout_iconBG.setBackgroundResource(Resources.cardBG.get(event.getIconID()));
+        img_iconBig.setImageResource(Resources.iconsBig.get(event.getIconID()));
         txt_eventName.setText(event.getTopic());
         Date date = event.getDate();
         txt_date.setText(String.format("%02d/%02d/%04d",date.getDate(),date.getMonth(),date.getYear()));
         txt_time.setText(String.format("%02d:%02d", date.getHours(), date.getMinutes()));
-        txt_joinNumber.setText(event.getInvitedList().size()+"");
-        txt_note.setText(event.getNote());
+        txt_joined.setText(event.getJoinedNumber()+"");
+        txt_waiting.setText(event.getWaitingNumber()+"");
+        txt_decline.setText(event.getDeclineNumber()+"");
+        if(event.getNote().equals(""))
+            layout_note.setVisibility(View.GONE);
+        else
+            txt_note.setText(event.getNote());
         return view;
     }
 }
