@@ -15,14 +15,18 @@ import java.util.Observable;
 public class InvitedListModel{
     public static List<Map<User,Integer>> sortedMap(Map<User,Integer> unsortMap){
         List<Map<User,Integer>> sortedListMap = new ArrayList<Map<User,Integer>>();
+        int joinIndex = 0;
         for(Map.Entry<User,Integer> each : unsortMap.entrySet()){
             int status = each.getValue().intValue();
             Map<User,Integer> map = new HashMap<User,Integer>();
             map.put(each.getKey(),each.getValue());
-            int index = 0;
-            if(status == Resources.WAITING)
-                index = sortedListMap.size();
-            sortedListMap.add(index,map);
+            if(status == Resources.JOIN){
+                sortedListMap.add(joinIndex, map);
+                joinIndex++;
+            }else if(status == Resources.WAITING)
+                sortedListMap.add(joinIndex,map);
+            else
+                sortedListMap.add(map);
         }
         return sortedListMap;
     }

@@ -1,5 +1,6 @@
 package com.example.taweesoft.joinpa.MyEventView;
 
+import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;

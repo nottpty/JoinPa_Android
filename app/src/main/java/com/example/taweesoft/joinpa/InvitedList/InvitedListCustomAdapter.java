@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.taweesoft.joinpa.Library.Resources;
@@ -29,26 +30,25 @@ public class InvitedListCustomAdapter extends ArrayAdapter<Map<User,Integer>> {
         Map<User,Integer> map = getItem(position);
         Map.Entry<User,Integer> each = map.entrySet().iterator().next();
         String username = each.getKey().getUsername();
-        Log.d("LLLLL : ", username);
         int status = each.getValue().intValue();
         if(convertView == null)
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.invited_list_view,parent,false);
         TextView txt_username = (TextView)convertView.findViewById(R.id.txt_username);
-        TextView txt_status = (TextView)convertView.findViewById(R.id.txt_status);
+        LinearLayout layout_bg = (LinearLayout)convertView.findViewById(R.id.layout_bg);
         txt_username.setText(username);
-        int color=0;
+        int bg=0;
         switch(status){
             case Resources.JOIN :
-                color = Color.GREEN;
+                bg = R.drawable.invited_list_green;
                 break;
             case Resources.WAITING :
-                color = Color.GRAY;
+                bg = R.drawable.invited_list_yellow;
                 break;
             case Resources.DECLINE :
-                color = Color.RED;
+                bg = R.drawable.invited_list_red;
                 break;
         }
-        txt_status.setBackgroundColor(color);
+        layout_bg.setBackgroundResource(bg);
         return convertView;
     }
 }

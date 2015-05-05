@@ -101,7 +101,8 @@
                     android:text="Join"
                     android:id="@+id/btn_join"
                     android:layout_weight="1"
-                    android:background="#ffffffff" />
+                    android:background="#ffffffff"
+                    android:textColor="#ffffc009" />
 
                 <Button
                     android:layout_width="wrap_content"

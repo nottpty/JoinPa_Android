@@ -9,11 +9,14 @@
 
     <ListView
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/lv_friendsList"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="true"
+        android:choiceMode="multipleChoice"
+        android:clickable="true"
+        android:layout_above="@+id/btn_findFriend" />
 
     <Button
         android:layout_width="wrap_content"
@@ -22,23 +25,20 @@
         android:id="@+id/btn_next"
         android:layout_weight="0"
         android:layout_gravity="center_horizontal"
-        android:layout_alignBottom="@+id/lv_friendsList"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/lv_friendsList"
+        android:layout_alignEnd="@+id/lv_friendsList" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btn_findFriend"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:background="@drawable/button_find_friend"
+        android:layout_alignParentBottom="true"
         android:layout_toStartOf="@+id/btn_next"
-        android:layout_marginRight="129dp"
-        android:layout_marginEnd="129dp"
-        android:layout_alignTop="@+id/lv_friendsList"
-        android:layout_marginTop="429dp"
-        android:layout_toLeftOf="@+id/btn_next" />
+        android:layout_alignTop="@+id/btn_next"
+        android:layout_toLeftOf="@+id/btn_next"
+        android:layout_marginRight="155dp"
+        android:layout_marginEnd="155dp" />
 
 </RelativeLayout>

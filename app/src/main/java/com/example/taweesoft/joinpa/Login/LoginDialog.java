@@ -36,7 +36,8 @@ public class LoginDialog implements Observer {
     private LoginController controller;
     private Activity activity;
     private EditText txt_username,txt_password;
-    private TextView txt_signUp,txt_signIn,txt_msg1,txt_msg2;
+    private TextView txt_msg1,txt_msg2;
+    private Button btn_signIn,btn_signUp;
     private AlertDialog alertDialog;
     private Dialog dialog;
     public LoginDialog(Activity activity){
@@ -52,8 +53,8 @@ public class LoginDialog implements Observer {
         dialog.setContentView(R.layout.activity_login);
         txt_username = (EditText)dialog.findViewById(R.id.txt_username);
         txt_password=  (EditText)dialog.findViewById(R.id.txt_password);
-        txt_signUp = (TextView)dialog.findViewById(R.id.txt_signUp);
-        txt_signIn = (TextView)dialog.findViewById(R.id.txt_signIn);
+        btn_signUp = (Button)dialog.findViewById(R.id.btn_signUp);
+        btn_signIn = (Button)dialog.findViewById(R.id.btn_signIn);
         txt_msg1 = (TextView)dialog.findViewById(R.id.txt_msg1);
         txt_msg2 = (TextView)dialog.findViewById(R.id.txt_msg2);
         LoginModel model = new LoginModel();
@@ -68,11 +69,11 @@ public class LoginDialog implements Observer {
      * Set action for login button.
      */
     public void setLoginAction( View.OnClickListener action){
-        txt_signIn.setOnClickListener(action);
+        btn_signIn.setOnClickListener(action);
     }
 
     public void setSignUpAction (View.OnClickListener action){
-        txt_signUp.setOnClickListener(action);
+        btn_signUp.setOnClickListener(action);
     }
 
 

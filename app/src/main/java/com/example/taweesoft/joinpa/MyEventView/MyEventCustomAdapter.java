@@ -34,7 +34,7 @@ public class MyEventCustomAdapter extends ArrayAdapter<Event>{
         TextView txt_note = (TextView)view.findViewById(R.id.txt_note);
         TextView txt_joinNumber = (TextView)view.findViewById(R.id.txt_joinNumber);
         ImageView img_iconBig = (ImageView)view.findViewById(R.id.img_iconBig);
-        img_iconBig.setImageResource(Resources.iconsBig.get(event.getIconID()));
+        img_iconBig.setImageResource(Resources.iconForCard.get(event.getIconID()));
         txt_eventName.setText(event.getTopic());
         Date date = event.getDate();
         txt_date.setText(String.format("%02d/%02d/%04d",date.getDate(),date.getMonth(),date.getYear()));

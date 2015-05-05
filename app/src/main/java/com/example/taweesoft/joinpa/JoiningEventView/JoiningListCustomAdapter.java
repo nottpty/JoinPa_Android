@@ -64,7 +64,7 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
         btn_invitedList.setOnClickListener(new ShowInvitedListDialog(event));
         btn_decline.setOnClickListener(setYesEventForDeclineConfirm(event));
         txt_topic.setText(event.getTopic());
-        txt_OwnerName.setText(event.getEventOwner().getUsername());
+        txt_OwnerName.setText(event.getEventOwner().getUsername().toUpperCase());
         Date date = event.getDate();
         txt_date.setText(String.format("%02d/%02d/%04d",date.getDate(),date.getMonth(),date.getYear()));
         txt_time.setText(String.format("%02d:%02d",date.getHours(),date.getMinutes()));

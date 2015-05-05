@@ -80,35 +80,30 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0">
+        android:orientation="horizontal"
+        android:weightSum="2">
 
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign In"
-            android:id="@+id/txt_signIn"
-            android:textSize="30dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_weight="0"
-            android:layout_alignParentEnd="false" />
+            android:id="@+id/btn_signIn"
+            android:background="@drawable/button_signin"
+            android:layout_alignBottom="@+id/btn_signUp"
+            android:layout_weight="1" />
 
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign up"
-            android:id="@+id/txt_signUp"
-            android:textSize="30dp"
-            android:layout_weight="0"
+            android:id="@+id/btn_signUp"
+            android:layout_weight="1"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
-    </RelativeLayout>
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/button_signup" />
+    </LinearLayout>
 
 </LinearLayout>

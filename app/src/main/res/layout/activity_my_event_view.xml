@@ -1,118 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.taweesoft.joinpa.MyEventView.MyEventActivity"
-    android:orientation="vertical">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="3"
-        android:background="@drawable/myevent_card"
-        android:gravity="right">
+        android:layout_height="134dp"
+        android:background="@drawable/invited_card"
+        android:weightSum="3">
 
-        <LinearLayout
+        <ImageView
+            android:layout_width="112dp"
+            android:layout_height="match_parent"
+            android:id="@+id/img_iconBig"
+            android:src="@drawable/lunch_big"
+            android:scaleType="fitXY" />
+
+        <RelativeLayout
             android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:id="@+id/img_iconBig"
-                android:src="@drawable/home_big"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp" />
-        </LinearLayout>
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="2">
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:gravity="bottom"
+            android:paddingRight="3dp">
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center"
-                android:gravity="right"
-                android:weightSum="1"
-                android:paddingRight="10dp">
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:orientation="vertical"
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Event Name"
+                    android:id="@+id/txt_eventName"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="2"
+                    android:gravity="bottom|center_horizontal"
+                    android:paddingBottom="5dp"
+                    android:textStyle="bold|italic"
+                    android:textSize="18dp" />
+
+                <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1.00"
-                    android:gravity="center_vertical|bottom"
-                    android:paddingBottom="10dp">
+                    android:layout_height="wrap_content"
+                    android:text="Date"
+                    android:id="@+id/txt_date"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="15dp"
+                    android:textIsSelectable="false" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Event name"
-                        android:id="@+id/txt_eventName"
-                        android:gravity="center_horizontal"
-                        android:textSize="20dp"
-                        android:textStyle="bold|italic" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Date"
-                        android:id="@+id/txt_date"
-                        android:textSize="15dp"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Time"
-                        android:id="@+id/txt_time"
-                        android:textSize="15dp"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Note"
-                        android:id="@+id/txt_note"
-                        android:textSize="15dp"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
+                <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="0.12"
-                    android:paddingTop="3dp">
+                    android:layout_height="wrap_content"
+                    android:text="Time"
+                    android:id="@+id/txt_time"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="15dp"
+                    android:textIsSelectable="false" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="0"
-                        android:id="@+id/txt_joinNumber"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:background="#ffff5f1a"
-                        android:paddingTop="5dp"
-                        android:textColor="#ffffffff"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp" />
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Note"
+                    android:id="@+id/txt_note"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="15dp"
+                    android:textIsSelectable="false" />
+
             </LinearLayout>
-        </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="0"
+                android:id="@+id/txt_joinNumber"
+                android:layout_alignParentRight="true"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:textSize="20dp"
+                android:background="#ffff9700" />
+
+        </RelativeLayout>
 
     </LinearLayout>
-
 </LinearLayout>

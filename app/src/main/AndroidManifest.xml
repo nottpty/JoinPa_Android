@@ -29,19 +29,19 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="News Feed" >
         </activity>
         <activity
             android:name=".MyEventView.MyEventActivity"
-            android:label="@string/title_activity_my_event" >
+            android:label="My events" >
         </activity>
         <activity
             android:name=".CreateEvent.FriendView.FriendListView.FriendListActivity"
-            android:label="@string/title_activity_friend_list" >
+            android:label="Friends list" >
         </activity>
         <activity
             android:name=".CreateEvent.NewEvent.NewEventActivity"
-            android:label="@string/title_activity_new_event" >
+            android:label="Create event" >
         </activity>
 
         <service android:name=".GCMIntentService" />
@@ -63,11 +63,7 @@
         </activity>
         <activity
             android:name=".MyJoinedEvent.MyJoinedEventActivity"
-            android:label="@string/title_activity_my_joined_event" >
-        </activity>
-        <activity
-            android:name=".MainFragment"
-            android:label="@string/title_activity_main_fragment" >
+            android:label="Recent" >
         </activity>
     </application>
 

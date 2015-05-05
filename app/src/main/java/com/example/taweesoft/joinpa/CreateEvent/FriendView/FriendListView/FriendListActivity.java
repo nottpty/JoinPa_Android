@@ -48,6 +48,7 @@ public class FriendListActivity extends ActionBarActivity implements Observer {
      */
     public void initComponent(){
         lv_friendsList = (ListView)findViewById(R.id.lv_friendsList);
+        lv_friendsList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         btn_next = (Button)findViewById(R.id.btn_next);
         btn_findFriend = (Button)findViewById(R.id.btn_findFriend);
     }

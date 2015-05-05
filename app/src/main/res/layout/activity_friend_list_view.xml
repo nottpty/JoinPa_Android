@@ -7,23 +7,72 @@
     tools:context="com.example.taweesoft.joinpa.MyFriendListView"
     android:orientation="vertical">
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="115dp"
-        android:background="@drawable/friend_card"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/layout_name">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Friend name"
-            android:id="@+id/txt_friendName"
-            android:textSize="35dp"
-            android:layout_gravity="center"
-            android:gravity="center_vertical"
-            android:paddingTop="40dp" />
-    </FrameLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/invited_card"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/layout_name"
+                android:weightSum="4"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:background="@drawable/friend_bg"
+                    android:layout_weight="3.20">
+
+                    <ImageView
+                        android:layout_width="72dp"
+                        android:layout_height="72dp"
+                        android:id="@+id/imageView"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/friend_icon" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cb_check"
+                        android:layout_centerVertical="true"
+                        android:checked="false" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Friend name"
+                        android:id="@+id/txt_friendName"
+                        android:textSize="20dp"
+                        android:gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true" />
+                </RelativeLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

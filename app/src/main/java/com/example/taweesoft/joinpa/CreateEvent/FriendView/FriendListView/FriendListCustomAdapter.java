@@ -19,6 +19,7 @@ import com.example.taweesoft.joinpa.Library.Friend;
 import com.example.taweesoft.joinpa.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -30,45 +31,45 @@ public class FriendListCustomAdapter extends ArrayAdapter<Friend>{
     private AdapterObservable observable;
     private List<Friend> selectedFriend = new ArrayList<Friend>();
     private List<Friend> friendList;
-    private FrameLayout layout_name;
+    private boolean[] isCheckedState;
+
     public FriendListCustomAdapter(Context context,List<Friend> friendList){
         super(context,0,friendList);
         observable = new AdapterObservable();
         observable.addObserver((Observer)context);
         this.friendList = friendList;
+        isCheckedState = new boolean[friendList.size()];
     }
+    public View getView(int position, View view, ViewGroup parent){
 
-    public View getView(final int position, View view, ViewGroup parent){
         Friend friend = getItem(position);
-        if(view == null)
-            view = LayoutInflater.from(getContext()).inflate(R.layout.activity_friend_list_view,parent,false);
+        view = LayoutInflater.from(getContext()).inflate(R.layout.activity_friend_list_view,null);
         TextView txt_friendName = (TextView)view.findViewById(R.id.txt_friendName);
-        layout_name = (FrameLayout)view.findViewById(R.id.layout_name);
+        CheckBox cb_check = (CheckBox)view.findViewById(R.id.cb_check);
+        SelectFriendEvent event = new SelectFriendEvent(friend,position);
+        cb_check.setOnClickListener(event);
+        cb_check.setChecked(isCheckedState[position]);
         txt_friendName.setText(friend.getUsername());
-        final SelectFriendEvent event = new SelectFriendEvent(friend,layout_name);
-        view.setOnClickListener(event);
+
         return view;
     }
-
     class SelectFriendEvent implements View.OnClickListener{
-        private Boolean isCheck = false;
         private Friend friend;
-        private final FrameLayout layout;
-        public SelectFriendEvent(Friend friend, FrameLayout layout){
+        private int position;
+        public SelectFriendEvent(Friend friend,int position){
             this.friend = friend;
-            this.layout = layout;
+            this.position = position;
         }
-        public void onClick(View v){
-            if(!isCheck){
+        @Override
+        public void onClick(View v) {
+            boolean checked = !isCheckedState[position];
+            isCheckedState[position] = checked;
+            if(checked)
                 selectedFriend.add(friend);
-                layout.setBackgroundResource(R.drawable.friend_card_clicked);
-            }else{
+            else
                 selectedFriend.remove(friend);
-                layout.setBackgroundResource(R.drawable.friend_card);
-            }
             observable.setChanged();
             observable.notifyObservers(selectedFriend);
-            isCheck = !isCheck;
         }
     }
 
@@ -77,5 +78,4 @@ public class FriendListCustomAdapter extends ArrayAdapter<Friend>{
             super.setChanged();
         }
     }
-
 }
