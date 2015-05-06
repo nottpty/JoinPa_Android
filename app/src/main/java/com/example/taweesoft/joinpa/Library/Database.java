@@ -405,4 +405,28 @@ public class Database {
             connect.disconnect();
         }catch(IOException e){ e.printStackTrace();}
     }
+
+    public static void addFriendToWaitingList(Friend friend){
+        HttpURLConnection connect = getConnection(String.format("INSERT INTO tb_waitingFriendList VALUES (\'%s\',\'%s\')",friend.getUsername(),Resources.owner.getUsername()));
+        try{
+            Scanner scan = new Scanner(connect.getInputStream());
+            while(scan.hasNext()) scan.next();
+            scan.close();
+            connect.disconnect();
+        }catch(IOException e){ e.printStackTrace(); }
+    }
+
+//    public static List<Friend> getWaitingFriendList(Owner owner){
+//        HttpURLConnection connect = getConnection(String.format("SELECT FriendName FROM tb_waitingFriendList WHERE Username=\'%s\'",owner.getUsername()));
+//        List<String> waitingListName = new ArrayList<String>();
+//        try{
+//            Scanner scan = new Scanner(connect.getInputStream());
+//            scan.next();
+//            while(scan.hasNext()) waitingListName.add(scan.next());
+//            scan.close();
+//            connect.disconnect();
+//        }catch(IOException e){ e.printStackTrace(); }
+//
+//        connect = getConnection(String.format("SELECT Username,NotiKey FROM tb_login WHERE User"))
+//    }
 }

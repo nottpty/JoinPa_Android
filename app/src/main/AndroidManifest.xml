@@ -65,6 +65,10 @@
             android:name=".MyJoinedEvent.MyJoinedEventActivity"
             android:label="Recent" >
         </activity>
+        <activity
+            android:name=".friend_waiting_list"
+            android:label="@string/title_activity_friend_waiting_list" >
+        </activity>
     </application>
 
 </manifest>

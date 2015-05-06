@@ -44,7 +44,7 @@ public class LoginModel extends Observable {
                 setChanged();
                 Log.d("IIIIII : ", Resources.isIllegalText(username,password)+"");
                 if(Resources.isIllegalText(username, password))
-                    notifyObservers("1@@Illegal character");
+                    notifyObservers("1@@Invalid character");
                 else if(Database.checkExistUsername(username))
                     notifyObservers("2@@Username already exist");
                 else{

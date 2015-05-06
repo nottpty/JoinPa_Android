@@ -23,6 +23,7 @@ public class FoundState implements AddState{
             protected Void doInBackground(Void... params) {
                 Resources.owner.addFriend(friend);
                 Database.addFriend(friend);
+                Database.addFriendToWaitingList(friend);
                 view.getController().setState(view.notFoundState);
                 return null;
             }
