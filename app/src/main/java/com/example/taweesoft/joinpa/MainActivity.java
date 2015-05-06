@@ -44,7 +44,7 @@ public class MainActivity extends ActionBarActivity implements Observer{
         initComponents();
         initMyEventList();
         initButton();
-        updateInBackground();
+//        updateInBackground();
     }
 
     /**

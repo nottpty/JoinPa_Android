@@ -3,7 +3,9 @@ package com.example.taweesoft.joinpa.Library;
 import android.os.Environment;
 import android.util.Log;
 
+import com.example.taweesoft.joinpa.GCMIntentService;
 import com.example.taweesoft.joinpa.R;
+import com.google.android.gcm.GCMRegistrar;
 
 import java.io.File;
 import java.util.ArrayList;

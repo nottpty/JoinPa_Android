@@ -40,7 +40,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 
     @Override
     protected void onUnregistered(Context context, String registrationId) {
-
+        Resources.deviceID = registrationId;
     }
 
     @Override
