@@ -61,7 +61,7 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
         LinearLayout layout_iconBG = (LinearLayout)view.findViewById(R.id.layout_iconBG);
         LinearLayout layout_note = (LinearLayout)view.findViewById(R.id.layout_note);
         ImageView img_iconBig = (ImageView)view.findViewById(R.id.img_iconBig);
-        img_iconBig.setImageResource(Resources.iconsBig.get(event.getIconID()));
+        img_iconBig.setImageResource(Resources.icons.get(event.getIconID()));
         layout_iconBG.setBackgroundResource(Resources.cardBG.get(event.getIconID()));
 
         btn_join.setOnClickListener(setYesEventForJoinConfirm(event));

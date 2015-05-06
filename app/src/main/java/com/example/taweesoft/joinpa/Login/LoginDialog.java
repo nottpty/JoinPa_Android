@@ -87,7 +87,7 @@ public class LoginDialog implements Observer {
 
 
     public String getUsername(){
-        return txt_username.getText().toString();
+        return txt_username.getText().toString().toLowerCase();
     }
 
     public String getPassword(){

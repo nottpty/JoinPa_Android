@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -34,7 +35,6 @@ public class FindFriendDialog implements Observer{
     private EditText txt_username;
     private TextView txt_tapToAdd;
     private Button btn_find;
-    private RelativeLayout layout_friendName;
     private Finder finder;
     private Friend friend;
     private FindFriendController controller;
@@ -53,12 +53,12 @@ public class FindFriendDialog implements Observer{
     public void openDialog(){
         Dialog dialog = new Dialog(context);
         dialog.setTitle("Find friend");
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); //Hide the action bar.
         dialog.setContentView(R.layout.activity_find_friend);
         txt_username = (EditText)dialog.findViewById(R.id.txt_username);
         btn_find = (Button)dialog.findViewById(R.id.btn_find);
         btn_find.setOnClickListener(new FindEvent());
-        layout_friendName = (RelativeLayout)dialog.findViewById(R.id.layout_friendName);
-        layout_friendName.setOnClickListener(new AddFriendAction());
+        txt_username.setOnClickListener(new AddFriendAction());
 
         txt_tapToAdd = (TextView)dialog.findViewById(R.id.txt_tapToAdd);
 
@@ -69,7 +69,7 @@ public class FindFriendDialog implements Observer{
     public void update(Observable observable, Object data) {
         if(((Object)observable).getClass() == DatabaseFinder.class){
             if(data == null) {
-                layout_friendName.setBackgroundColor(0xffff4d32);
+                txt_username.setBackgroundColor(0xffff4d32);
                 controller.setState(notFoundState);
                 txt_tapToAdd.setVisibility(View.INVISIBLE);
                 return;
@@ -84,11 +84,11 @@ public class FindFriendDialog implements Observer{
         }
         friend = (Friend)data;
         if(!controller.isAlreadyAdd(friend)){
-            layout_friendName.setBackgroundColor(0xff88ff47);
+            txt_username.setBackgroundColor(0xff88ff47);
             txt_tapToAdd.setText("Tap to add   ");
             controller.setState(foundState);
         }else{
-            layout_friendName.setBackgroundColor(0xfffdff34);
+            txt_username.setBackgroundColor(0xfffdff34);
             txt_tapToAdd.setText("Already friend with you   ");
         }
         txt_tapToAdd.setVisibility(View.VISIBLE);

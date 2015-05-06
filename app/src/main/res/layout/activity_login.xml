@@ -4,81 +4,107 @@
     android:orientation="vertical"
     android:weightSum="1">
 
-    <RelativeLayout
+    <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="#ff5fff8f"
-        android:gravity="center_vertical"
-        android:layout_weight="0">
+        android:id="@+id/linearLayout2"
+        android:paddingTop="3dp"
+        android:paddingLeft="3dp"
+        android:padding="3dp"
+        android:background="#ffc0ff16">
 
-        <EditText
-            android:layout_width="fill_parent"
+        <ImageView
+            android:layout_width="60dp"
             android:layout_height="60dp"
-            android:id="@+id/txt_username"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:textSize="35dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:singleLine="true"
-            android:hint="USERNAME"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:id="@+id/imageView15"
+            android:src="@drawable/username_icon" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Message"
-            android:id="@+id/txt_msg1"
-            android:layout_weight="1"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:visibility="invisible"
-            android:textColor="#ffff0c1a"
-            android:layout_alignBottom="@+id/txt_username"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <RelativeLayout
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:id="@+id/txt_username"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:textSize="30dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:singleLine="true"
+                android:hint="USERNAME"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Message"
+                android:id="@+id/txt_msg1"
+                android:layout_weight="1"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:visibility="invisible"
+                android:textColor="#ffff0c1a"
+                android:layout_below="@+id/linearLayout2"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="#ff8affd1"
-        android:layout_weight="0"
-        android:gravity="center_vertical">
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:padding="3dp"
+        android:background="#ffffb5ab">
 
-        <EditText
-            android:layout_width="fill_parent"
+        <ImageView
+            android:layout_width="60dp"
             android:layout_height="60dp"
-            android:id="@+id/txt_password"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:textSize="35dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:password="true"
-            android:singleLine="true"
-            android:hint="PASSWORD"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:id="@+id/imageView16"
+            android:src="@drawable/password_icon" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Message"
-            android:id="@+id/txt_msg2"
-            android:layout_weight="1"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:visibility="invisible"
-            android:textColor="#ffff0c1a"
-            android:layout_alignBottom="@+id/txt_password"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
 
-    </RelativeLayout>
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:id="@+id/txt_password"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:textSize="30dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:password="true"
+                android:singleLine="true"
+                android:hint="PASSWORD"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Message"
+                android:id="@+id/txt_msg2"
+                android:layout_weight="1"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:visibility="invisible"
+                android:textColor="#ffff0c1a"
+                android:layout_alignBottom="@+id/txt_password"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"

@@ -52,7 +52,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         int iconID = R.drawable.a1;
         if(message.contains("@@")){
             String[] msgArr = message.split("@@");
-            iconID = Resources.iconsBig.get(Integer.parseInt(msgArr[0]));
+            iconID = Resources.icons.get(Integer.parseInt(msgArr[0]));
             message = msgArr[1];
             Log.d("OOO : " , message);
             Resources.isNewData = true;

@@ -40,7 +40,7 @@ public class MyEventCustomAdapter extends ArrayAdapter<Event>{
         LinearLayout layout_iconBG = (LinearLayout)view.findViewById(R.id.layout_iconBG);
         ImageView img_iconBig = (ImageView)view.findViewById(R.id.img_iconBig);
         layout_iconBG.setBackgroundResource(Resources.cardBG.get(event.getIconID()));
-        img_iconBig.setImageResource(Resources.iconsBig.get(event.getIconID()));
+        img_iconBig.setImageResource(Resources.icons.get(event.getIconID()));
         txt_eventName.setText(event.getTopic());
         Date date = event.getDate();
         txt_date.setText(String.format("%02d/%02d/%04d",date.getDate(),date.getMonth(),date.getYear()));

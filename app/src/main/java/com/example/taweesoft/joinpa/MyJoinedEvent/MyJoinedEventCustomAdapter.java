@@ -93,7 +93,7 @@ public class MyJoinedEventCustomAdapter extends BaseExpandableListAdapter{
         txt_ownerName.setText(event.getEventOwner().getUsername());
         txt_date.setText(event.getDateStr());
         txt_time.setText(event.getTimeStr());
-        img_iconBig.setImageResource(Resources.iconsBig.get(event.getIconID()));
+        img_iconBig.setImageResource(Resources.icons.get(event.getIconID()));
         return convertView;
     }
 

@@ -1,6 +1,7 @@
 package com.example.taweesoft.joinpa.Login;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.taweesoft.joinpa.Library.Database;
 import com.example.taweesoft.joinpa.Library.Owner;
@@ -41,8 +42,9 @@ public class LoginModel extends Observable {
             @Override
             protected Void doInBackground(Void... params) {
                 setChanged();
+                Log.d("IIIIII : ", Resources.isIllegalText(username,password)+"");
                 if(Resources.isIllegalText(username, password))
-                    notifyObservers("1@@Username or password has illegal character");
+                    notifyObservers("1@@Illegal character");
                 else if(Database.checkExistUsername(username))
                     notifyObservers("2@@Username already exist");
                 else{
