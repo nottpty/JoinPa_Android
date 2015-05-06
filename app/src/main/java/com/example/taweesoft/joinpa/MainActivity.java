@@ -238,9 +238,7 @@ public class MainActivity extends ActionBarActivity implements Observer{
     class UpdateJoiningEventListView extends AsyncTask<Void, Void, Void>{
         @Override
         protected Void doInBackground(Void... params) {
-            Log.d("XXXXX1 : " , Resources.owner.getJoiningEvents().size()+"");
             Resources.owner.setJoiningEvents(Database.myJoiningEvents(Resources.owner,Resources.WAITING));
-            Log.d("XXXXX2 : " , Resources.owner.getJoiningEvents().size()+"");
             return null;
         }
 

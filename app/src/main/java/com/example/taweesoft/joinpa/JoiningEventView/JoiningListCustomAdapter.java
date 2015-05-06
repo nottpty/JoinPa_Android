@@ -58,6 +58,9 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
         TextView btn_join = (TextView)view.findViewById(R.id.btn_join);
         TextView btn_invitedList = (TextView)view.findViewById(R.id.btn_invitedList);
         TextView btn_decline = (TextView)view.findViewById(R.id.btn_decline);
+        TextView txt_join = (TextView)view.findViewById(R.id.txt_join);
+        TextView txt_waiting = (TextView)view.findViewById(R.id.txt_waiting);
+        TextView txt_decline = (TextView)view.findViewById(R.id.txt_decline);
         LinearLayout layout_iconBG = (LinearLayout)view.findViewById(R.id.layout_iconBG);
         LinearLayout layout_note = (LinearLayout)view.findViewById(R.id.layout_note);
         ImageView img_iconBig = (ImageView)view.findViewById(R.id.img_iconBig);
@@ -72,6 +75,9 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
         Date date = event.getDate();
         txt_date.setText(String.format("%02d/%02d/%04d",date.getDate(),date.getMonth(),date.getYear()));
         txt_time.setText(String.format("%02d:%02d",date.getHours(),date.getMinutes()));
+        txt_join.setText(event.getJoinedNumber()+"");
+        txt_waiting.setText(event.getWaitingNumber()+"");
+        txt_decline.setText(event.getDeclineNumber()+"");
         if(event.getNote().equals(""))
             layout_note.setVisibility(View.GONE);
         else

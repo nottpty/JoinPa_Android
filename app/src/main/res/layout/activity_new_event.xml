@@ -146,8 +146,8 @@
     </LinearLayout>
 
     <Button
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
         android:id="@+id/btn_create"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/plus_icon"
