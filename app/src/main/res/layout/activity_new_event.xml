@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.taweesoft.joinpa.CreateEvent.NewEvent.NewEventActivity"
+    tools:context="com.joinpa.taweesoft.joinpa.CreateEvent.NewEvent.NewEventActivity"
     android:orientation="vertical"
     android:paddingBottom="5dp">
 

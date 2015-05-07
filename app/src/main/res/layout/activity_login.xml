@@ -68,7 +68,6 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:visibility="invisible"
                 android:textColor="#ffff0c1a"
-                android:layout_below="@+id/linearLayout2"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true" />
