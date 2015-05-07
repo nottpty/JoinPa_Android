@@ -10,14 +10,19 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * Created by taweesoft on 30/4/2558.
+ * Find friend on database. (For high accuracy).
+ * Created on 30/4/2558.
  */
 public class DatabaseFinder extends Observable implements Finder{
 
     public DatabaseFinder(Observer dialog){
         addObserver(dialog);
-    }
+    } // Observer = FindFriendDialog
 
+    /**
+     * Find friend on database.
+     * @param username
+     */
     @Override
     public void find(final String username) {
         AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {

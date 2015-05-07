@@ -13,20 +13,31 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by taweesoft on 2/5/2558.
+ * Invited list dialog.
  */
 public class InvitedListDialog{
     private Context context;
     private Event event;
     private ListView lv_invitedList;
     private InvitedListController controller;
+
+    /**
+     * Constructor.
+     * @param context
+     * @param event
+     */
     public InvitedListDialog(Context context,Event event){
         this.context = context;
         this.event = event;
+
+        /*Create model and controller.*/
         InvitedListModel model = new InvitedListModel();
         controller = new InvitedListController(this,model);
     }
 
+    /**
+     * Open invited list dialog.
+     */
     public void openDialog(){
         Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); //Hide the action bar.

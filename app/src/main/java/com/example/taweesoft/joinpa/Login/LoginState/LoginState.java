@@ -7,7 +7,7 @@ import com.example.taweesoft.joinpa.FirstActivity;
 import com.example.taweesoft.joinpa.Login.LoginDialog;
 
 /**
- * Created by taweesoft on 27/4/2558.
+ * Login state (Interface)
  */
 public interface LoginState {
     void performed(Activity firstActivity);

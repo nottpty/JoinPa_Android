@@ -49,7 +49,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         // Message from PHP server
         message = data.getStringExtra("message");
 
-        int iconID = R.drawable.a1;
+        int iconID = R.drawable.noti_icon;
         if(message.contains("@@")){
             String[] msgArr = message.split("@@");
             iconID = Resources.icons.get(Integer.parseInt(msgArr[0]));

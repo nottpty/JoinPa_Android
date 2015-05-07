@@ -20,10 +20,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * My joined event activity.
+ */
 public class MyJoinedEventActivity extends ActionBarActivity {
     private ExpandableListView ep_lv_myJoinedEvent;
     private ProgressBar pbg_loading;
+
+    /**
+     * On create the activity.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +49,9 @@ public class MyJoinedEventActivity extends ActionBarActivity {
         task.execute();
     }
 
+    /**
+     * Set view of expandable list view.
+     */
     public void setExpandableListView(){
         List<JoiningEvent> joinedEvent = Resources.owner.getJoinedEvent();
         List<List<Map<User,Integer>>> allInvitedList = new ArrayList<List<Map<User,Integer>>>();
@@ -75,7 +85,13 @@ public class MyJoinedEventActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Check for data is ready.
+     */
     class CheckLoading extends AsyncTask<Void,Void,Void>{
+        /**
+         * Show the progress bar.
+         */
         @Override
         protected void onPreExecute() {
             pbg_loading.setVisibility(View.VISIBLE);
@@ -83,10 +99,15 @@ public class MyJoinedEventActivity extends ActionBarActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
+            /*Run the progress bar until the data is ready.*/
             while(!Resources.owner.isLoadMyJoinedFinish()){}
             return null;
         }
 
+        /**
+         * Hide progress bar.
+         * @param aVoid
+         */
         @Override
         protected void onPostExecute(Void aVoid) {
             pbg_loading.setVisibility(View.INVISIBLE);

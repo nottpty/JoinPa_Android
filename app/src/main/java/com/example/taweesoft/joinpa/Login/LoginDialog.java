@@ -22,7 +22,6 @@ import com.example.taweesoft.joinpa.Login.LoginState.LoginState;
 import com.example.taweesoft.joinpa.Login.LoginState.SuccessState;
 import com.example.taweesoft.joinpa.GCMIntentService;
 import com.example.taweesoft.joinpa.R;
-import com.example.taweesoft.joinpa.Register.RegisterDialogController;
 import com.google.android.gcm.GCMRegistrar;
 
 import java.util.Observable;
@@ -149,6 +148,11 @@ public class LoginDialog implements Observer {
 
     }
 
+    /**
+     * Show message on username password TextView.
+     * @param message
+     * @param respondCode
+     */
     public void showMessage(String message,int respondCode){
         txt_msg1.setText(message);
         txt_msg2.setText(message);
@@ -167,14 +171,26 @@ public class LoginDialog implements Observer {
 
     }
 
+    /**
+     * Return AlertDialog
+     * @return
+     */
     public AlertDialog getAlertDialog(){
         return alertDialog;
     }
 
+    /**
+     * Return Activity.
+     * @return
+     */
     public Activity getActivity(){
         return activity;
     }
 
+    /**
+     * Return controller.
+     * @return
+     */
     public LoginController getController(){
         return controller;
     }

@@ -6,7 +6,6 @@ import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,18 +13,16 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.taweesoft.joinpa.CreateEvent.FriendView.FriendListView.FriendListActivity;
-import com.example.taweesoft.joinpa.FindFriend.FindFriendDialog;
+import com.example.taweesoft.joinpa.FriendRequest.FriendRequestActivity;
 import com.example.taweesoft.joinpa.Library.Database;
 import com.example.taweesoft.joinpa.Library.JoiningEvent;
 import com.example.taweesoft.joinpa.JoiningEventView.JoiningListCustomAdapter;
-import com.example.taweesoft.joinpa.Library.Owner;
 import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.Logout.LogoutDialog;
 import com.example.taweesoft.joinpa.MyEventView.MyEventActivity;
 import com.example.taweesoft.joinpa.MyJoinedEvent.MyJoinedEventActivity;
 import com.example.taweesoft.joinpa.Notification.NotifyOwner;
 
-import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -210,12 +207,15 @@ public class MainActivity extends ActionBarActivity implements Observer{
         }else if( id == R.id.action_refresh){
             updateListView();
         }else if( id == R.id.action_notification){
-            Intent intent = new Intent(this,WaitingFriendListActivity.class);
+            Intent intent = new Intent(this,FriendRequestActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Check for notification key.
+     */
     public void checkNotiKey(){
         CheckExistNotiKey task = new CheckExistNotiKey();
         task.execute();
@@ -232,7 +232,9 @@ public class MainActivity extends ActionBarActivity implements Observer{
         }
     }
 
-
+    /**
+     * Update view of joining event view.
+     */
     class UpdateJoiningEventListView extends AsyncTask<Void, Void, Void>{
         @Override
         protected Void doInBackground(Void... params) {
@@ -256,6 +258,9 @@ public class MainActivity extends ActionBarActivity implements Observer{
         task.execute();
     }
 
+    /**
+     * Auto refresh on joining event.
+     */
     public void updateInBackground(){
         Runnable runnable = new Runnable(){
             @Override

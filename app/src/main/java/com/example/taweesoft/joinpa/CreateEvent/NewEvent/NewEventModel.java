@@ -12,7 +12,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * Created by taweesoft on 29/4/2558.
+ * New event model.
+ * Created on 29/4/2558.
  */
 public class NewEventModel extends Observable implements Serializable,Observer{
     private Date date = null;
@@ -21,6 +22,9 @@ public class NewEventModel extends Observable implements Serializable,Observer{
     private String eventName;
     private String note;
 
+    /**
+     * Constructor. set initial date to current.
+     */
     public NewEventModel(){
         date = new Date();
         date.setMonth(date.getMonth()+1);
@@ -28,6 +32,10 @@ public class NewEventModel extends Observable implements Serializable,Observer{
 
     }
 
+    /**
+     * Set date with new data.
+     * @param dateArr
+     */
     public void setDate(int[] dateArr){
         int day = dateArr[0];
         int month = dateArr[1]+1;
@@ -37,6 +45,10 @@ public class NewEventModel extends Observable implements Serializable,Observer{
         date.setYear(year);
     }
 
+    /**
+     * Set time with new data.
+     * @param timeArr
+     */
     public void setTime(int[] timeArr){
         int hour = timeArr[0];
         int minute = timeArr[1];
@@ -44,6 +56,11 @@ public class NewEventModel extends Observable implements Serializable,Observer{
         date.setMinutes(minute);
     }
 
+    /**
+     * Update method of observer. called from DatePicker and TimePicker.
+     * @param observable
+     * @param obj
+     */
     public void update(Observable observable, Object obj){
         if(obj == null) return;
         int[] dataArr = (int[])obj;
@@ -57,6 +74,10 @@ public class NewEventModel extends Observable implements Serializable,Observer{
         notifyObservers(date);
     }
 
+    /**
+     * Get date and time.
+     * @return
+     */
     public Date getDateAndTime(){
         return date;
     }

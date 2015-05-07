@@ -13,10 +13,17 @@ import java.util.Calendar;
 import java.util.Observer;
 
 /**
+ * Data picker for pick the date.
  * Created by taweesoft on 29/4/2558.
  */
 public class DatePicker extends DialogFragment implements DatePickerDialog.OnDateSetListener {
     private Observable observable;
+
+    /**
+     * Show date picker dialog.
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         observable = new Observable();
@@ -32,6 +39,13 @@ public class DatePicker extends DialogFragment implements DatePickerDialog.OnDat
         return new DatePickerDialog(getActivity(), this, year, month, day);
     }
 
+    /**
+     * Notify observer when data has been set. (Observer == NewEventModel)
+     * @param view
+     * @param year
+     * @param monthOfYear
+     * @param dayOfMonth
+     */
     @Override
     public void onDateSet(android.widget.DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         observable.setChanged();

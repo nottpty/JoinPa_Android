@@ -15,9 +15,16 @@ import java.util.Observable;
  * Login model.
  */
 public class LoginModel extends Observable {
+    /*Observer is LoginDialog*/
+
     private Owner owner=null;
     private LoginState state;
 
+    /**
+     * Sign in.
+     * @param username
+     * @param password
+     */
     public void doSignIn(final String username,final String password){
         AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
 
@@ -37,12 +44,16 @@ public class LoginModel extends Observable {
         task.execute();
     }
 
+    /**
+     * Sign up.
+     * @param username
+     * @param password
+     */
     public void doSignUp(final String username, final String password){
         AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
                 setChanged();
-                Log.d("IIIIII : ", Resources.isIllegalText(username,password)+"");
                 if(Resources.isIllegalText(username, password))
                     notifyObservers("1@@Invalid character");
                 else if(Database.checkExistUsername(username))

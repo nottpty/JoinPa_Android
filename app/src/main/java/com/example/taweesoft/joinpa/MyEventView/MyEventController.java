@@ -10,18 +10,26 @@ import com.example.taweesoft.joinpa.Library.Resources;
 import java.util.List;
 
 /**
- * Created by taweesoft on 3/5/2558.
+ * My event controller.
  */
 public class MyEventController {
     private MyEventActivity view;
     private MyEventModel model;
 
+    /**
+     * Constructor.
+     * @param view
+     * @param model
+     */
     public MyEventController(MyEventActivity view, MyEventModel model){
         this.view = view;
         this.model = model;
         model.addObserver(view);
     }
 
+    /**
+     * View my invited list on each event.
+     */
     class ViewInvitedListAction implements AdapterView.OnItemClickListener{
         @Override
         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -31,12 +39,18 @@ public class MyEventController {
         }
     }
 
+    /**
+     * Set list view adapter to show each event.
+     */
     public void setListViewAdapter(){
         List<Event> myEventList = Resources.owner.getEventList();
         MyEventCustomAdapter adapter = new MyEventCustomAdapter(view,myEventList);
         view.setLisViewAdapter(adapter);
     }
 
+    /**
+     * Set list view click action.
+     */
     public void setListViewClickAction(){
         view.setListViewClickAction(new ViewInvitedListAction());
     }

@@ -12,10 +12,17 @@ import java.util.Calendar;
 import java.util.Observer;
 
 /**
- * Created by taweesoft on 30/4/2558.
+ * Time picker.
+ * Created on 30/4/2558.
  */
 public class TimePicker extends DialogFragment implements TimePickerDialog.OnTimeSetListener{
     private Observable observable;
+
+    /**
+     * Create time picker dialog.
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         observable = new Observable();
@@ -28,6 +35,12 @@ public class TimePicker extends DialogFragment implements TimePickerDialog.OnTim
         return new TimePickerDialog(getActivity(),this,hour,minute,true);
     }
 
+    /**
+     * Notify observer when time is changed or set. (Observer == NewEventModel)
+     * @param timerPicker
+     * @param hour
+     * @param minute
+     */
     public void onTimeSet(android.widget.TimePicker timerPicker,int hour, int minute){
         observable.setChanged();
         int[] dateArr = new int[]{hour,minute};

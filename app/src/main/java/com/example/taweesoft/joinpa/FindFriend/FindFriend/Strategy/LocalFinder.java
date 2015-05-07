@@ -10,14 +10,19 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * Created by taweesoft on 30/4/2558.
+ * Find friend in local data. (For high performance)
+ * Created on 30/4/2558.
  */
 public class LocalFinder extends Observable implements Finder {
 
     public LocalFinder(Observer dialog){
         addObserver(dialog);
-    }
+    } //(Observer = FindFriendDialog)
 
+    /**
+     * Find in local resource.
+     * @param username
+     */
     @Override
     public void find(String username) {
         Map<String,Friend> allUser = Database.allUser;

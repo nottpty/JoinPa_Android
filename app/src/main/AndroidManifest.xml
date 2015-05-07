@@ -66,7 +66,7 @@
             android:label="Recent" >
         </activity>
         <activity
-            android:name=".WaitingFriendListActivity"
+            android:name=".FriendRequest.FriendRequestActivity"
             android:label="Friends request" >
         </activity>
     </application>

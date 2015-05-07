@@ -10,9 +10,18 @@ import java.util.Map;
 import java.util.Observable;
 
 /**
- * Created by taweesoft on 3/5/2558.
+ * Invited list model.
  */
 public class InvitedListModel{
+
+    /**
+     * Sort map by
+     * First priority = JOINED.
+     * Second priority = WAITING.
+     * Third priority = DECLINE.
+     * @param unsortMap
+     * @return
+     */
     public static List<Map<User,Integer>> sortedMap(Map<User,Integer> unsortMap){
         List<Map<User,Integer>> sortedListMap = new ArrayList<Map<User,Integer>>();
         int joinIndex = 0;

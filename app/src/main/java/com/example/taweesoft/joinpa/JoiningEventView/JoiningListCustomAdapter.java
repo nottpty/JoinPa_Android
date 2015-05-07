@@ -31,22 +31,37 @@ import java.util.Map;
 import java.util.Observer;
 
 /**
- * Created by taweesoft on 27/4/2558.
+ * Joining list custom view.
+ * Created on 27/4/2558.
  */
 public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
     private final int JOIN = 1;
     private final int DECLINE = 2;
     private Observable observable;
     private List<JoiningEvent> joiningList;
+
+    /**
+     * Constructor.
+     * @param context
+     * @param joiningEventList
+     */
     public JoiningListCustomAdapter(Context context,List<JoiningEvent> joiningEventList){
         super(context,0,joiningEventList);
         observable = new Observable();
         observable.addObserver((Observer)context);
     }
 
+    /**
+     * Show joining list card of each event.
+     * @param position
+     * @param view
+     * @param parent
+     * @return
+     */
     public View getView(int position, View view, ViewGroup parent){
         JoiningEvent event = getItem(position);
 
+        /*Initialize components.*/
         if(view == null)
             view = LayoutInflater.from(getContext()).inflate(R.layout.activity_joining_event_view,parent,false);
 
@@ -64,9 +79,10 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
         LinearLayout layout_iconBG = (LinearLayout)view.findViewById(R.id.layout_iconBG);
         LinearLayout layout_note = (LinearLayout)view.findViewById(R.id.layout_note);
         ImageView img_iconBig = (ImageView)view.findViewById(R.id.img_iconBig);
+
+        /*Initialize data to components.*/
         img_iconBig.setImageResource(Resources.icons.get(event.getIconID()));
         layout_iconBG.setBackgroundResource(Resources.cardBG.get(event.getIconID()));
-
         btn_join.setOnClickListener(setYesEventForJoinConfirm(event));
         btn_invitedList.setOnClickListener(new ShowInvitedListDialog(event));
         btn_decline.setOnClickListener(setYesEventForDeclineConfirm(event));
@@ -85,6 +101,11 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
         return view;
     }
 
+    /**
+     * Confirm to join this event (action).
+     * @param event
+     * @return
+     */
     public View.OnClickListener setYesEventForJoinConfirm(JoiningEvent event){
         String message = String.format("Join to \'%s\'\nBy %s",event.getTopic(),event.getEventOwner().getUsername());
         JoinEventAction joinAction = new JoinEventAction(event,JOIN);
@@ -92,12 +113,21 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
         return joinConfirm;
     }
 
+    /**
+     * Decline this event (action).
+     * @param event
+     * @return
+     */
     public View.OnClickListener setYesEventForDeclineConfirm(JoiningEvent event){
         String message = String.format("Decline the \'%s\' event\nBy %s",event.getTopic(),event.getEventOwner().getUsername());
         JoinEventAction declineAction = new JoinEventAction(event,DECLINE);
         ShowComfirmDialog declineConfirm = new ShowComfirmDialog(event,message,declineAction);
         return declineConfirm;
     }
+
+    /**
+     * Join event action.
+     */
     class JoinEventAction implements DialogInterface.OnClickListener{
         private JoiningEvent event;
         private int status;
@@ -106,6 +136,11 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
             this.status = status;
         }
 
+        /**
+         * Join the event and change the status.
+         * @param dialog
+         * @param which
+         */
         @Override
         public void onClick(DialogInterface dialog, int which) {
             AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
@@ -126,6 +161,9 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
         }
     }
 
+    /**
+     * Show confirm dialog.
+     */
     class ShowComfirmDialog implements View.OnClickListener{
         private AlertDialog.Builder dialog;
         private JoiningEvent event;
@@ -143,6 +181,9 @@ public class JoiningListCustomAdapter extends ArrayAdapter<JoiningEvent>{
         }
     }
 
+    /**
+     * Show invited list dialog.
+     */
     class ShowInvitedListDialog implements View.OnClickListener{
         private JoiningEvent event;
         private InvitedListDialog dialog;

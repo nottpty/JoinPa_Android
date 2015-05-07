@@ -7,42 +7,66 @@ import java.io.Serializable;
 import java.util.Observer;
 
 /**
- * Created by taweesoft on 2/5/2558.
+ * Load my event.
+ * Created on 2/5/2558.
  */
 public class LoadMyEvent implements LoadData,Observer{
     private Owner owner;
     private boolean isFinished = false;
 
+    /**
+     * Constructor.
+     * @param owner
+     */
     public LoadMyEvent(Owner owner){
         this.owner = owner;
-        Log.d("OWNER LOADMYEVENT : ", owner.hashCode() + "");
     }
+
+    /**
+     * Load my event in background.
+     * @param params
+     * @return
+     */
     protected Void doInBackground(Void... params) {
         owner.setEventList(Database.getMyEvent(owner));
         return null;
     }
 
+    /**
+     * Return is load data finished.
+     * @return
+     */
     public boolean isFinished() {
         return isFinished;
     }
 
-
+    /**
+     * Load the data.
+     */
     @Override
     public void load() {
         LoadMyEventTask task = new LoadMyEventTask(this);
         task.execute();
     }
 
+    /**
+     * Update method for observer. called from LoadMyEventTask.
+     * @param observable
+     * @param data
+     */
     @Override
     public void update(java.util.Observable observable, Object data) {
         isFinished = true;
     }
 
+    /**
+     * Load my event task.
+     */
     class LoadMyEventTask extends AsyncTask<Void,Void,Void>{
         private Observable observable;
         public LoadMyEventTask(Observer observer){
             observable = new Observable();
-            observable.addObserver(observer);
+            observable.addObserver(observer); //Observer = LoadMyEvent
         }
         @Override
         protected Void doInBackground(Void... params) {

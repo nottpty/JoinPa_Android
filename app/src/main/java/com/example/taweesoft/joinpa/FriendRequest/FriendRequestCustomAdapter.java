@@ -1,4 +1,4 @@
-package com.example.taweesoft.joinpa;
+package com.example.taweesoft.joinpa.FriendRequest;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -14,21 +14,35 @@ import com.example.taweesoft.joinpa.Library.Friend;
 import com.example.taweesoft.joinpa.Library.Observable;
 import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.Library.User;
+import com.example.taweesoft.joinpa.R;
 
 import java.util.List;
 import java.util.Observer;
 
 /**
- * Created by taweesoft on 7/5/2558.
+ * Friend request custom adapter to show each friend request.
  */
-public class WaitingFriendListCustomAdapter extends ArrayAdapter<Friend>{
+public class FriendRequestCustomAdapter extends ArrayAdapter<Friend>{
     private Observable observable;
-    public WaitingFriendListCustomAdapter(Context context,List<Friend> waitingList){
+
+    /**
+     * Constructor.
+     * @param context
+     * @param waitingList
+     */
+    public FriendRequestCustomAdapter(Context context, List<Friend> waitingList){
         super(context,0,waitingList);
         observable = new Observable();
-        observable.addObserver((Observer)context);
+        observable.addObserver((Observer)context); // Observer == FriendRequestActivity.
     }
 
+    /**
+     * Show view of each friend request.
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -43,6 +57,9 @@ public class WaitingFriendListCustomAdapter extends ArrayAdapter<Friend>{
         return convertView;
     }
 
+    /**
+     * Accept friend request.
+     */
     class AcceptFriend implements View.OnClickListener{
         private Friend friend;
         public AcceptFriend(Friend friend){

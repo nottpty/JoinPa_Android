@@ -14,18 +14,32 @@ import com.example.taweesoft.joinpa.Library.TimePicker;
 import java.util.Date;
 
 /**
- * Created by taweesoft on 29/4/2558.
+ * New event controller.
+ * Created on 29/4/2558.
  */
 public class NewEventController extends Activity{
     private NewEventActivity view;
     private NewEventModel model;
+
+    /**
+     * Constructor.
+     * @param view
+     * @param model
+     */
     public NewEventController(NewEventActivity view, NewEventModel model){
         this.model = model;
         this.view = view;
+        model.addObserver(view); //Observer = NewEventActivity.
+
+        /*Initialize action for components.*/
         view.setLayoutDateAction(new DateClick());
         view.setLayoutTimeAction(new TimeClick());
         view.setIconSpinnerAction(new IconSelectedEvent());
     }
+
+    /**
+     * Show date picker dialog.
+     */
     class DateClick implements View.OnClickListener{
         @Override
         public void onClick(View v) {
@@ -34,6 +48,9 @@ public class NewEventController extends Activity{
         }
     }
 
+    /**
+     * Show time picker dialog.
+     */
     class TimeClick implements View.OnClickListener{
         @Override
         public void onClick(View v) {
@@ -42,6 +59,9 @@ public class NewEventController extends Activity{
         }
     }
 
+    /**
+     * Set icon for each event.
+     */
     class IconSelectedEvent implements AdapterView.OnItemSelectedListener{
         @Override
         public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
@@ -58,9 +78,17 @@ public class NewEventController extends Activity{
         }
     }
 
+    /**
+     * Get date and time.
+     * @return
+     */
     public Date getDateAndTime(){
         return model.getDateAndTime();
     }
+
+    /*
+    Get model.
+     */
     public NewEventModel getModel(){
         return this.model;
     }

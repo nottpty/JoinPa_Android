@@ -1,26 +1,32 @@
-package com.example.taweesoft.joinpa;
+package com.example.taweesoft.joinpa.FriendRequest;
 
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.taweesoft.joinpa.Library.Database;
 import com.example.taweesoft.joinpa.Library.Friend;
 import com.example.taweesoft.joinpa.Library.Resources;
+import com.example.taweesoft.joinpa.R;
 
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-
-public class WaitingFriendListActivity extends ActionBarActivity implements Observer {
+/**
+ * Friend request activity.
+ */
+public class FriendRequestActivity extends ActionBarActivity implements Observer {
     private ListView lv_waitingList;
-    private WaitingFriendListCustomAdapter adapter;
+    private FriendRequestCustomAdapter adapter;
+
+    /**
+     * Constructor.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +35,11 @@ public class WaitingFriendListActivity extends ActionBarActivity implements Obse
     }
 
 
+    /**
+     * On create activity.
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -36,12 +47,21 @@ public class WaitingFriendListActivity extends ActionBarActivity implements Obse
         return true;
     }
 
+    /**
+     * Initial components.
+     */
     public void initComponents(){
         lv_waitingList = (ListView)findViewById(R.id.lv_waitingList);
-        List<Friend> waitingList = Resources.owner.getFriendWaitingList();
-        adapter = new WaitingFriendListCustomAdapter(this,waitingList);
+        List<Friend> waitingList = Resources.owner.getFriendRequest();
+        adapter = new FriendRequestCustomAdapter(this,waitingList);
         lv_waitingList.setAdapter(adapter);
     }
+
+    /**
+     * On create menu item on actionBar.
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -59,6 +79,9 @@ public class WaitingFriendListActivity extends ActionBarActivity implements Obse
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Update friend request view.
+     */
     class UpdateFriendRequest extends AsyncTask<Void,Void,Void>{
         @Override
         protected Void doInBackground(Void... params) {
@@ -77,10 +100,20 @@ public class WaitingFriendListActivity extends ActionBarActivity implements Obse
         }
     }
 
+    /**
+     * Update friend request.
+     */
     public void updateFriendRequest(){
         UpdateFriendRequest task = new UpdateFriendRequest();
         task.execute();
     }
+
+    /**
+     * Update method for observer. called from FriendRequestCustomAdapter.
+     * Update view for listView.
+     * @param observable
+     * @param data
+     */
     @Override
     public void update(Observable observable, Object data) {
         adapter.notifyDataSetChanged();

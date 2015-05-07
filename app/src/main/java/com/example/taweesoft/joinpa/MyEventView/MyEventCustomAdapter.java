@@ -17,16 +17,32 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by taweesoft on 28/4/2558.
+ * Custom adapter.
+ * To show each event card.
  */
 public class MyEventCustomAdapter extends ArrayAdapter<Event>{
 
+    /**
+     * Constructor.
+     * @param context
+     * @param myEventList
+     */
     public MyEventCustomAdapter(Context context,List<Event> myEventList){
         super(context,0,myEventList);
     }
 
+    /**
+     * Return view of each event. Displaying in the screen.
+     * @param position
+     * @param view
+     * @param parent
+     * @return
+     */
     public View getView(int position,View view,ViewGroup parent){
+
         Event event = getItem(position);
+
+        /*Initial components on current view.*/
         if(view == null)
             view = LayoutInflater.from(getContext()).inflate(R.layout.activity_my_event_view,parent,false);
         TextView txt_eventName  = (TextView)view.findViewById(R.id.txt_eventName);
@@ -39,6 +55,8 @@ public class MyEventCustomAdapter extends ArrayAdapter<Event>{
         LinearLayout layout_note = (LinearLayout)view.findViewById(R.id.layout_note);
         LinearLayout layout_iconBG = (LinearLayout)view.findViewById(R.id.layout_iconBG);
         ImageView img_iconBig = (ImageView)view.findViewById(R.id.img_iconBig);
+
+        /*Set component's data.*/
         layout_iconBG.setBackgroundResource(Resources.cardBG.get(event.getIconID()));
         img_iconBig.setImageResource(Resources.icons.get(event.getIconID()));
         txt_eventName.setText(event.getTopic());

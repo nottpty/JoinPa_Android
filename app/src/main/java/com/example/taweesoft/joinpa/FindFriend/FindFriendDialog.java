@@ -26,7 +26,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * Created by taweesoft on 30/4/2558.
+ * Finf friend dialog.
+ * Created on 30/4/2558.
  */
 public class FindFriendDialog implements Observer{
     private Context context;
@@ -39,9 +40,14 @@ public class FindFriendDialog implements Observer{
     private Friend friend;
     private FindFriendController controller;
 
+    /*States*/
     public AddState foundState = new FoundState();
     public AddState notFoundState = new NotFoundState();
 
+    /**
+     * Constructor.
+     * @param context
+     */
     public FindFriendDialog(Context context){
         this.context = context;
         finder = localFinder;
@@ -50,6 +56,9 @@ public class FindFriendDialog implements Observer{
         controller.setState(notFoundState);
     }
 
+    /**
+     * Open find friend dialog.
+     */
     public void openDialog(){
         Dialog dialog = new Dialog(context);
         dialog.setTitle("Find friend");
@@ -65,6 +74,11 @@ public class FindFriendDialog implements Observer{
         dialog.show();
     }
 
+    /**
+     * Update method of observer.
+     * @param observable
+     * @param data
+     */
     @Override
     public void update(Observable observable, Object data) {
         if(((Object)observable).getClass() == DatabaseFinder.class){
@@ -107,10 +121,17 @@ public class FindFriendDialog implements Observer{
         }
     }
 
+    /**
+     * Get controller.
+     * @return
+     */
     public FindFriendController getController(){
         return controller;
     }
 
+    /**
+     * Add friend action.
+     */
     class AddFriendAction implements View.OnClickListener{
         @Override
         public void onClick(View v) {
@@ -119,7 +140,10 @@ public class FindFriendDialog implements Observer{
     }
 
 
-
+    /**
+     * Get context.
+     * @return
+     */
     public Context getContext(){
         return context;
     }

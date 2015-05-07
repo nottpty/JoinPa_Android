@@ -12,9 +12,16 @@ import com.example.taweesoft.joinpa.MainActivity;
 import java.util.List;
 
 /**
- * Created by taweesoft on 1/5/2558.
+ * Found friend state.
+ * Created on 1/5/2558.
  */
 public class FoundState implements AddState{
+
+    /**
+     * Add friend into friend list. and set current back to not found state.
+     * @param view
+     * @param friend
+     */
     @Override
     public void addNewFriend(final FindFriendDialog view, final Friend friend) {
         Toast.makeText(view.getContext(),friend.getUsername() + " began your friend", Toast.LENGTH_LONG).show();

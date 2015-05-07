@@ -8,7 +8,7 @@ import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.MainActivity;
 
 /**
- * Created by taweesoft on 2/5/2558.
+ * Notify event's owner.
  */
 public class NotifyOwner extends AsyncTask<Void,Void,Void> {
 
@@ -17,6 +17,11 @@ public class NotifyOwner extends AsyncTask<Void,Void,Void> {
         this.event = event;
     }
 
+    /**
+     * Notify with message.
+     * @param params
+     * @return
+     */
     @Override
     protected Void doInBackground(Void... params) {
         String ownerNotiKey = event.getEventOwner().getNotifyKey();

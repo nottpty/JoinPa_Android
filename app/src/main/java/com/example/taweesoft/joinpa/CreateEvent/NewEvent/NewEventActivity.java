@@ -50,7 +50,6 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
         //Get selected friends list from select friend activity.
         selectedFriends = (List<Friend>)getIntent().getSerializableExtra("SelectedFriend");
         NewEventModel model = (NewEventModel)getIntent().getSerializableExtra("Model");
-        model.addObserver(this);
         initComponent();
         initSpinnerIcon();
         initDateTextView();
@@ -166,7 +165,6 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
         public void onClick(View v){
             /*Initial component for create event.*/
             Date date = controller.getDateAndTime();
-            Date now = new Date();
             String eventID = System.currentTimeMillis()+"";
 //            String eventID = String.format("%02d%02d%04d%02d%02d%02d", now.getDay(),now.getMonth(),now.getYear(),now.getHours(),now.getMinutes(),now.getSeconds());
             Owner owner = Resources.owner;
