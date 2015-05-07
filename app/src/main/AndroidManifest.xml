@@ -67,7 +67,7 @@
         </activity>
         <activity
             android:name=".WaitingFriendListActivity"
-            android:label="@string/title_activity_friend_waiting_list" >
+            android:label="Friends request" >
         </activity>
     </application>
 

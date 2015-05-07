@@ -2,6 +2,7 @@ package com.example.taweesoft.joinpa;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -11,10 +12,13 @@ import com.example.taweesoft.joinpa.Library.Friend;
 import com.example.taweesoft.joinpa.Library.Resources;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 
-public class WaitingFriendListActivity extends ActionBarActivity {
+public class WaitingFriendListActivity extends ActionBarActivity implements Observer {
     private ListView lv_waitingList;
+    private WaitingFriendListCustomAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +37,7 @@ public class WaitingFriendListActivity extends ActionBarActivity {
     public void initComponents(){
         lv_waitingList = (ListView)findViewById(R.id.lv_waitingList);
         List<Friend> waitingList = Resources.owner.getFriendWaitingList();
-        WaitingFriendListCustomAdapter adapter = new WaitingFriendListCustomAdapter(this,waitingList);
+        adapter = new WaitingFriendListCustomAdapter(this,waitingList);
         lv_waitingList.setAdapter(adapter);
     }
     @Override
@@ -49,5 +53,10 @@ public class WaitingFriendListActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void update(Observable observable, Object data) {
+        adapter.notifyDataSetChanged();
     }
 }

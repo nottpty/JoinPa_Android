@@ -236,6 +236,7 @@ public class MainActivity extends ActionBarActivity implements Observer{
         Resources.file.delete();
         Intent intent = new Intent(this,FirstActivity.class);
         startActivity(intent);
+        this.finish();
     }
 
     class UpdateJoiningEventListView extends AsyncTask<Void, Void, Void>{

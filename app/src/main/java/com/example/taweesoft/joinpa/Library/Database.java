@@ -332,7 +332,6 @@ public class Database {
 
         if(isFriend == 1){
             sendMsg(friend.getNotifyKey(),String.format("%s just add you to friend list",Resources.owner.getUsername()));
-            acceptFriend(friend);
         }
     }
 
@@ -426,8 +425,11 @@ public class Database {
         HttpURLConnection connect = getConnection(String.format("SELECT * FROM tb_friendList WHERE OwnerName=\'%s\' AND FriendName=\'%s\'",friendName,Resources.owner.getUsername()));
         try{
             Scanner scan = new Scanner(connect.getInputStream());
-            scan.next();
-            while(scan.hasNext()) return true;
+            Log.d("TTTTTTTTT : " , scan.nextLine());
+            while(scan.hasNext()) {
+                Log.d("NNNNN : " , scan.nextLine());
+                return true;
+            }
             scan.close();
             connect.disconnect();
         }catch(IOException e){ e.printStackTrace(); }
@@ -439,9 +441,8 @@ public class Database {
         try{
             Scanner scan = new Scanner(connect.getInputStream());
 
-            Log.d("MMMMM : ", scan.next());
+            scan.nextLine();
             while(scan.hasNext()){
-                Log.d("GGGGGG : ", "LLL");
                 String friendName = scan.next();
                 friendWaitingList.add(0,(Friend)getEachUser(friendName));
             }

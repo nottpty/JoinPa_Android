@@ -92,4 +92,17 @@ public class Owner extends User{
     public List<Friend> getFriendWaitingList(){
         return friendWaitingList;
     }
+
+    public void acceptFriend(final Friend friend){
+        friendWaitingList.remove(friend);
+        addFriend(friend);
+        AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                Database.acceptFriend(friend);
+                return null;
+            }
+        };
+        task.execute();
+    }
 }
