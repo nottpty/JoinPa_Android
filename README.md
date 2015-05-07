@@ -21,12 +21,11 @@
 * MYSQL Database connected by php and java.
 * Push notification for notify on your mobile.
 * All-In-One management on PC version to manage all events. (Admin)
-* Material style on User-Inteface.
+* Flat design on User-Inteface.
 
 ---
-Screenshot (Draft)
-![1.png](https://bitbucket.org/repo/k9aEpo/images/2118635377-1.png)
-![Screenshot_2015-05-07-01-25-52.png](https://bitbucket.org/repo/k9aEpo/images/508103139-Screenshot_2015-05-07-01-25-52.png)
-![Screenshot_2015-05-07-01-26-24.png](https://bitbucket.org/repo/k9aEpo/images/74392816-Screenshot_2015-05-07-01-26-24.png)
-![Screenshot_2015-05-07-01-26-15.png](https://bitbucket.org/repo/k9aEpo/images/2938751947-Screenshot_2015-05-07-01-26-15.png)
-![Screenshot_2015-05-07-01-26-01.png](https://bitbucket.org/repo/k9aEpo/images/4074179343-Screenshot_2015-05-07-01-26-01.png)
+ScreenShot (Final)
+![Screenshot_2015-05-07-01-26-39.png](https://bitbucket.org/repo/k9aEpo/images/1329559937-Screenshot_2015-05-07-01-26-39.png)
+![Screenshot_2015-05-07-23-53-58.png](https://bitbucket.org/repo/k9aEpo/images/2308390953-Screenshot_2015-05-07-23-53-58.png)
+![Screenshot_2015-05-07-23-54-14.png](https://bitbucket.org/repo/k9aEpo/images/563296973-Screenshot_2015-05-07-23-54-14.png)
+![Screenshot_2015-05-07-01-26-01.png](https://bitbucket.org/repo/k9aEpo/images/1534707691-Screenshot_2015-05-07-01-26-01.png)
