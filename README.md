@@ -22,7 +22,8 @@
 * Push notification for notify on your mobile.
 * All-In-One management on PC version to manage all events. (Admin)
 * Flat design on User-Inteface.
-APK FILE >> [Download](https://bitbucket.org/oop2final/joinpa-android/src/bfe3502090c873d61125db3a1845ee9174879bd8/APK/join_pa.apk?at=master)
+
+APK FILE >> [Download](https://bitbucket.org/oop2final/joinpa-android/src/bfe3502090c873d61125db3a1845ee9174879bd8/APK/join_pa.apk)
 
 ---
 ScreenShot (Final)
