@@ -12,7 +12,7 @@ import java.util.Observable;
 
 
 /**
- * Created by taweesoft on 30/4/2558.
+ * Login model.
  */
 public class LoginModel extends Observable {
     private Owner owner=null;

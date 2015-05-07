@@ -12,7 +12,7 @@ public class Owner extends User{
 	private List<Friend> friendList;
     private List<JoiningEvent> joiningEvents;
     private List<JoiningEvent> joinedEvent;
-    private List<Friend> friendWaitingList;
+    private List<Friend> friendRequest;
     private LoadData loadMyEvent,loadMyJoinedEvent;
 	public Owner(String username,String notifyKey){
 		super(username,notifyKey);
@@ -24,8 +24,7 @@ public class Owner extends User{
         loadData(loadMyJoinedEvent);
 		friendList = Database.getFriendList(this);
         joiningEvents = Database.myJoiningEvents(this,Resources.WAITING);
-        friendWaitingList = Database.getWaitingFriendList(this);
-        Log.d("YYYYYYYY : ", friendWaitingList.size()+"");
+        friendRequest = Database.getFriendRequest(this);
 	}
 	
 	public List<Friend> getFriendList(){
@@ -89,12 +88,17 @@ public class Owner extends User{
         this.joiningEvents.addAll(joiningEvent);
     }
 
+    public void setFriendRequest(List<Friend> friendRequest){
+        this.friendRequest.clear();
+        this.friendRequest.addAll(friendRequest);
+    }
+
     public List<Friend> getFriendWaitingList(){
-        return friendWaitingList;
+        return friendRequest;
     }
 
     public void acceptFriend(final Friend friend){
-        friendWaitingList.remove(friend);
+        friendRequest.remove(friend);
         addFriend(friend);
         AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
             @Override

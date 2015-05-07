@@ -8,14 +8,14 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="96dp"
         android:layout_gravity="center_horizontal"
         android:gravity="center_vertical|center_horizontal"
         android:background="@drawable/login_bg">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="104dp"
+            android:layout_height="122dp"
             android:id="@+id/imageView22"
             android:src="@drawable/lock_icon" />
     </LinearLayout>
@@ -139,7 +139,8 @@
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
         android:weightSum="2"
-        android:paddingTop="10dp">
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -149,8 +150,8 @@
             android:gravity="center">
 
             <Button
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:id="@+id/btn_signIn"
                 android:background="@drawable/signin"
                 android:layout_alignBottom="@+id/btn_signUp" />
@@ -166,8 +167,8 @@
             android:gravity="center">
 
             <Button
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:id="@+id/btn_signUp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"

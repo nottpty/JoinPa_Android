@@ -28,7 +28,9 @@ import com.google.android.gcm.GCMRegistrar;
 import java.util.Observable;
 import java.util.Observer;
 
-
+/**
+ * Login dialog (view)
+ */
 public class LoginDialog implements Observer {
     private Owner owner = null;
     private final LoginState successState = new SuccessState();
@@ -57,10 +59,15 @@ public class LoginDialog implements Observer {
         btn_signIn = (Button)dialog.findViewById(R.id.btn_signIn);
         txt_msg1 = (TextView)dialog.findViewById(R.id.txt_msg1);
         txt_msg2 = (TextView)dialog.findViewById(R.id.txt_msg2);
+
+        /*Create model and controller.*/
         LoginModel model = new LoginModel();
         controller = new LoginController(this,model);
     }
 
+    /**
+     * Show dialog.
+     */
     public void openDialog(){
         dialog.show();
     }
@@ -72,6 +79,9 @@ public class LoginDialog implements Observer {
         btn_signIn.setOnClickListener(action);
     }
 
+    /**
+     * Set action for sign up button.
+     */
     public void setSignUpAction (View.OnClickListener action){
         btn_signUp.setOnClickListener(action);
     }
@@ -95,26 +105,34 @@ public class LoginDialog implements Observer {
     }
 
 
+    /**
+     * Update information.
+     * @param observable
+     * @param data
+     */
     @Override
     public void update(Observable observable,final Object data) {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                /*Wrong username or password*/
                 if(data == null){
                     alertDialog.setMessage("Wrong username or password");
-                    controller.setState(failedState);
+                    controller.setState(failedState); //Set to failed state.
                     alertDialog.setCancelable(true);
                     return;
                 }
+                /*Correct username and password.*/
                 if(data.getClass() == Owner.class){
-                    Resources.owner = (Owner)data;
+                    Resources.owner = (Owner)data; //Set owner in Resources.java
                     Resources.password = getPassword();
                     alertDialog.setMessage("Logged in");
-                    controller.setState(successState);
-                    controller.executeState();
-                    alertDialog.setCancelable(true);
+                    controller.setState(successState); //Set to success state.
+                    controller.executeState(); //Run the state.
+                    alertDialog.setCancelable(true); //Can cancel the dialog
                     return;
                 }
+                /*For register new user.*/
                 if(data.getClass() == String.class){
                     String msg = (String)data;
                     String[] dataArr = msg.split("@@");
@@ -122,7 +140,7 @@ public class LoginDialog implements Observer {
                     msg = dataArr[1];
                     txt_username.setText("");
                     txt_password.setText("");
-                    showMessage(msg,respondCode);
+                    showMessage(msg,respondCode); //Check for correction of username and password.
 
                 }
             }
@@ -137,9 +155,9 @@ public class LoginDialog implements Observer {
         txt_msg1.setVisibility(View.VISIBLE);
         txt_msg2.setVisibility(View.VISIBLE);
         int color = 0;
-        if(respondCode == Resources.CHECKING){
+        if(respondCode == Resources.CHECKING){ //Checking
             color = 0xffe591ac; // Pink
-        }else if(respondCode == Resources.REGIS_SUCCESS){
+        }else if(respondCode == Resources.REGIS_SUCCESS){ //
             color = 0xff61ce1b; // Green
         }else{
             color = 0xffff0c1a; // Red
@@ -161,6 +179,11 @@ public class LoginDialog implements Observer {
         return controller;
     }
 
+    /**
+     * Set username and password called by autologin.
+     * @param username
+     * @param password
+     */
     public void setUsernamePassword(String username,String password){
         txt_username.setText(username);
         txt_password.setText(password);

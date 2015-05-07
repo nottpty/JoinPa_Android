@@ -1,5 +1,6 @@
 package com.example.taweesoft.joinpa;
 
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.taweesoft.joinpa.Library.Database;
 import com.example.taweesoft.joinpa.Library.Friend;
 import com.example.taweesoft.joinpa.Library.Resources;
 
@@ -50,11 +52,35 @@ public class WaitingFriendListActivity extends ActionBarActivity implements Obse
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }else if(id == R.id.action_refresh){
+            updateFriendRequest();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    class UpdateFriendRequest extends AsyncTask<Void,Void,Void>{
+        @Override
+        protected Void doInBackground(Void... params) {
+            Resources.owner.setFriendRequest(Database.getFriendRequest(Resources.owner));
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            runOnUiThread(new Runnable(){
+                @Override
+                public void run() {
+                    adapter.notifyDataSetChanged();
+                }
+            });
+        }
+    }
+
+    public void updateFriendRequest(){
+        UpdateFriendRequest task = new UpdateFriendRequest();
+        task.execute();
+    }
     @Override
     public void update(Observable observable, Object data) {
         adapter.notifyDataSetChanged();

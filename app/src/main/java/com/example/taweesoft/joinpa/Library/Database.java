@@ -343,6 +343,8 @@ public class Database {
             scan.close();
             connect.disconnect();
         }catch(IOException e){ e.printStackTrace(); }
+
+        sendMsg(friend.getNotifyKey(),String.format("%s accepted your friend request",Resources.owner.getUsername()));
     }
     public static void joinEvent(JoiningEvent event,int status){
         String name = Resources.owner.getUsername();
@@ -435,7 +437,7 @@ public class Database {
         }catch(IOException e){ e.printStackTrace(); }
         return false;
     }
-    public static List<Friend> getWaitingFriendList(Owner owner){
+    public static List<Friend> getFriendRequest(Owner owner){
         HttpURLConnection connect = getConnection(String.format("SELECT OwnerName FROM tb_friendList WHERE FriendName=\'%s\' AND isFriend=\'1\'",owner.getUsername()));
         List<Friend> friendWaitingList = new ArrayList<Friend>();
         try{

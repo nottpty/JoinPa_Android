@@ -20,6 +20,7 @@ import com.example.taweesoft.joinpa.Library.JoiningEvent;
 import com.example.taweesoft.joinpa.JoiningEventView.JoiningListCustomAdapter;
 import com.example.taweesoft.joinpa.Library.Owner;
 import com.example.taweesoft.joinpa.Library.Resources;
+import com.example.taweesoft.joinpa.Logout.LogoutDialog;
 import com.example.taweesoft.joinpa.MyEventView.MyEventActivity;
 import com.example.taweesoft.joinpa.MyJoinedEvent.MyJoinedEventActivity;
 import com.example.taweesoft.joinpa.Notification.NotifyOwner;
@@ -171,9 +172,7 @@ public class MainActivity extends ActionBarActivity implements Observer{
     public void update(Observable observable, Object data) {
         if( data == null ) return;
         final JoiningEvent joiningEvent = (JoiningEvent)data;
-        Log.d("OOO1: ", Resources.owner.getJoiningEvents().size()+"");
         Resources.owner.moveToJoined(joiningEvent);
-        Log.d("OOO2: ", Resources.owner.getJoiningEvents().size()+"");
         runOnUiThread(new Runnable(){ //Because original thread and touch this view.
             @Override
             public void run() {
@@ -206,7 +205,8 @@ public class MainActivity extends ActionBarActivity implements Observer{
         if (id == R.id.action_settings) {
             return true;
         }else if( id == R.id.action_logout){
-            logout();
+            LogoutDialog logoutDialog = new LogoutDialog(this);
+            logoutDialog.showDialog();
         }else if( id == R.id.action_refresh){
             updateListView();
         }else if( id == R.id.action_notification){
@@ -232,12 +232,6 @@ public class MainActivity extends ActionBarActivity implements Observer{
         }
     }
 
-    public void logout(){
-        Resources.file.delete();
-        Intent intent = new Intent(this,FirstActivity.class);
-        startActivity(intent);
-        this.finish();
-    }
 
     class UpdateJoiningEventListView extends AsyncTask<Void, Void, Void>{
         @Override
