@@ -4,14 +4,22 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.example.taweesoft.joinpa.Library.Friend;
+import com.example.taweesoft.joinpa.Library.Resources;
+
+import java.util.List;
 
 
-public class friend_waiting_list extends ActionBarActivity {
-
+public class WaitingFriendListActivity extends ActionBarActivity {
+    private ListView lv_waitingList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_waiting_list);
+        initComponents();
     }
 
 
@@ -22,6 +30,12 @@ public class friend_waiting_list extends ActionBarActivity {
         return true;
     }
 
+    public void initComponents(){
+        lv_waitingList = (ListView)findViewById(R.id.lv_waitingList);
+        List<Friend> waitingList = Resources.owner.getFriendWaitingList();
+        WaitingFriendListCustomAdapter adapter = new WaitingFriendListCustomAdapter(this,waitingList);
+        lv_waitingList.setAdapter(adapter);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

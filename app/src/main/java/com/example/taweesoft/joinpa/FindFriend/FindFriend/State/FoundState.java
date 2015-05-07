@@ -18,17 +18,8 @@ public class FoundState implements AddState{
     @Override
     public void addNewFriend(final FindFriendDialog view, final Friend friend) {
         Toast.makeText(view.getContext(),friend.getUsername() + " began your friend", Toast.LENGTH_LONG).show();
-        AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                Resources.owner.addFriend(friend);
-                Database.addFriend(friend);
-                Database.addFriendToWaitingList(friend);
-                view.getController().setState(view.notFoundState);
-                return null;
-            }
-        };
-        task.execute();
+        Resources.owner.addFriend(friend);
+        view.getController().setState(view.notFoundState);
     }
 
 

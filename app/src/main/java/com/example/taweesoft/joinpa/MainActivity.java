@@ -209,6 +209,9 @@ public class MainActivity extends ActionBarActivity implements Observer{
             logout();
         }else if( id == R.id.action_refresh){
             updateListView();
+        }else if( id == R.id.action_notification){
+            Intent intent = new Intent(this,WaitingFriendListActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

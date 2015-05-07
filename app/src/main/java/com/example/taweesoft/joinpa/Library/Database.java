@@ -113,7 +113,6 @@ public class Database {
     	};
     	return friendList;
     }
-    
     public static User getEachUser(String name){
     	User user = null;
     	HttpURLConnection connect = getConnection(String.format("SELECT * FROM tb_login WHERE Username=\'%s\'",name));
@@ -266,7 +265,7 @@ public class Database {
                     String[] dateArr = dataArr[7].split("/");
                     String[] timeArr = dataArr[8].split(":");
                     int iconID = Integer.parseInt(dataArr[4]);
-                    Date date = createDate(dateArr,timeArr);
+                    Date date = createDate(dateArr, timeArr);
                     event = new JoiningEvent(eventID,owner,invitedList,iconID,dataArr[5],dataArr[6],date);
                 }
                 count++;
@@ -300,7 +299,7 @@ public class Database {
 
     public static void removeEvent(Event event){
         String eventID = event.getEventID();
-        HttpURLConnection connect = getConnection(String.format("DELETE FROM tb_event WHERE EventID=\'%s\'",eventID));
+        HttpURLConnection connect = getConnection(String.format("DELETE FROM tb_event WHERE EventID=\'%s\'", eventID));
         try{
             Scanner scan = new Scanner(connect.getInputStream());
             while(scan.hasNext()){ scan.next(); }
@@ -320,7 +319,25 @@ public class Database {
     public static void addFriend(Friend friend){
         String ownerName = Resources.owner.getUsername();
         String friendName = friend.getUsername();
-        HttpURLConnection connect = getConnection(String.format("INSERT INTO tb_friendList VALUES (\'%s\',\'%s\')",ownerName,friendName));
+        int isFriend = 0 ;
+        if(!checkIsFriend(friendName)) isFriend = 1;
+
+        HttpURLConnection connect = getConnection(String.format("INSERT INTO tb_friendList VALUES (\'%s\',\'%s\',\'%s\')",ownerName,friendName,isFriend));
+        try{
+            Scanner scan = new Scanner(connect.getInputStream());
+            while(scan.hasNext()) scan.next();
+            scan.close();
+            connect.disconnect();
+        }catch(IOException e){ e.printStackTrace(); }
+
+        if(isFriend == 1){
+            sendMsg(friend.getNotifyKey(),String.format("%s just add you to friend list",Resources.owner.getUsername()));
+            acceptFriend(friend);
+        }
+    }
+
+    public static void acceptFriend(Friend friend){
+        HttpURLConnection connect = getConnection(String.format("UPDATE tb_friendList SET isFriend=\'0\' WHERE OwnerName=\'%s\' AND FriendName=\'%s\'",friend.getUsername(),Resources.owner.getUsername()));
         try{
             Scanner scan = new Scanner(connect.getInputStream());
             while(scan.hasNext()) scan.next();
@@ -328,7 +345,6 @@ public class Database {
             connect.disconnect();
         }catch(IOException e){ e.printStackTrace(); }
     }
-
     public static void joinEvent(JoiningEvent event,int status){
         String name = Resources.owner.getUsername();
         String eventID = event.getEventID();
@@ -406,27 +422,32 @@ public class Database {
         }catch(IOException e){ e.printStackTrace();}
     }
 
-    public static void addFriendToWaitingList(Friend friend){
-        HttpURLConnection connect = getConnection(String.format("INSERT INTO tb_waitingFriendList VALUES (\'%s\',\'%s\')",friend.getUsername(),Resources.owner.getUsername()));
+    public static boolean checkIsFriend(String friendName){
+        HttpURLConnection connect = getConnection(String.format("SELECT * FROM tb_friendList WHERE OwnerName=\'%s\' AND FriendName=\'%s\'",friendName,Resources.owner.getUsername()));
         try{
             Scanner scan = new Scanner(connect.getInputStream());
-            while(scan.hasNext()) scan.next();
+            scan.next();
+            while(scan.hasNext()) return true;
             scan.close();
             connect.disconnect();
         }catch(IOException e){ e.printStackTrace(); }
+        return false;
     }
+    public static List<Friend> getWaitingFriendList(Owner owner){
+        HttpURLConnection connect = getConnection(String.format("SELECT OwnerName FROM tb_friendList WHERE FriendName=\'%s\' AND isFriend=\'1\'",owner.getUsername()));
+        List<Friend> friendWaitingList = new ArrayList<Friend>();
+        try{
+            Scanner scan = new Scanner(connect.getInputStream());
 
-//    public static List<Friend> getWaitingFriendList(Owner owner){
-//        HttpURLConnection connect = getConnection(String.format("SELECT FriendName FROM tb_waitingFriendList WHERE Username=\'%s\'",owner.getUsername()));
-//        List<String> waitingListName = new ArrayList<String>();
-//        try{
-//            Scanner scan = new Scanner(connect.getInputStream());
-//            scan.next();
-//            while(scan.hasNext()) waitingListName.add(scan.next());
-//            scan.close();
-//            connect.disconnect();
-//        }catch(IOException e){ e.printStackTrace(); }
-//
-//        connect = getConnection(String.format("SELECT Username,NotiKey FROM tb_login WHERE User"))
-//    }
+            Log.d("MMMMM : ", scan.next());
+            while(scan.hasNext()){
+                Log.d("GGGGGG : ", "LLL");
+                String friendName = scan.next();
+                friendWaitingList.add(0,(Friend)getEachUser(friendName));
+            }
+            scan.close();
+            connect.disconnect();
+        }catch(IOException e){ e.printStackTrace(); }
+        return friendWaitingList;
+    }
 }
