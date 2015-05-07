@@ -23,7 +23,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by taweesoft on 2/5/2558.
+ * Notification System.
+ * Created on 2/5/2558.
  */
 public class GCMIntentService extends GCMBaseIntentService {
     // Use your PROJECT ID from Google API into SENDER_ID

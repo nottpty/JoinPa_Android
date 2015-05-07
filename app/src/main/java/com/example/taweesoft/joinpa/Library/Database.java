@@ -20,12 +20,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-
+/**
+ * Database class.
+ * Get data.
+ */
 public class Database {
 	private static String urlStr = Resources.URL;
 	public static Map<String,Friend> allUser = getAllUser();
 	private final static String WAITING = "0";
-	
+
+    /**
+     * Get owner by username and password for authenticate login.
+     * @param username
+     * @param password
+     * @return
+     */
 	public static Owner getOwner(String username,String password){
 		Owner owner = null;
 		HttpURLConnection connect = getConnection(String.format("SELECT * FROM tb_login WHERE Username=\'%s\' AND Password=\'%s\'",username, password));
@@ -48,6 +57,11 @@ public class Database {
 		return owner;
 	}
 
+    /**
+     * Get connection from database.
+     * @param command
+     * @return
+     */
     public static HttpURLConnection getConnection(String command){
         HttpURLConnection connect = null;
         BufferedReader in=null;
@@ -69,7 +83,11 @@ public class Database {
         
         return connect;
     }
-    
+
+    /**
+     * Get all user.
+     * @return
+     */
     public static Map<String,Friend> getAllUser(){
     	Map<String,Friend> allUser = new HashMap<String,Friend>();
     	HttpURLConnection connect = getConnection(String.format("SELECT * FROM tb_login"));
@@ -91,6 +109,11 @@ public class Database {
     	return allUser;
     }
 
+    /**
+     * Get friend list of current owner.
+     * @param owner
+     * @return
+     */
     public static List<Friend> getFriendList(Owner owner){
     	String ownerName = owner.getUsername();
     	List<Friend> friendList = new ArrayList<Friend>();
@@ -113,6 +136,12 @@ public class Database {
     	};
     	return friendList;
     }
+
+    /**
+     * Get each user from username.
+     * @param name
+     * @return
+     */
     public static User getEachUser(String name){
     	User user = null;
     	HttpURLConnection connect = getConnection(String.format("SELECT * FROM tb_login WHERE Username=\'%s\'",name));
@@ -133,7 +162,12 @@ public class Database {
     	};
     	return user;
     }
-    
+
+    /**
+     * Get my event.
+     * @param owner
+     * @return
+     */
     public static List<Event> getMyEvent(Owner owner){
     	String ownerName = owner.getUsername();
     	List<Event> eventList = new ArrayList<Event>();
@@ -164,6 +198,12 @@ public class Database {
     	return eventList;
     }
 
+    /**
+     * Create date from String array.
+     * @param dateArr
+     * @param timeArr
+     * @return
+     */
     public static Date createDate(String[] dateArr,String[] timeArr){
         Date date = new Date();
         date.setDate(Integer.parseInt(dateArr[0]));
@@ -174,6 +214,11 @@ public class Database {
         return date;
     }
 
+    /**
+     * Add event into joining list
+     * @param eventID
+     * @param username
+     */
     public static void addJoiningList(String eventID,String username){
     	HttpURLConnection connect = getConnection(String.format("INSERT INTO tb_joinList VALUES (\'%s\',\'%s\',\'%s\')", eventID,username,WAITING));
     	try{
@@ -185,7 +230,12 @@ public class Database {
     		e.printStackTrace();
     	};
     }
-    
+
+    /**
+     * Get map of invited list of each event.
+     * @param eventID
+     * @return
+     */
     public static Map<User,Integer> getMapInvitedList(String eventID){
     	HttpURLConnection connect = getConnection(String.format("SELECT * FROM tb_joinList WHERE EventID=\'%s\'",eventID));
     	Map<User,Integer> invitedList = new HashMap<User,Integer>();
@@ -208,7 +258,12 @@ public class Database {
     	}catch(IOException e){ e.printStackTrace();}
     	return invitedList;
     }
-    
+
+    /**
+     * Add event.
+     * @param event
+     * @return
+     */
     public static Event addEvent(Event event){
         Owner owner = event.getOwner();
         Date date = event.getDate();
@@ -239,6 +294,11 @@ public class Database {
     	return event;
     }
 
+    /**
+     * Search friend in local data.
+     * @param username
+     * @return
+     */
     public static Friend searchFriendInUsers(String username){
     	Collection<Friend> collection = allUser.values();
     	for(User user : collection) {
@@ -248,6 +308,11 @@ public class Database {
     	return null;
     }
 
+    /**
+     * Get joining event.
+     * @param eventID
+     * @return
+     */
     public static JoiningEvent getJoiningEvent(String eventID){
         JoiningEvent event=null;
         HttpURLConnection connect = getConnection(String.format("SELECT * FROM tb_event WHERE EventID=\'%s\'",eventID));
@@ -274,6 +339,12 @@ public class Database {
         return event;
     }
 
+    /**
+     * Get list of joining events.
+     * @param owner
+     * @param whichStatus
+     * @return
+     */
     public static List<JoiningEvent> myJoiningEvents(Owner owner,int whichStatus){
         Log.d("OOOOOO : ", whichStatus +"");
         List<JoiningEvent> events = new ArrayList<JoiningEvent>();
@@ -297,6 +368,10 @@ public class Database {
         return events;
     }
 
+    /**
+     * Remove event.
+     * @param event
+     */
     public static void removeEvent(Event event){
         String eventID = event.getEventID();
         HttpURLConnection connect = getConnection(String.format("DELETE FROM tb_event WHERE EventID=\'%s\'", eventID));
@@ -316,6 +391,10 @@ public class Database {
         }catch(IOException e){ e.printStackTrace(); }
     }
 
+    /**
+     * Add friend.
+     * @param friend
+     */
     public static void addFriend(Friend friend){
         String ownerName = Resources.owner.getUsername();
         String friendName = friend.getUsername();
@@ -335,6 +414,10 @@ public class Database {
         }
     }
 
+    /**
+     * Accept new friend.
+     * @param friend
+     */
     public static void acceptFriend(Friend friend){
         HttpURLConnection connect = getConnection(String.format("UPDATE tb_friendList SET isFriend=\'0\' WHERE OwnerName=\'%s\' AND FriendName=\'%s\'",friend.getUsername(),Resources.owner.getUsername()));
         try{
@@ -346,6 +429,12 @@ public class Database {
 
         sendMsg(friend.getNotifyKey(),String.format("%s accepted your friend request",Resources.owner.getUsername()));
     }
+
+    /**
+     * Join the event.
+     * @param event
+     * @param status
+     */
     public static void joinEvent(JoiningEvent event,int status){
         String name = Resources.owner.getUsername();
         String eventID = event.getEventID();
@@ -358,6 +447,11 @@ public class Database {
         }catch(IOException e) { e.printStackTrace(); }
     }
 
+    /**
+     * Send notification message.
+     * @param key
+     * @param msg
+     */
     public static void sendMsg(String key,String msg){
         HttpURLConnection connect = null;
         try{
@@ -391,6 +485,11 @@ public class Database {
         }
     }
 
+    /**
+     * Update notification key.
+     * @param key
+     * @param username
+     */
     public static void updateNotificationKey(String key,String username){
         HttpURLConnection connect = getConnection(String.format("UPDATE tb_login SET NotiKey=\'%s\' WHERE Username=\'%s\'",key,username));
         try{
@@ -401,6 +500,11 @@ public class Database {
         }catch(IOException e) { e.printStackTrace(); }
     }
 
+    /**
+     * Check exist username.
+     * @param username
+     * @return
+     */
     public static boolean checkExistUsername(String username){
         HttpURLConnection connect = getConnection(String.format("SELECT * FROM tb_login WHERE Username=\'%s\'",username));
         try{
@@ -413,6 +517,12 @@ public class Database {
         return false;
     }
 
+    /**
+     * Add new user.
+     * @param username
+     * @param password
+     * @param notiKey
+     */
     public static void addNewUser(String username,String password, String notiKey){
         HttpURLConnection connect = getConnection(String.format("INSERT INTO tb_login VALUES (\'%s\',\'%s\',\'%s\')",username,password,notiKey));
         try{
@@ -423,6 +533,11 @@ public class Database {
         }catch(IOException e){ e.printStackTrace();}
     }
 
+    /**
+     * Check is you have new friend request and never be friend before.
+     * @param friendName
+     * @return
+     */
     public static boolean checkIsFriend(String friendName){
         HttpURLConnection connect = getConnection(String.format("SELECT * FROM tb_friendList WHERE OwnerName=\'%s\' AND FriendName=\'%s\'",friendName,Resources.owner.getUsername()));
         try{
@@ -437,6 +552,12 @@ public class Database {
         }catch(IOException e){ e.printStackTrace(); }
         return false;
     }
+
+    /**
+     * Get friend request list.
+     * @param owner
+     * @return
+     */
     public static List<Friend> getFriendRequest(Owner owner){
         HttpURLConnection connect = getConnection(String.format("SELECT OwnerName FROM tb_friendList WHERE FriendName=\'%s\' AND isFriend=\'1\'",owner.getUsername()));
         List<Friend> friendWaitingList = new ArrayList<Friend>();

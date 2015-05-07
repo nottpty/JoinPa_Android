@@ -13,20 +13,39 @@ import com.example.taweesoft.joinpa.Library.Resources;
 import com.example.taweesoft.joinpa.R;
 
 /**
- * Created by taweesoft on 29/4/2558.
+ * Custom event icon for spinner.
+ * Created on 29/4/2558.
  */
 public class CustomEventIcon extends ArrayAdapter<Integer> {
 
+    /**
+     * Constructor.
+     * @param context
+     */
     public CustomEventIcon(Context context){
         super(context,android.R.layout.simple_spinner_dropdown_item, Resources.icons);
     }
 
+    /**
+     * Show view when spinner is dropping down.
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
+     */
     @Override
     public View getDropDownView(int position, View convertView,
                                 ViewGroup parent) {
         return getView(position, convertView, parent);
     }
 
+    /**
+     * Show each event icon and event name.
+     * @param position
+     * @param view
+     * @param parent
+     * @return
+     */
     public View getView(int position,View view,ViewGroup parent){
         int icon = getItem(position);
         if(view == null)

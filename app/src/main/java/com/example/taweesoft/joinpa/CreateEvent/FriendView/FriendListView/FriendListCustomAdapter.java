@@ -16,32 +16,46 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.taweesoft.joinpa.Library.Friend;
+import com.example.taweesoft.joinpa.Library.Observable;
 import com.example.taweesoft.joinpa.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Observable;
 import java.util.Observer;
 
 /**
- * Created by taweesoft on 28/4/2558.
+ * Friend list custom adapter.
+ * Show each friend in a card format.
+ * Created on 28/4/2558.
  */
 public class FriendListCustomAdapter extends ArrayAdapter<Friend>{
-    private AdapterObservable observable;
+    private Observable observable;
     private List<Friend> selectedFriend = new ArrayList<Friend>();
     private List<Friend> friendList;
     private List<Boolean> isCheckedState;
 
+    /**
+     * Constructor.
+     * @param context
+     * @param friendList
+     */
     public FriendListCustomAdapter(Context context,List<Friend> friendList){
         super(context,0,friendList);
-        observable = new AdapterObservable();
-        observable.addObserver((Observer)context);
+        observable = new Observable();
+        observable.addObserver((Observer)context); //Observer == FriendListActivity
         this.friendList = friendList;
         isCheckedState = new ArrayList<Boolean>();
         initialBooleanList(new boolean[friendList.size()]);
     }
 
+    /**
+     * Get view of each friend in card format.
+     * @param position
+     * @param view
+     * @param parent
+     * @return
+     */
     public View getView(int position, View view, ViewGroup parent){
         checkForNewFriend();
         Friend friend = getItem(position);
@@ -55,6 +69,10 @@ public class FriendListCustomAdapter extends ArrayAdapter<Friend>{
 
         return view;
     }
+
+    /**
+     * Add friend into selected list.
+     */
     class SelectFriendEvent implements View.OnClickListener{
         private Friend friend;
         private int position;
@@ -75,12 +93,9 @@ public class FriendListCustomAdapter extends ArrayAdapter<Friend>{
         }
     }
 
-    class AdapterObservable extends Observable{
-        public void setChanged(){
-            super.setChanged();
-        }
-    }
-
+    /**
+     * Check for new friend (If you have)
+     */
     public void checkForNewFriend(){
         if(friendList.size() != isCheckedState.size()){
             int diff = friendList.size() - isCheckedState.size();
@@ -89,6 +104,10 @@ public class FriendListCustomAdapter extends ArrayAdapter<Friend>{
         }
     }
 
+    /**
+     * Initial boolean list for make view is correct check.
+     * @param arr
+     */
     public void initialBooleanList(boolean[] arr){
         for(boolean bool : arr){
             isCheckedState.add(bool);

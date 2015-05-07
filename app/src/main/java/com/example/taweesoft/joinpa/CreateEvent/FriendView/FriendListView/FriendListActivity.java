@@ -28,16 +28,25 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-
+/**
+ * Friend list actiivty (View)
+ */
 public class FriendListActivity extends ActionBarActivity implements Observer {
     private List<Friend> selectedFriend = new ArrayList<Friend>();
     private ListView lv_friendsList;
     private Button btn_next,btn_findFriend;
+
+    /**
+     * Constructor.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_friend_list);
+
+        /*Initialize component.*/
         initComponent();
         setListViewAdapter();
         initButton();
@@ -93,6 +102,11 @@ public class FriendListActivity extends ActionBarActivity implements Observer {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Update method of observer. called from FriendListCustomAdapter.
+     * @param observable
+     * @param obj
+     */
     public void update(Observable observable,Object obj){
         if(obj.getClass() != ArrayList.class) {
             return;
@@ -100,6 +114,9 @@ public class FriendListActivity extends ActionBarActivity implements Observer {
         selectedFriend = (List<Friend>)obj;
     }
 
+    /**
+     * Show event creator. (NewEventActivity)
+     */
     class ShowEventCreator implements View.OnClickListener{
         private Activity activity;
         public ShowEventCreator(Activity activity){

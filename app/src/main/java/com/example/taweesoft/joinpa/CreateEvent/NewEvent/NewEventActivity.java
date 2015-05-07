@@ -32,6 +32,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Observer;
 
+/**
+ * New event activity (View)
+ */
 public class NewEventActivity extends ActionBarActivity implements Observer {
     private Spinner spn_icon;
     private List<Friend> selectedFriends;
@@ -42,6 +45,11 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
     private LinearLayout layout_date,layout_time;
     private NewEventController controller;
     private String eventName;
+
+    /**
+     * On create activity.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,12 +57,15 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
         setContentView(R.layout.activity_new_event);
         //Get selected friends list from select friend activity.
         selectedFriends = (List<Friend>)getIntent().getSerializableExtra("SelectedFriend");
-        NewEventModel model = (NewEventModel)getIntent().getSerializableExtra("Model");
+
+        /*Initialize components.*/
         initComponent();
         initSpinnerIcon();
         initDateTextView();
         initTimeTextView();
 
+        /*Receive model and create controller.*/
+        NewEventModel model = (NewEventModel)getIntent().getSerializableExtra("Model");
         controller = new NewEventController(this,model);
     }
 
@@ -139,27 +150,49 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
     }
 
 
-
+    /**
+     * Set date layout action.
+     * @param action
+     */
     public void setLayoutDateAction(View.OnClickListener action){
         this.layout_date.setOnClickListener(action);
     }
 
+    /**
+     * Set time layout action.
+     * @param action
+     */
     public void setLayoutTimeAction(View.OnClickListener action){
         this.layout_time.setOnClickListener(action);
     }
 
+    /**
+     * Set spinner on click action.
+     * @param action
+     */
     public void setIconSpinnerAction(AdapterView.OnItemSelectedListener action){
         this.spn_icon.setOnItemSelectedListener(action);
     }
 
+    /**
+     * Set event name.
+     * @param eventName
+     */
     public void setEventName(String eventName){
         this.eventName = eventName;
     }
 
+    /**
+     * Get controller.
+     * @return
+     */
     public NewEventController getController(){
         return  controller;
     }
 
+    /**
+     * Action when create new event.
+     */
     class CreateEventAction implements View.OnClickListener{
         @Override
         public void onClick(View v){
