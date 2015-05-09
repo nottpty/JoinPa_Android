@@ -21,12 +21,19 @@
 * MYSQL Database connected by php and java.
 * Push notification for notify on your mobile.
 * All-In-One management on PC version to manage all events. (Admin)
-* Material style on User-Inteface.
+* Flat design on User-Inteface.
+
+APK FILE >> [Download](https://bitbucket.org/oop2final/joinpa-android/src/bfe3502090c873d61125db3a1845ee9174879bd8/APK/join_pa.apk)
+
+Google play >> [LINK](https://play.google.com/store/apps/details?id=com.joinpa.taweesoft.joinpa&hl=en)
 
 ---
-Screenshot (Draft)
-![1.png](https://bitbucket.org/repo/k9aEpo/images/2118635377-1.png)
-![Screenshot_2015-05-07-01-25-52.png](https://bitbucket.org/repo/k9aEpo/images/508103139-Screenshot_2015-05-07-01-25-52.png)
-![Screenshot_2015-05-07-01-26-24.png](https://bitbucket.org/repo/k9aEpo/images/74392816-Screenshot_2015-05-07-01-26-24.png)
-![Screenshot_2015-05-07-01-26-15.png](https://bitbucket.org/repo/k9aEpo/images/2938751947-Screenshot_2015-05-07-01-26-15.png)
-![Screenshot_2015-05-07-01-26-01.png](https://bitbucket.org/repo/k9aEpo/images/4074179343-Screenshot_2015-05-07-01-26-01.png)
+ScreenShot (Final)
+
+![first.png](https://bitbucket.org/repo/k9aEpo/images/1074909263-first.png)
+
+![main.png](https://bitbucket.org/repo/k9aEpo/images/3169294017-main.png)
+
+![event.png](https://bitbucket.org/repo/k9aEpo/images/1483902685-event.png)
+
+![invitedlist.png](https://bitbucket.org/repo/k9aEpo/images/1017162532-invitedlist.png)
