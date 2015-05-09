@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.joinpa.taweesoft.joinpa" >
+    package="com.joinpa.joinpa.joinpa" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <permission
-        android:name="com.joinpa.taweesoft.joinpa.permission.C2D_MESSAGE"
+        android:name="com.joinpa.joinpa.joinpa.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.joinpa.taweesoft.joinpa.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.joinpa.joinpa.joinpa.permission.C2D_MESSAGE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -19,7 +19,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.joinpa.taweesoft.joinpa.FirstActivity"
+            android:name="com.joinpa.joinpa.joinpa.FirstActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,23 +28,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.joinpa.taweesoft.joinpa.MainActivity"
+            android:name="com.joinpa.joinpa.joinpa.MainActivity"
             android:label="News Feed" >
         </activity>
         <activity
-            android:name="com.joinpa.taweesoft.joinpa.MyEventView.MyEventActivity"
+            android:name="com.joinpa.joinpa.joinpa.MyEventView.MyEventActivity"
             android:label="My events" >
         </activity>
         <activity
-            android:name="com.joinpa.taweesoft.joinpa.CreateEvent.FriendView.FriendListView.FriendListActivity"
+            android:name="com.joinpa.joinpa.joinpa.CreateEvent.FriendView.FriendListView.FriendListActivity"
             android:label="Friends list" >
         </activity>
         <activity
-            android:name="com.joinpa.taweesoft.joinpa.CreateEvent.NewEvent.NewEventActivity"
+            android:name="com.joinpa.joinpa.joinpa.CreateEvent.NewEvent.NewEventActivity"
             android:label="Create event" >
         </activity>
 
-        <service android:name="com.joinpa.taweesoft.joinpa.GCMIntentService" />
+        <service android:name="com.joinpa.joinpa.joinpa.GCMIntentService" />
 
         <receiver
             android:name="com.google.android.gcm.GCMBroadcastReceiver"
@@ -58,15 +58,15 @@
         </receiver>
 
         <activity
-            android:name="com.joinpa.taweesoft.joinpa.JoiningEventView.OneEvent"
+            android:name="com.joinpa.joinpa.joinpa.JoiningEventView.OneEvent"
             android:label="@string/title_activity_one_event" >
         </activity>
         <activity
-            android:name="com.joinpa.taweesoft.joinpa.MyJoinedEvent.MyJoinedEventActivity"
+            android:name="com.joinpa.joinpa.joinpa.MyJoinedEvent.MyJoinedEventActivity"
             android:label="Recent" >
         </activity>
         <activity
-            android:name="com.joinpa.taweesoft.joinpa.FriendRequest.FriendRequestActivity"
+            android:name="com.joinpa.joinpa.joinpa.FriendRequest.FriendRequestActivity"
             android:label="Friends request" >
         </activity>
     </application>
