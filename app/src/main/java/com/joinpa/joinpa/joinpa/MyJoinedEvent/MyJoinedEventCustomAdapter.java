@@ -90,12 +90,18 @@ public class MyJoinedEventCustomAdapter extends BaseExpandableListAdapter{
         TextView txt_date = (TextView)convertView.findViewById(R.id.txt_date);
         TextView txt_time = (TextView)convertView.findViewById(R.id.txt_time);
         ImageView img_iconBig = (ImageView)convertView.findViewById(R.id.img_iconBig);
+        TextView txt_joined = (TextView)convertView.findViewById(R.id.txt_joined);
+        TextView txt_waiting = (TextView)convertView.findViewById(R.id.txt_waiting);
+        TextView txt_decline = (TextView)convertView.findViewById(R.id.txt_decline);
 
         /*Initialize data.*/
         if(event.getNote().equals(""))
             layout_note.setVisibility(View.GONE);
         else
             txt_note.setText(event.getNote());
+        txt_joined.setText(event.getJoinedNumber()+"");
+        txt_waiting.setText(event.getWaitingNumber()+"");
+        txt_decline.setText(event.getDeclineNumber()+"");
         txt_eventName.setText(event.getTopic());
         txt_ownerName.setText(event.getEventOwner().getUsername());
         txt_date.setText(event.getDateStr());

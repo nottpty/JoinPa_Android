@@ -64,10 +64,8 @@ public class NewEventController extends Activity{
     class IconSelectedEvent implements AdapterView.OnItemSelectedListener{
         @Override
         public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-            //Get integer of icon in each element of arrayAdapter(CustomEventIcon).
-            Integer iconKey = (Integer)parent.getItemAtPosition(position);
             //Get event's name from map.
-            String eventName = Resources.eventsName.get(iconKey);
+            String eventName = Resources.eventNameKey.get(position);
             view.setEventName(eventName);
         }
 

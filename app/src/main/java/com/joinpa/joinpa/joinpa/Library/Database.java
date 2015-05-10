@@ -1,6 +1,7 @@
 package com.joinpa.joinpa.joinpa.Library;
 
 import android.util.Log;
+import android.util.SparseArray;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -572,5 +573,32 @@ public class Database {
             connect.disconnect();
         }catch(IOException e){ e.printStackTrace(); }
         return friendWaitingList;
+    }
+
+    /**
+     * Loading event name from database
+     */
+    public static Map<String,Integer> loadEventsName(){
+        Map<String,Integer> eventsName = new HashMap<String,Integer>();
+        HttpURLConnection connect = getConnection("SELECT * FROM tb_eventName");
+        try{
+            BufferedReader in = new BufferedReader(new InputStreamReader(connect.getInputStream()));
+            int count=0;
+            String input="";
+            while((input = in.readLine())!= null){
+                if(count!=0){
+                    String[] data = input.split("\t");
+                    //[, eventName, iconID]
+                    String eventName = data[1];
+                    Integer iconID = new Integer(Integer.parseInt(data[2]));
+                    eventsName.put(eventName,iconID);
+                }
+                count++;
+            }
+            in.close();
+            connect.disconnect();
+        }catch(IOException e){ e.printStackTrace(); }
+
+        return eventsName;
     }
 }

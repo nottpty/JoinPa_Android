@@ -17,14 +17,14 @@ import com.joinpa.joinpa.joinpa.R;
  * Created on 29/4/2558.
  * Created by TAWEERAT CHAIMAN 5710546259, PATINYA YONGYAI 5710547204
  */
-public class CustomEventIcon extends ArrayAdapter<Integer> {
+public class CustomEventIcon extends ArrayAdapter<String> {
 
     /**
      * Constructor.
      * @param context
      */
     public CustomEventIcon(Context context){
-        super(context,android.R.layout.simple_spinner_dropdown_item, Resources.icons);
+        super(context,android.R.layout.simple_spinner_dropdown_item, Resources.eventNameKey);
     }
 
     /**
@@ -48,13 +48,14 @@ public class CustomEventIcon extends ArrayAdapter<Integer> {
      * @return
      */
     public View getView(int position,View view,ViewGroup parent){
-        int icon = getItem(position);
+        String eventName =  Resources.eventNameKey.get(position);
+        int iconID = Resources.eventsName.get(eventName);
+        Integer icon = Resources.icons.get(iconID);
         if(view == null)
             view = LayoutInflater.from(getContext()).inflate(R.layout.activity_custom_event_icon,parent,false);
         ImageView imgView = (ImageView)view.findViewById(R.id.img_icon);
         TextView txt_eventName = (TextView)view.findViewById(R.id.txt_eventName);
-        txt_eventName.setText(Resources.eventsName.get(icon));
-        Log.d("KKKK : , ", txt_eventName.getText().toString());
+        txt_eventName.setText(eventName);
         imgView.setImageResource(icon);
         return view;
     }

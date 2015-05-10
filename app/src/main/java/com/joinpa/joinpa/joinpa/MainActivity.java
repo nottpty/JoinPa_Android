@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.joinpa.joinpa.joinpa.CreateEvent.FriendView.FriendListView.FriendListActivity;
 import com.joinpa.joinpa.joinpa.FriendRequest.FriendRequestActivity;
@@ -200,7 +201,7 @@ public class MainActivity extends ActionBarActivity implements Observer{
         protected Void doInBackground(Void... params) {
             String currentRegistrationID = Resources.deviceID;
             String dbRegistrationID = Resources.owner.getNotifyKey();
-            if(!(currentRegistrationID.equals(dbRegistrationID))){
+            if(!(currentRegistrationID.equals(dbRegistrationID)) && !Resources.deviceID.equals("key")){
                 Database.updateNotificationKey(currentRegistrationID,Resources.owner.getUsername());
             }
             return null;

@@ -1,6 +1,9 @@
 package com.joinpa.joinpa.joinpa.Library;
 
+import android.os.AsyncTask;
 import android.os.Environment;
+import android.util.Log;
+import android.util.SparseArray;
 
 import com.joinpa.joinpa.joinpa.R;
 
@@ -38,7 +41,10 @@ public class Resources {
             R.drawable.meeting,
             R.drawable.shopping,
             R.drawable.homework,
-            R.drawable.sleep
+            R.drawable.sleep,
+            R.drawable.book,
+            R.drawable.cinema,
+            R.drawable.facebook
     ));
     public static List<Integer> cardBG = new ArrayList<Integer>(Arrays.asList(
             R.drawable.toilet_card_bg,
@@ -51,25 +57,20 @@ public class Resources {
             R.drawable.fitness_card_bg,
             R.drawable.drink_card_bg,
             R.drawable.playgame_card_bg,
-            R.drawable.lunch_card_bg
+            R.drawable.lunch_card_bg,
+            R.drawable.fitness_card_bg,
+            R.drawable.drink_card_bg,
+            R.drawable.dota_card_bg
     ));
-    public static Map<Integer,String> eventsName= new HashMap<Integer,String>();
+    public static Map<String,Integer> eventsName= new HashMap<String,Integer>();
+
+    public static List<String> eventNameKey = new ArrayList<String>();
 
     public static final String URL = "http://www.cmvk-tech.com/joinpa/connectDB.php";
 
     static{
-        eventsName.put(icons.get(0),"Toilet");
-        eventsName.put(icons.get(1),"Lunch");
-        eventsName.put(icons.get(2),"Play game");
-        eventsName.put(icons.get(3),"Home");
-        eventsName.put(icons.get(4),"Dota");
-        eventsName.put(icons.get(5),"Drink");
-        eventsName.put(icons.get(6),"Fitness");
-        eventsName.put(icons.get(7),"Meeting");
-        eventsName.put(icons.get(8),"Shopping");
-        eventsName.put(icons.get(9),"Homework");
-        eventsName.put(icons.get(10),"Sleep");
-
+       LoadEventName loadEventName = new LoadEventName();
+       loadEventName.execute();
     }
 
     public static String deviceID = "key";
@@ -77,19 +78,21 @@ public class Resources {
     public static Owner owner = null;
 
     public static boolean isIllegalText(String username,String password){
-        final String illegalText = "#$%~!@^&*()-_=+,. ;\'\"<>?";
         if(username.length() == 0 || password.length() == 0) return true;
         for(int i=0;i<username.length();i++){
-            String chr = Character.toString(username.charAt(i));
-            if(illegalText.contains(chr)) return true;
+            char chr = username.charAt(i);
+            if(!characterRange(chr)) return true;
         }
         for(int i=0;i<password.length();i++){
-            String chr = Character.toString(password.charAt(i));
-            if(illegalText.contains(chr)) return true;
+            char chr = password.charAt(i);
+            if(!characterRange(chr)) return true;
         }
         return false;
     }
 
+    public static boolean characterRange(char chr){
+        return Character.isLetterOrDigit(chr) && ((chr >= 'a' && chr <= 'z') || (chr >= 'A' && chr <= 'Z') || (chr >= '0' && chr <= '9'));
+    }
     public static File sdCard = Environment.getExternalStorageDirectory();
     public static File dir = new File (sdCard.getAbsolutePath() + "/");
     public static File file = new File(dir,"JoinPa.txt");
@@ -97,4 +100,14 @@ public class Resources {
     public static String password = "";
 
     public static boolean isNewData = false;
+
+    static class LoadEventName extends AsyncTask<Void,Void,Void>{
+        @Override
+        protected Void doInBackground(Void... params) {
+            eventsName = Database.loadEventsName();
+            eventNameKey.addAll(eventsName.keySet());
+            Log.d("RRRRR : ", eventNameKey+"");
+            return null;
+        }
+    }
 }

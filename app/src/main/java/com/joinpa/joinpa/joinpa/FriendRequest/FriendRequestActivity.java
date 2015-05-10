@@ -1,5 +1,6 @@
 package com.joinpa.joinpa.joinpa.FriendRequest;
 
+import android.app.AlertDialog;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
@@ -77,6 +78,8 @@ public class FriendRequestActivity extends ActionBarActivity implements Observer
             return true;
         }else if(id == R.id.action_refresh){
             updateFriendRequest();
+        }else if(id == R.id.action_myID){
+            showMyIDDialog();
         }
 
         return super.onOptionsItemSelected(item);
@@ -120,5 +123,13 @@ public class FriendRequestActivity extends ActionBarActivity implements Observer
     @Override
     public void update(Observable observable, Object data) {
         adapter.notifyDataSetChanged();
+    }
+
+    public void showMyIDDialog(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setIcon(getResources().getDrawable(R.drawable.your_id));
+        dialog.setTitle("My username");
+        dialog.setMessage(String.format("%s",Resources.owner.getUsername()));
+        dialog.create().show();
     }
 }

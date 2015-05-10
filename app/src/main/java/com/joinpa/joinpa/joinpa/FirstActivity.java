@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.joinpa.joinpa.joinpa.Library.Database;
 import com.joinpa.joinpa.joinpa.Library.Resources;
 import com.joinpa.joinpa.joinpa.Login.LoginDialog;
 import com.google.android.gcm.GCMRegistrar;
@@ -100,4 +101,5 @@ public class FirstActivity extends Activity {
             e.printStackTrace();
         }
     }
+
 }
