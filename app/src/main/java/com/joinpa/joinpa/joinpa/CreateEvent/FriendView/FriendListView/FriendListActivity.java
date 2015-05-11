@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.joinpa.joinpa.joinpa.CreateEvent.NewEvent.NewEventActivity;
 import com.joinpa.joinpa.joinpa.CreateEvent.NewEvent.NewEventModel;
@@ -32,6 +34,7 @@ public class FriendListActivity extends ActionBarActivity implements Observer {
     private List<Friend> selectedFriend = new ArrayList<Friend>();
     private ListView lv_friendsList;
     private Button btn_next,btn_findFriend;
+    private ProgressBar pgb_loading;
 
     /**
      * Constructor.
@@ -45,8 +48,10 @@ public class FriendListActivity extends ActionBarActivity implements Observer {
 
         /*Initialize component.*/
         initComponent();
-        setListViewAdapter();
         initButton();
+
+        /*Run loader.*/
+        runProgressBar();
     }
 
     /**
@@ -57,6 +62,7 @@ public class FriendListActivity extends ActionBarActivity implements Observer {
         lv_friendsList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         btn_next = (Button)findViewById(R.id.btn_next);
         btn_findFriend = (Button)findViewById(R.id.btn_findFriend);
+        pgb_loading = (ProgressBar)findViewById(R.id.pgb_loading);
     }
 
     /**
@@ -149,6 +155,37 @@ public class FriendListActivity extends ActionBarActivity implements Observer {
         public void onClick(View v){
             FindFriendDialog findFriend = new FindFriendDialog(activity);
             findFriend.openDialog();
+        }
+    }
+
+    /**
+     * Run loader.
+     */
+    public void runProgressBar(){
+        RunProgressBar task = new RunProgressBar();
+        task.execute();
+    }
+
+    /**
+     * Run the progress bar class.
+     */
+    class RunProgressBar extends AsyncTask<Void,Void,Void>{
+
+        @Override
+        protected void onPreExecute() {
+            pgb_loading.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            while(!Resources.owner.isLoadFriendListFinish()){}
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            pgb_loading.setVisibility(View.GONE);
+            setListViewAdapter();
         }
     }
 }

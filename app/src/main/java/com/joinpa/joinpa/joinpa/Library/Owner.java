@@ -16,7 +16,7 @@ public class Owner extends User{
     private List<JoiningEvent> joiningEvents;
     private List<JoiningEvent> joinedEvent;
     private List<Friend> friendRequest;
-    private LoadData loadMyEvent,loadMyJoinedEvent;
+    private LoadData loadMyEvent,loadMyJoinedEvent,loadFriendList;
 
     /**
      * Constructor.
@@ -27,15 +27,18 @@ public class Owner extends User{
 		super(username,notifyKey);
         eventList = new ArrayList<Event>();
         joinedEvent = new ArrayList<JoiningEvent>();
+        friendList = new ArrayList<Friend>();
+
 		loadMyEvent = new LoadMyEvent(this);
         loadMyJoinedEvent = new LoadMyJoinedEvent(this);
+        loadFriendList = new LoadFriendList(this);
 
         /*Load data in background.*/
+        loadData(loadFriendList);
         loadData(loadMyEvent);
         loadData(loadMyJoinedEvent);
-
         /*Get important data.*/
-		friendList = Database.getFriendList(this);
+
         joiningEvents = Database.myJoiningEvents(this,Resources.WAITING);
         friendRequest = Database.getFriendRequest(this);
 	}
@@ -126,6 +129,12 @@ public class Owner extends User{
     }
 
     /**
+     * Check for load friend list is finished.
+     * @return
+     */
+    public boolean isLoadFriendListFinish() { return loadFriendList.isFinished(); }
+
+    /**
      * Load data.
      * @param loadData
      */
@@ -190,5 +199,12 @@ public class Owner extends User{
             }
         };
         task.execute();
+    }
+
+    /**
+     * Set friend list.
+     */
+    public void setFriendList(List<Friend> friendList){
+        this.friendList = friendList;
     }
 }

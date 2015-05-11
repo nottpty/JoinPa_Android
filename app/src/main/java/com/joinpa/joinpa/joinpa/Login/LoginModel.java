@@ -1,6 +1,7 @@
 package com.joinpa.joinpa.joinpa.Login;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.joinpa.joinpa.joinpa.Library.Database;
 import com.joinpa.joinpa.joinpa.Library.Owner;
@@ -31,6 +32,7 @@ public class LoginModel extends Observable {
             @Override
             protected Void doInBackground(Void... params) {
                 owner = Database.getOwner(username,password);
+                Log.d("TTTTTTT : ", owner.getUsername());
                 return null;
             }
 

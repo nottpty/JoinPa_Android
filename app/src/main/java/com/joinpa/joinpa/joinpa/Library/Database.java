@@ -601,4 +601,19 @@ public class Database {
 
         return eventsName;
     }
+
+    /**
+     * Get version.
+     */
+    public static String getVersion(){
+        HttpURLConnection connect = getConnection("SELECT Version FROM tb_version");
+        String version="";
+        try{
+            Scanner scan = new Scanner(connect.getInputStream());
+            scan.nextLine();
+            version = scan.nextLine().trim();
+            Log.d("VERSION" , version);
+        }catch(IOException e){ e.printStackTrace(); }
+        return version;
+    }
 }

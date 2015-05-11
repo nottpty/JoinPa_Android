@@ -53,19 +53,18 @@ public class GCMIntentService extends GCMBaseIntentService {
             String[] msgArr = message.split("@@");
             iconID = Resources.icons.get(Integer.parseInt(msgArr[0]));
             message = msgArr[1];
-            Log.d("OOO : " , message);
             Resources.isNewData = true;
         }
 
         Bitmap bitmap= BitmapFactory.decodeResource(context.getResources(), iconID);
 
         // Open a new activity called GCMMessageView
-        Intent intent = new Intent(this, FirstActivity.class);
-        // Pass data to the new activity
-        intent.putExtra("message", message);
-        // Starts the activity on notification click
-        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+//        Intent intent = new Intent(this, FirstActivity.class);
+//        // Pass data to the new activity
+//        intent.putExtra("message", message);
+//        // Starts the activity on notification click
+//        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent,
+//                PendingIntent.FLAG_UPDATE_CURRENT);
         // Create the notification with a notification builder
         Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION); // Play notification sound
         Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), sound);
@@ -76,7 +75,7 @@ public class GCMIntentService extends GCMBaseIntentService {
                 .setSmallIcon(iconID)
                 .setWhen(System.currentTimeMillis())
                 .setContentTitle("Join Pa!!")
-                .setContentText(message).setContentIntent(pIntent)
+                .setContentText(message)
                 .getNotification();
         // Remove the notification on click
         notification.flags |= Notification.FLAG_AUTO_CANCEL;

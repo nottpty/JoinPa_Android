@@ -2,9 +2,11 @@ package com.joinpa.joinpa.joinpa.Library;
 
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.util.Log;
 import android.util.SparseArray;
 
+import com.joinpa.joinpa.joinpa.BuildConfig;
 import com.joinpa.joinpa.joinpa.R;
 
 import java.io.File;
@@ -20,6 +22,8 @@ import java.util.Map;
  * Created by TAWEERAT CHAIMAN 5710546259, PATINYA YONGYAI 5710547204
  */
 public class Resources {
+    public static final String MY_VERSION = BuildConfig.VERSION_NAME;
+    public static String CURRENT_VERSION = "0";
     public static final int WAITING = 0;
     public static final int JOIN = 1;
     public static final int DECLINE = 2;
@@ -69,8 +73,13 @@ public class Resources {
     public static final String URL = "http://www.cmvk-tech.com/joinpa/connectDB.php";
 
     static{
+       StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+       StrictMode.setThreadPolicy(policy);
+
        LoadEventName loadEventName = new LoadEventName();
        loadEventName.execute();
+
+       CURRENT_VERSION = getCurrentVersion();
     }
 
     public static String deviceID = "key";
@@ -109,5 +118,13 @@ public class Resources {
             Log.d("RRRRR : ", eventNameKey+"");
             return null;
         }
+    }
+
+    public static String getCurrentVersion(){
+        return Database.getVersion();
+    }
+
+    public static boolean isUpToDate(){
+        return MY_VERSION.equals(CURRENT_VERSION);
     }
 }

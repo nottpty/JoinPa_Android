@@ -1,10 +1,14 @@
 package com.joinpa.joinpa.joinpa.InvitedList;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -41,12 +45,21 @@ public class InvitedListCustomAdapter extends ArrayAdapter<Map<User,Integer>> {
     public View getView(int position, View convertView, ViewGroup parent) {
         Map<User,Integer> map = getItem(position);
         Map.Entry<User,Integer> each = map.entrySet().iterator().next();
-        String username = each.getKey().getUsername();
+        User user = each.getKey();
+        String username = user.getUsername();
         int status = each.getValue().intValue();
         if(convertView == null)
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.invited_list_view,parent,false);
         TextView txt_username = (TextView)convertView.findViewById(R.id.txt_username);
         LinearLayout layout_bg = (LinearLayout)convertView.findViewById(R.id.layout_bg);
+        Button btn_add = (Button)convertView.findViewById(R.id.btn_add);
+
+        /*If already friend. then not show the add button.*/
+        if(Resources.owner.getFriendList().contains(user))
+            btn_add.setVisibility(View.GONE);
+        else{
+            btn_add.
+        }
         txt_username.setText(username);
         int bg=0;
         switch(status){
@@ -63,4 +76,6 @@ public class InvitedListCustomAdapter extends ArrayAdapter<Map<User,Integer>> {
         layout_bg.setBackgroundResource(bg);
         return convertView;
     }
+
+
 }

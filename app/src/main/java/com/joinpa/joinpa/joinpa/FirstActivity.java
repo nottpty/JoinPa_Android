@@ -1,8 +1,13 @@
 package com.joinpa.joinpa.joinpa;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,14 +32,22 @@ public class FirstActivity extends Activity {
         super.onCreate(savedInstanceState);
         super.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_first);
-        /*Get and register GCM key into Resources.key*/
-        GCMRegistrar.checkDevice(this);
-        GCMRegistrar.checkManifest(this);
-        GCMRegistrar.register(this,GCMIntentService.SENDER_ID);
+
+        /*If up to date.*/
+        if(Resources.isUpToDate()){
+            /*Get and register GCM key into Resources.key*/
+            GCMRegistrar.checkDevice(this);
+            GCMRegistrar.checkManifest(this);
+            GCMRegistrar.register(this,GCMIntentService.SENDER_ID);
         /*Initial components*/
-        initComponents();
+            initComponents();
         /*Run auto login algorithm.*/
-        AutoLogin();
+            AutoLogin();
+        }else{
+            showForceUpdateDialog();
+        }
+
+
     }
 
     /**
@@ -100,6 +113,26 @@ public class FirstActivity extends Activity {
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void showForceUpdateDialog(){
+        AlertDialog dialog = new AlertDialog.Builder(this).create();
+        dialog.setIcon(R.drawable.out_of_date);
+        dialog.setTitle("Out Of Date");
+        dialog.setMessage("Your application is out-of-date.\n\nPlease update the application.");
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                FirstActivity.this.finish();
+                openPlayStore();
+            }
+        });
+        dialog.show();
+    }
+
+    public void openPlayStore(){
+        final String appPackageName = getPackageName();
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
     }
 
 }
