@@ -78,11 +78,16 @@ public class Owner extends User{
      * @param friend
      */
     public void addFriend(final Friend friend) {
-        friendList.add(0,friend);
         AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                Database.addFriend(friend);
+                friendRequest = Database.getFriendRequest(Owner.this);
+                if(friendRequest.contains(friend))
+                    acceptFriend(friend);
+                else{
+                    friendList.add(0,friend);
+                    Database.addFriend(friend);
+                }
                 return null;
             }
         };
@@ -190,11 +195,12 @@ public class Owner extends User{
      */
     public void acceptFriend(final Friend friend){
         friendRequest.remove(friend);
-        addFriend(friend);
+        friendList.add(0, friend);
         AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
                 Database.acceptFriend(friend);
+                Database.addFriend(friend);
                 return null;
             }
         };

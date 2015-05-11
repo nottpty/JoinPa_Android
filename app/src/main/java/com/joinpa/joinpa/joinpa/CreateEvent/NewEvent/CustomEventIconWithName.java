@@ -1,7 +1,6 @@
 package com.joinpa.joinpa.joinpa.CreateEvent.NewEvent;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +16,13 @@ import com.joinpa.joinpa.joinpa.R;
  * Created on 29/4/2558.
  * Created by TAWEERAT CHAIMAN 5710546259, PATINYA YONGYAI 5710547204
  */
-public class CustomEventIcon extends ArrayAdapter<String> {
+public class CustomEventIconWithName extends ArrayAdapter<String> {
 
     /**
      * Constructor.
      * @param context
      */
-    public CustomEventIcon(Context context){
+    public CustomEventIconWithName(Context context){
         super(context,android.R.layout.simple_spinner_dropdown_item, Resources.eventNameKey);
     }
 
@@ -52,7 +51,7 @@ public class CustomEventIcon extends ArrayAdapter<String> {
         int iconID = Resources.eventsName.get(eventName);
         Integer icon = Resources.icons.get(iconID);
         if(view == null)
-            view = LayoutInflater.from(getContext()).inflate(R.layout.activity_custom_event_icon,parent,false);
+            view = LayoutInflater.from(getContext()).inflate(R.layout.activity_custom_event_icon_with_name,parent,false);
         ImageView imgView = (ImageView)view.findViewById(R.id.img_icon);
         TextView txt_eventName = (TextView)view.findViewById(R.id.txt_eventName);
         txt_eventName.setText(eventName);

@@ -48,7 +48,22 @@ public class Resources {
             R.drawable.sleep,
             R.drawable.book,
             R.drawable.cinema,
-            R.drawable.facebook
+            R.drawable.facebook,
+            R.drawable.graduation,
+            R.drawable.music,
+            R.drawable.football,
+            R.drawable.basketball,
+            R.drawable.beach,
+            R.drawable.bicycle,
+            R.drawable.codeing,
+            R.drawable.twitter,
+            R.drawable.tea,
+            R.drawable.coffee,
+            R.drawable.ruler,
+            R.drawable.karaoke,
+            R.drawable.physic,
+            R.drawable.chemistry,
+            R.drawable.bio
     ));
     public static List<Integer> cardBG = new ArrayList<Integer>(Arrays.asList(
             R.drawable.toilet_card_bg,
@@ -64,7 +79,23 @@ public class Resources {
             R.drawable.lunch_card_bg,
             R.drawable.dota_card_bg,
             R.drawable.drink_card_bg,
-            R.drawable.dota_card_bg
+            R.drawable.dota_card_bg,
+            R.drawable.fitness_card_bg,
+            R.drawable.toilet_card_bg,
+            R.drawable.dota_card_bg,
+            R.drawable.playgame_card_bg,
+            R.drawable.toilet_card_bg,
+            R.drawable.toilet_card_bg,
+            R.drawable.dota_card_bg,
+            R.drawable.fitness_card_bg,
+            R.drawable.home_card_bg,
+            R.drawable.drink_card_bg,
+            R.drawable.lunch_card_bg,
+            R.drawable.fitness_card_bg,
+            R.drawable.dota_card_bg,
+            R.drawable.fitness_card_bg,
+            R.drawable.drink_card_bg
+
     ));
     public static Map<String,Integer> eventsName= new HashMap<String,Integer>();
 
@@ -115,7 +146,6 @@ public class Resources {
         protected Void doInBackground(Void... params) {
             eventsName = Database.loadEventsName();
             eventNameKey.addAll(eventsName.keySet());
-            Log.d("RRRRR : ", eventNameKey+"");
             return null;
         }
     }

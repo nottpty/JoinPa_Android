@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import com.joinpa.joinpa.joinpa.Library.Database;
 import com.joinpa.joinpa.joinpa.Library.Event;
 import com.joinpa.joinpa.joinpa.Library.Friend;
+import com.joinpa.joinpa.joinpa.Library.MessageDialog;
 import com.joinpa.joinpa.joinpa.Library.Owner;
 import com.joinpa.joinpa.joinpa.Library.Resources;
 import com.joinpa.joinpa.joinpa.Library.User;
@@ -34,14 +37,16 @@ import java.util.Observer;
  * Created by TAWEERAT CHAIMAN 5710546259, PATINYA YONGYAI 5710547204
  */
 public class NewEventActivity extends ActionBarActivity implements Observer {
-    private Spinner spn_icon;
+    private Spinner spn_eventWithIcon,spn_icon;
     private List<Friend> selectedFriends;
     private TextView txt_note;
     private TextView txt_date;
     private TextView txt_time;
+    private TextView txt_ownEvent;
     private Button btn_create;
-    private LinearLayout layout_date,layout_time;
+    private LinearLayout layout_date,layout_time,layout_providedEvent,layout_ownEvent;
     private NewEventController controller;
+    private CheckBox cb_ownEvent;
     private String eventName;
 
     /**
@@ -71,7 +76,7 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
      * Initial the components.
      */
     public void initComponent(){
-        spn_icon = (Spinner)findViewById(R.id.spn_icon);
+        spn_eventWithIcon = (Spinner)findViewById(R.id.spn_eventWithIcon);
         txt_note = (TextView)findViewById(R.id.txt_note);
         btn_create = (Button)findViewById(R.id.btn_create);
         btn_create.setOnClickListener(new CreateEventAction());
@@ -79,14 +84,24 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
         txt_time = (TextView)findViewById(R.id.txt_time);
         layout_date = (LinearLayout)findViewById(R.id.layout_date);
         layout_time = (LinearLayout)findViewById(R.id.layout_time);
+        cb_ownEvent = (CheckBox)findViewById(R.id.cb_ownEvent);
+        cb_ownEvent.setOnCheckedChangeListener(new CheckForOwnEvent());
+        spn_icon = (Spinner)findViewById(R.id.spn_icon);
+        layout_providedEvent = (LinearLayout)findViewById(R.id.layout_providedEvent);
+        layout_ownEvent = (LinearLayout)findViewById(R.id.layout_ownEvent);
+        txt_ownEvent = (TextView)findViewById(R.id.txt_ownEvent);
     }
 
     /**
      * Set spinner's icon.
      */
     public void initSpinnerIcon(){
-        CustomEventIcon adapter = new CustomEventIcon(this);
-        spn_icon.setAdapter(adapter);
+        CustomEventIconWithName adapter = new CustomEventIconWithName(this);
+        spn_eventWithIcon.setAdapter(adapter);
+
+        CustomSpinnerIcon adapterIcon = new CustomSpinnerIcon(this);
+        spn_icon.setAdapter(adapterIcon);
+
     }
 
     /**
@@ -169,7 +184,7 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
      * @param action
      */
     public void setIconSpinnerAction(AdapterView.OnItemSelectedListener action){
-        this.spn_icon.setOnItemSelectedListener(action);
+        this.spn_eventWithIcon.setOnItemSelectedListener(action);
     }
 
     /**
@@ -200,9 +215,22 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
 //            String eventID = String.format("%02d%02d%04d%02d%02d%02d", now.getDay(),now.getMonth(),now.getYear(),now.getHours(),now.getMinutes(),now.getSeconds());
             Owner owner = Resources.owner;
             final List<Friend> invitedList = selectedFriends;
-            String eventName = (String)spn_icon.getSelectedItem();
-            int iconID = Resources.eventsName.get(eventName);
-            Log.d("TTTTT :", eventName + " " + iconID);
+
+            String eventName = "";
+            int iconID = 0;
+            if(cb_ownEvent.isChecked()) {
+                eventName = txt_ownEvent.getText().toString();
+                if(Resources.isIllegalText(eventName,"nothing")){
+                    MessageDialog dialog = new MessageDialog(NewEventActivity.this,R.drawable.cross_icon,"Error","Invalid event name.");
+                    dialog.showDialog();
+                    return;
+                }
+                iconID = spn_icon.getSelectedItemPosition();
+            }else {
+                eventName = (String) spn_eventWithIcon.getSelectedItem();
+                iconID = Resources.eventsName.get(eventName);
+            }
+
             String note = txt_note.getText().toString();
             Map<User,Integer> invitedMap = Event.createInvitedMap(invitedList);
 
@@ -232,6 +260,23 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
 
             };
             task.execute();
+        }
+    }
+
+    class CheckForOwnEvent implements CompoundButton.OnCheckedChangeListener{
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            int provided_visibility = 0;
+            int own_visibility = 0;
+            if(isChecked){
+                provided_visibility = View.GONE;
+                own_visibility = View.VISIBLE;
+            }else{
+                provided_visibility = View.VISIBLE;
+                own_visibility = View.GONE;
+            }
+            layout_providedEvent.setVisibility(provided_visibility);
+            layout_ownEvent.setVisibility(own_visibility);
         }
     }
 }

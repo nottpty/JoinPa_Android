@@ -46,7 +46,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignRight="@+id/btn_create"
                 android:layout_alignEnd="@+id/btn_create"
-                android:id="@+id/linearLayout"
+                android:id="@+id/layout_providedEvent"
                 android:gravity="center_vertical">
 
                 <ImageView
@@ -58,7 +58,7 @@
                 <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spn_icon"
+                    android:id="@+id/spn_eventWithIcon"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
@@ -67,10 +67,68 @@
 
             <LinearLayout
                 android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingLeft="4dp"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cb_ownEvent"
+                    android:checked="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Create own event"
+                    android:id="@+id/textView2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignRight="@+id/btn_create"
+                android:layout_alignEnd="@+id/btn_create"
+                android:id="@+id/layout_ownEvent"
+                android:gravity="center_vertical"
+                android:weightSum="1"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:id="@+id/imageView28"
+                    android:src="@drawable/event_icon" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spn_icon"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:gravity="center_vertical" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txt_ownEvent"
+                    android:maxLength="20"
+                    android:singleLine="true"
+                    android:hint="Event (1-20 chrs)" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:paddingBottom="4dp">
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp">
 
                 <ImageView
                     android:layout_width="45dp"
