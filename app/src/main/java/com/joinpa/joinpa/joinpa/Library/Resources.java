@@ -58,7 +58,7 @@ public class Resources {
             R.drawable.drink_card_bg,
             R.drawable.playgame_card_bg,
             R.drawable.lunch_card_bg,
-            R.drawable.fitness_card_bg,
+            R.drawable.dota_card_bg,
             R.drawable.drink_card_bg,
             R.drawable.dota_card_bg
     ));

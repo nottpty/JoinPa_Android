@@ -4,6 +4,7 @@ import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -199,7 +200,9 @@ public class NewEventActivity extends ActionBarActivity implements Observer {
 //            String eventID = String.format("%02d%02d%04d%02d%02d%02d", now.getDay(),now.getMonth(),now.getYear(),now.getHours(),now.getMinutes(),now.getSeconds());
             Owner owner = Resources.owner;
             final List<Friend> invitedList = selectedFriends;
-            int iconID = spn_icon.getSelectedItemPosition();
+            String eventName = (String)spn_icon.getSelectedItem();
+            int iconID = Resources.eventsName.get(eventName);
+            Log.d("TTTTT :", eventName + " " + iconID);
             String note = txt_note.getText().toString();
             Map<User,Integer> invitedMap = Event.createInvitedMap(invitedList);
 
