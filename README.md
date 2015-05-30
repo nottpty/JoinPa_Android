@@ -25,7 +25,7 @@
 
 APK FILE >> [Download](https://bitbucket.org/oop2final/joinpa-android/src/bfe3502090c873d61125db3a1845ee9174879bd8/APK/join_pa.apk)
 
-Google play >> [LINK](https://play.google.com/store/apps/details?id=com.joinpa.taweesoft.joinpa&hl=en)
+Google play >> [LINK](https://play.google.com/store/apps/details?id=com.joinpa.joinpa.joinpa&hl=en)
 
 ---
 ScreenShot (Final)
